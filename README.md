@@ -28,6 +28,8 @@ code/validate.py               reproduces the validation table of Appendix G
 code/verify_factorizations.py  re-checks every factorization in data/
 code/scripts_as_run/           the working scripts behind individual claims (not cleaned; see its README)
 data/factorizations.json       prime factorizations along both orbits, up to 163 digits
+notes/                         research notes from collaborators, each with a review
+code/verify_local_i0star.py    symbolic check of the 7 Nov 2026 note on the I0* fibres
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
