@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below. It contains text and code written with a large language model and results that are partly unverified (see the paper, section Limitations and provenance)."
+title: "Pythagorean Specializations of an Elliptic K3 Surface: Geometry, Conductors, Root Numbers and Rank Jumps"
+authors:
+  - name: "Chalolennox"
+type: software
+version: 0.1.0
+date-released: 2026-11-06
+license: MIT
+repository-code: "https://github.com/Chalolennox/pythagorean-k3-specializations"
+abstract: "Elliptic curves y^2 = x^3 + 4Ax - 8B from Pythagorean triples form an elliptic K3 surface. Working paper, code and data on their conductors, root numbers and rank jumps, and on the parity problem along the orbit t_n = 1 - x(nP). LLM-assisted; partly unverified."
+keywords:
+  - elliptic curves
+  - K3 surfaces
+  - root numbers
+  - parity problem
