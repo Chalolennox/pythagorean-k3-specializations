@@ -2,7 +2,7 @@
 
 Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of the unit circle (a Pythagorean triple), form an elliptic **K3 surface** over the projective line. This repository holds the working paper, the code and the data of a study of their conductors, root numbers and rank jumps, and of one open problem: **are there infinitely many members of rank ≥ 2 along the orbit t_n = 1 − x(nP)?**
 
-> **Status.** LLM-assisted research notes, code and data. **Partly unverified. Not peer reviewed.** The research and the write-up were done with a large language model (Claude, by Anthropic) working with the person who directed the project. Read the section "Limitations and provenance" of the paper before relying on any result.
+> **Status.** LLM-assisted research notes, code and data. **Partly unverified. Not peer reviewed.** The research and the write-up were done with large language models working with the person who directed the project: Claude (Anthropic) wrote the text, code and proofs, and OpenAI ChatGPT and DeepSeek were also used for research. Read the section "Limitations and provenance" of the paper before relying on any result.
 
 ## What is established, and what is not
 
@@ -22,7 +22,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 199)
+paper/paper.md                 the paper (snapshot export, revision 201)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G
@@ -53,7 +53,7 @@ python3 code/verify_factorizations.py
 
 ## How far to trust it
 
-Everything in the paper was produced in conversation with a language model, which makes characteristic errors: confident wrong statements, references recalled from memory, arguments that look complete but are not. Several occurred and are recorded in `ERRATA.md`. Treat each "Proved" as a claim to be checked by a human, and see the paper's section "Limitations and provenance" for the list of what has not been independently verified.
+Everything in the paper was produced in conversation with language models, which make characteristic errors: confident wrong statements, references recalled from memory, arguments that look complete but are not. Several occurred and are recorded in `ERRATA.md`. Treat each "Proved" as a claim to be checked by a human, and see the paper's section "Limitations and provenance" for the list of what has not been independently verified.
 
 ## Contributing
 

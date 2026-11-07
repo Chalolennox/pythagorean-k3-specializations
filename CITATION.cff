@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this work, please cite it as below. It contains text and code written with a large language model and results that are partly unverified (see the paper, section Limitations and provenance)."
+message: "If you use this work, please cite it as below. It contains text and code written with large language models (Claude, OpenAI ChatGPT, DeepSeek) and results that are partly unverified (see the paper, section Limitations and provenance)."
 title: "Pythagorean Specializations of an Elliptic K3 Surface: Geometry, Conductors, Root Numbers and Rank Jumps"
 authors:
   - name: "Chalolennox"
