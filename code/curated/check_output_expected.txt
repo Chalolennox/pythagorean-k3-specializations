@@ -1,0 +1,17 @@
+OK   03 + 07: t_n from the half-angle recurrence gives A_n + i B_n = ((3+4i)/5)^n, n = 1..12, and a_n^2 + b_n^2 = 25^n (n=12: a=32125393, b=-242017776)
+OK   08: [0,0,0,4a5^(3n),-8b5^(5n)] is E_n scaled by u = 5^n, and is nonsingular, n = 0..11 
+OK   01/02: the 16 parameters give nonsingular curves (ranks are NOT computed here) 
+OK   05: disc_t N_c = -4(c^6 - 16c^2 - 64)   (printed by the script as the factorization -4*(c**6 - 16*c**2 - 64))
+OK   05: Res_t(N_c, t^2+1) = 64(c^2+4)  (= |N_c(i)|^2, N_c(i) = 8c - 16i) 
+OK   05: (u^2+1)N_c(u) squarefree for c = 0, 1, 2, 4, -3 
+OK   06: H(c) squarefree of degree 8 (genus 3); factorization (c**2 + 4)*(c**6 + 36*c**4 - 1024) 
+OK   06: H(c) is not a rational square at the 12 listed c 
+OK   10: P_c lies on S_c (exact identity in Q[c,t]) 
+OK   04: G(c) = c(c^6+16c^4+432c^2+1472) lies in the ideal (Groebner basis of 7 elements) 
+OK   04: the last basis element is G(c) 
+OK   04: x^3+16x^2+432x+1472 (x = c^2) has no positive real root 
+OK   09: the four points lie on y^2 = x^3 + 4Ax - 8B at t = -46/9 (exact) 
+OK   09: P1 + P3 + P4 = O exactly (the fourth point is the third intersection of the line P1 P3) 
+OK   09: Gram matrix of canonical heights has exactly one zero eigenvalue (rank 3)   eigenvalues ['-1.94e-09', '3.65', '5.75', '12.5']
+OK   09: every independent triple has regulator 87.60 +- 0.02 (the value recorded in section 5 of the paper)   regulators ['87.594', '87.597', '0.000', '87.595']
+ALL CHECKS PASS

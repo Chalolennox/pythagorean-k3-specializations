@@ -20,13 +20,14 @@ For the elliptic K3 surface E_t : y² = x³ + 4A(t)x − 8B(t), A² + B² = 1, w
 
 1. **Independent verification.** Have someone (or a second tool) re-derive the periodicity theorem of Appendix B and the proofs of §3.1 and §4.1. Every "Proved" label in those parts is inherited, not re-checked.
 2. **Verify the ranks of §5** with a second system (the four rank-3 fibres t = −46/9, −12/11, −17/31, 15/8 are certified there; three more are only reported).
-3. **A second implementation of the point counts** in PARI or Magma, to confirm `code/fibrecount.c` and `code/lfunc.py` beyond the values in `validate.py`.
-4. **Finish the cover scan.** For the 12 undecided values of c in F.46, add the primes 29 and 31 (counts at p = 29 and 31 took 1 to 2 minutes each with the faster counter).
-5. **N₅ at p = 19 for c = 13/9** (`./fibrecount 19 5 …`, about 10 minutes) to decide between the discriminant classes 15 and 69. It does not change the conclusion ρ = 13.
-6. **Factor the open cofactors:** the 94-digit cofactor of N(10P), the 136-digit composite N(11P), and N(12P + T) (data in `data/factorizations.json`; use CADO-NFS, msieve or PARI). A result would add a data point only; it cannot prove H.
-7. **Check the references** 7–16 of the paper (written from memory).
-8. **Unexamined ideas** (F.34): arithmetic identities at the points nP that are not identities of functions; Heegner-type or descent constructions of a second point; the ideal-class route in the sextic field.
-9. **Presentation:** turn the bold lead-ins of F.1–F.46 into headings; decide whether `paper/paper.md` or the claude.ai working document is the source of truth.
+3. **Run the curated CAS scripts** of `code/curated/` in Sage, Magma and PARI/GP and fill `code/curated/RUN_LOG_TEMPLATE.md` (copy it to `RUN_LOG.md`); compare with section 4 of `code/curated/README_INTEGRATION.md`. Scripts 01/02 give the ranks for step 2 (and new data at t = −7/4, 2/5); script 04 is the second-system check of F.47.
+4. **A second implementation of the point counts** in PARI or Magma, to confirm `code/fibrecount.c` and `code/lfunc.py` beyond the values in `validate.py`.
+5. **Finish the cover scan.** For the 12 undecided values of c in F.46, add the primes 29 and 31 (counts at p = 29 and 31 took 1 to 2 minutes each with the faster counter).
+6. **N₅ at p = 19 for c = 13/9** (`./fibrecount 19 5 …`, about 10 minutes) to decide between the discriminant classes 15 and 69. It does not change the conclusion ρ = 13.
+7. **Factor the open cofactors:** the 94-digit cofactor of N(10P), the 136-digit composite N(11P), and N(12P + T) (data in `data/factorizations.json`; use CADO-NFS, msieve or PARI). A result would add a data point only; it cannot prove H.
+8. **Check the references** 7–16 of the paper (written from memory).
+9. **Unexamined ideas** (F.34): arithmetic identities at the points nP that are not identities of functions; Heegner-type or descent constructions of a second point; the ideal-class route in the sextic field.
+10. **Presentation:** turn the bold lead-ins of F.1–F.46 into headings; decide whether `paper/paper.md` or the claude.ai working document is the source of truth.
 
 ## What went wrong before (do not repeat)
 

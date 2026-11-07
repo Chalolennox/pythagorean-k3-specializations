@@ -1,0 +1,15 @@
+// MagmaCell. Reconstructed from successful (3+4i)^n computations.
+// E_n is isomorphic over Q to y^2=x^3+4*a/5^n*x-8*b/5^n.
+Q := RationalField();
+a := Integers()!1;
+b := Integers()!0;
+for n in [0..12] do
+    print "n =",n,"a =",a,"b =",b;
+    assert a^2+b^2 eq 5^(2*n);
+    E := EllipticCurve([Q|0,0,0,4*Q!a/5^n,-8*Q!b/5^n]);
+    print "Root number =",RootNumber(E);
+    if n le 8 then
+        print "Rank bounds =",RankBounds(E);
+    end if;
+    a,b := 3*a-4*b,4*a+3*b;
+end for;
