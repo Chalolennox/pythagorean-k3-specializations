@@ -11,3 +11,5 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python3 code/validate.py
       - run: python3 code/verify_factorizations.py
+      - run: python3 code/verify_local_i0star.py
+      - run: python3 code/verify_fibre_configuration.py

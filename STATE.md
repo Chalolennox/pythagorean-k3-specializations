@@ -1,6 +1,6 @@
 # State of the research (resume here)
 
-*As of 7 November 2026. The paper snapshot in `paper/paper.md` is revision 193 of the working document.*
+*As of 7 November 2026. The paper snapshot in `paper/paper.md` is revision 196 of the working document.*
 
 ## In one paragraph
 
@@ -12,7 +12,7 @@ For the elliptic K3 surface E_t : y² = x³ + 4A(t)x − 8B(t), A² + B² = 1, w
 | --- | --- | --- |
 | What exactly is open? | W_n = ε_n·(−1)^{ω(N_n)}·η_n with ε_n periodic and η_n explicit; H fails iff a_n = (−1)^{ω(N_n)}η_n = −ε_n for all large n | F.24, F.40 |
 | What was tried and fails? | function-field identities, degree reduction, primitive divisors, multisections, second sections on covers, doubling/tripling laws, patterns in the bit | F.13–F.15, F.18–F.19, F.26–F.27, F.34–F.36, F.41, F.43–F.46 |
-| What is known about the I₀* fibres of the covers? | no section of the shape X = X_P + λN_c² for any rational c; sections meeting the identity components are not covered | F.47, `notes/` |
+| What is known about the I₀* fibres of the covers? | no section of the shape X = X_P + λN_c² for any rational c; sections meeting the identity components are not covered; every rational c has the fibres 2·III + 2·I₀* + 6·I₁, and the branch points of the genus-3 curve of F.47 are fibre-collision parameters | F.43, F.47, `notes/` |
 | Which conjectures were refuted? | period-4 pattern; δ_2n = δ_n | F.31–F.38 |
 | What is the data? | 19 complete factorizations (n ≤ 12); W = +1 at 7 of them | `data/factorizations.json`, F.31, F.38 |
 
