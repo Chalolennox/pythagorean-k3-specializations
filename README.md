@@ -22,7 +22,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 196)
+paper/paper.md                 the paper (snapshot export, revision 198)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G

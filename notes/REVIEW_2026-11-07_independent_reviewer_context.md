@@ -40,14 +40,14 @@ Much of the reviewer's text coincides with the paper: the same resultant factori
 | tilt family E_{t,s} (1112 tilt pairs, 422 opposite signs) | not verifiable: the reviewer's own text says the definitions of U, M in the predictor were incomplete |
 | 106,330 small quadratic base changes, no section | a reported bounded search; not verifiable |
 
-## 5. Suggested text for §5 (replaces Block 1 of `paper_insert.md`)
+## 5. Text inserted into §5 of the paper (revision 198; replaces Block 1 of `paper_insert.md`)
 
-**Generators at t = −46/9 (independent recomputation; lower bound Certified, upper bound Magma's).** On y² = x³ − (8140/2197)x + 6624/2197 the points P₁ = (−18/13, 396/169), P₂ = (−242/117, 6172/4563) and P₃ = (−243/169, 5091/2197) satisfy, with P₄ = (358/117, 20572/4563), P₁ + P₃ + P₄ = O, and the other six points reported in two independent summaries (among them (486/13, 38580/169) = P₂ − P₃ and (−932/1521, 133372/59319) = P₁ − P₂ + P₃) are integer combinations of P₁, P₂, P₃, checked exactly. The curve has no rational 2-torsion. The canonical-height regulator of P₁, P₂, P₃ is 87.599 (heights computed by repeated doubling and extrapolated; the routine reproduces the values of ĥ and ⟨·,·⟩ at t = −7 given below to four digits), against 87.60 recorded above. Hence the three points are independent of infinite order and the rank is at least 3; the upper bound is Magma's.
+**Generators at t = −46/9 (independent recomputation; lower bound Certified, upper bound Magma's).** On y² = x³ − (8140/2197)x + 6624/2197 the points P₁ = (−18/13, 396/169), P₂ = (−242/117, 6172/4563) and P₃ = (−243/169, 5091/2197) satisfy, with P₄ = (358/117, 20572/4563), P₁ + P₃ + P₄ = O, and every further point listed in two summaries of earlier computations is an integer combination of P₁, P₂, P₃ (for example (486/13, 38580/169) = P₂ − P₃, (−932/1521, 133372/59319) = P₁ − P₂ + P₃, and the point with x-coordinate −151763/74529 equals P₁ + P₂ − P₃), checked exactly. The curve has no rational 2-torsion. The canonical-height regulator of P₁, P₂, P₃ is 87.599 (heights computed by repeated doubling and extrapolated; the routine reproduces the values of ĥ and ⟨·,·⟩ at t = −7 given below to four digits), against 87.60 recorded above. Hence the three points are independent of infinite order and the rank is at least 3; the upper bound is Magma's.
 
 ## 6. Recommended consolidation
 
-1. Insert the revised block above into §5.
-2. In "Limitations and provenance", add that the reviewer's files and the paper share their sources (section 1 above).
+1. Done in revision 198: the block above is in §5.
+2. Done in revision 198: "Limitations and provenance" now has a row on the reviewer's files and their shared sources (section 1 above).
 3. Keep t = −7/4, 2/5 and 5/2 out of the paper until the ranks are computed (run scripts 01 and 02 of `curated-scripts-integration.zip`).
 4. Send the reviewer the corrections of section 3.
 5. Decide whether to keep copies of the reviewer's files in the repository. They name another assistant and describe unverified material, so I did not add them.
