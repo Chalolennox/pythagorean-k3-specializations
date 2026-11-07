@@ -1,0 +1,24 @@
+// MagmaCell. Reconstructed from successful 2026-11-07 elimination.
+// The successful run produced G(c)=c*(c^6+16*c^4+432*c^2+1472).
+// This avoids the previously failing cross-ring coercion P!z.
+Q := RationalField();
+P<lam,v0,v1,v2,h,c> := PolynomialRing(Q,6,"lex");
+T<t> := PolynomialRing(P);
+N := c*(c^2-4)*t^2-16*t+c^3+4*c;
+r := c*(1+t^2);
+F := (1+t^2)^2 + lam*(3*r^2+4*(1-t^4))
+    + 3*lam^2*r*N + lam^3*N^2;
+V := v0+v1*t+v2*t^2;
+eqs := [Coefficient(F-V^2,k): k in [0..4]];
+Append(~eqs,h*lam-1);
+print "Computing lex Groebner basis...";
+GB := GroebnerBasis(ideal<P|eqs>);
+print "Basis size =",#GB;
+for g in GB do print g; end for;
+G := c*(c^6+16*c^4+432*c^2+1472);
+print "Checking recorded elimination polynomial is in the ideal...";
+assert G in ideal<P|eqs>;
+print "Recorded necessary condition:",G;
+print "Over rational c, only candidate is c=0.";
+print "At c=0, prior specialized elimination gave h^4+16*h^3+1024.";
+print "That polynomial has no rational roots (test separately).";

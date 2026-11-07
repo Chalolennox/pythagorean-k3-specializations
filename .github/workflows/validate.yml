@@ -14,3 +14,4 @@ jobs:
       - run: python3 code/verify_local_i0star.py
       - run: python3 code/verify_fibre_configuration.py
       - run: python3 code/verify_reviewer_context.py
+      - run: python3 code/curated/check_curated_python.py

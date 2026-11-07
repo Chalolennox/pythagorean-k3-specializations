@@ -22,18 +22,19 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 198)
+paper/paper.md                 the paper (snapshot export, revision 199)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G
 code/verify_factorizations.py  re-checks every factorization in data/
 code/scripts_as_run/           the working scripts behind individual claims (not cleaned; see its README)
+code/curated/                  ten CAS scripts (reconstructed, not executed) and a Python check of their checkable parts
 data/factorizations.json       prime factorizations along both orbits, up to 163 digits
 notes/                         research notes from collaborators, each with a review
 code/verify_local_i0star.py    symbolic check of the 7 Nov 2026 note on the I0* fibres
 code/verify_fibre_configuration.py   exact check of the fibre configuration of S_c for every rational c (F.43, F.47)
 code/verify_reviewer_context.py   recomputation of the data in the independent reviewer's files (notes/REVIEW_2026-11-07_independent_reviewer_context.md)
-code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by the previous script)
+code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by verify_reviewer_context.py and curated/check_curated_python.py)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected

@@ -1,0 +1,14 @@
+// MagmaCell. Reconstructed from successful 12-step output 2026-11-07.
+// Exact rational circle group recurrence.
+Q := RationalField();
+s := Q!1/2;
+t := Q!0;
+print "Generator s =",s;
+for n in [1..12] do
+    assert 1-s*t ne 0;
+    t := (t+s)/(1-s*t);
+    A := (1-t^2)/(1+t^2);
+    B := 2*t/(1+t^2);
+    assert A^2+B^2 eq 1;
+    print "Step =",n,"t =",t,"A =",A,"B =",B;
+end for;
