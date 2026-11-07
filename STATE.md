@@ -1,6 +1,6 @@
 # State of the research (resume here)
 
-*As of 7 November 2026. The paper snapshot in `paper/paper.md` is revision 204 of the working document.*
+*As of 7 November 2026. The paper snapshot in `paper/paper.md` is revision 206 of the working document.*
 
 ## In one paragraph
 
