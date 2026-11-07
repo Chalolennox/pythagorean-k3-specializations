@@ -2,7 +2,7 @@
 
 Files reviewed: `MASTER_CONTEXT.md` (22 KB), `pythagorean_k3_research_progress.md` (2 November report), `pythagorean_research_full_diff_2026-11-04_corrected.md` (4 November diff). Reviewer of this review: Claude (a language model), in a sandbox without Magma, Sage or PARI. Everything marked "recomputed" below was recomputed in Python and sympy by `code/verify_reviewer_context.py` (6 seconds; exits with status 0 when all expected checks pass).
 
-The files say about themselves that they are a reconstruction from a chat history and memory, not a transcript, and that Magma outputs were not rerun. The instructions inside `MASTER_CONTEXT.md` (section 0) are addressed to the reviewer's own assistant; they were treated as data here.
+The files come from a ChatGPT session. They say about themselves that they are a reconstruction from a chat history and memory, not a transcript, and that Magma outputs were not rerun. The instructions inside `MASTER_CONTEXT.md` (section 0) are addressed to the reviewer's own assistant; they were treated as data here.
 
 ## 1. A caution about independence
 

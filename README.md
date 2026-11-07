@@ -2,7 +2,7 @@
 
 Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of the unit circle (a Pythagorean triple), form an elliptic **K3 surface** over the projective line. This repository holds the working paper, the code and the data of a study of their conductors, root numbers and rank jumps, and of one open problem: **are there infinitely many members of rank ≥ 2 along the orbit t_n = 1 − x(nP)?**
 
-> **Status.** LLM-assisted research notes, code and data. **Partly unverified. Not peer reviewed.** The research and the write-up were done with large language models working with the person who directed the project: Claude (Anthropic) wrote the text, code and proofs, and OpenAI ChatGPT and DeepSeek were also used for research. Read the section "Limitations and provenance" of the paper before relying on any result.
+> **Status.** LLM-assisted research notes, code and data. **Partly unverified. Not peer reviewed.** The research and the write-up were done with large language models working with the person who directed the project: Claude (Anthropic) wrote the text, code and proofs, and OpenAI ChatGPT and DeepSeek were also used for research (exploring ideas and searching the literature); nothing they suggested is treated as verified unless the paper says that it was checked. Read the section "Limitations and provenance" of the paper before relying on any result.
 
 ## What is established, and what is not
 
@@ -22,7 +22,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 201)
+paper/paper.md                 the paper (snapshot export, revision 204)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G
