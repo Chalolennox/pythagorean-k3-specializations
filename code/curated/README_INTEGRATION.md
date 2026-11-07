@@ -88,7 +88,7 @@ paper_insert.md                       three text blocks for the paper
 code/curated/01..10_*                 the ten scripts, exactly as you supplied them
 code/curated/README_ORIGINAL.md       the README that came with them
 code/curated/check_curated_python.py  Python/sympy re-implementation of the checkable parts
-code/curated/ec.py                    exact elliptic-curve arithmetic and canonical heights (used by the check)
+code/curated/ec.py                    exact elliptic-curve arithmetic and canonical heights (used by the check; now kept once, as code/ec.py)
 code/curated/check_output_expected.txt  output of the check, 7 November 2026
 code/curated/RUN_LOG_TEMPLATE.md      table for recording real runs
 ```

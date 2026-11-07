@@ -7,7 +7,7 @@ warnings.filterwarnings('ignore')
 from fractions import Fraction as Fr
 import sympy
 from sympy import symbols, Poly, groebner, expand, factor, gcd, resultant, discriminant, factor_list
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))   # code/ec.py
 from ec import Curve, gram, det3
 ok = True
 def check(name, cond, extra=''):

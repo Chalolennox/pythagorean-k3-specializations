@@ -34,7 +34,7 @@ notes/                         research notes from collaborators, each with a re
 code/verify_local_i0star.py    symbolic check of the 7 Nov 2026 note on the I0* fibres
 code/verify_fibre_configuration.py   exact check of the fibre configuration of S_c for every rational c (F.43, F.47)
 code/verify_reviewer_context.py   recomputation of the data in the independent reviewer's files (notes/REVIEW_2026-11-07_independent_reviewer_context.md)
-code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by the previous script)
+code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by verify_reviewer_context.py and curated/check_curated_python.py)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
