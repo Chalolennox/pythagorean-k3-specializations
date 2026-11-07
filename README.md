@@ -2,6 +2,8 @@
 
 Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of the unit circle (a Pythagorean triple), form an elliptic **K3 surface** over the projective line. This repository holds the working paper, the code and the data of a study of their conductors, root numbers and rank jumps, and of one open problem: **are there infinitely many members of rank ≥ 2 along the orbit t_n = 1 − x(nP)?**
 
+> **Project status (7 November 2026): open problem; project paused; this repository is a reproducible record of what was tried.** Problem H is not solved, and no work is in progress. Start with [`STATE.md`](STATE.md): it says what is proved, what was tried and closed, and what has not been tried.
+
 > **Status.** LLM-assisted research notes, code and data. **Partly unverified. Not peer reviewed.** The research and the write-up were done with large language models working with the person who directed the project: Claude (Anthropic) wrote the text, code and proofs, and OpenAI ChatGPT and DeepSeek were also used for research (exploring ideas and searching the literature); nothing they suggested is treated as verified unless the paper says that it was checked. Read the section "Limitations and provenance" of the paper before relying on any result.
 
 ## What is established, and what is not
@@ -15,6 +17,7 @@ Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of 
 | No identity of rational functions relates the values F_n; no second section exists on 18 constant-x covers examined | Proved / Conditional | F.19, F.34, F.36, F.41, F.44–F.46 |
 | No section of the shape X = X_P + λN_c² on the twist of any constant-x cover with rational c (other shapes are not covered) | Certified | F.47 |
 | Conjectured patterns of the parity bit (period 4; δ_2n = δ_n) | Refuted by factorizations up to 163 digits | F.31–F.38 |
+| For fixed distinct rational a, b, only finitely many t have rational points at both x = a and x = b (genus 2 or 3 fibre product) | Proved | F.48 |
 | **Infinitely many members of rank ≥ 2 (Problem H)** | **Open** | Appendix B, F.24 |
 
 The labels are those of the paper: Proved, Certified, Observed, Conditional, Open. "Conditional" results depend on stated hypotheses (for example the Tate conjecture for K3 surfaces over finite fields).
@@ -50,7 +53,7 @@ python3 code/validate.py                  # about a minute; add --full for more 
 python3 code/verify_factorizations.py
 ```
 
-`validate.py` needs a C compiler (`gcc`). Both scripts exit with status 0 only if every check agrees. They were run on 6 November 2026 in a Linux sandbox; the GitHub Actions workflow in `.github/workflows/` runs the same checks but has not yet been exercised on GitHub.
+`validate.py` needs a C compiler (`gcc`). Both scripts exit with status 0 only if every check agrees. They were run on 6 November 2026 in a Linux sandbox; the GitHub Actions workflow in `.github/workflows/` runs them, together with the other verification scripts in `code/`, on every push and pull request.
 
 ## How far to trust it
 
