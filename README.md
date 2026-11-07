@@ -13,6 +13,7 @@ Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of 
 | Along the orbit, the sign of the root number is periodic (period 6 along nP, period 3 along nP + T) up to one parity bit; valuations at 2 and 3 are explicit | Proved | Appendix B, F.20–F.22 |
 | Problem H is equivalent to one parity statement about the number of prime factors of F_n | Proved | F.24, F.40 |
 | No identity of rational functions relates the values F_n; no second section exists on 18 constant-x covers examined | Proved / Conditional | F.19, F.34, F.36, F.41, F.44–F.46 |
+| No section of the shape X = X_P + λN_c² on the twist of any constant-x cover with rational c (other shapes are not covered) | Certified | F.47 |
 | Conjectured patterns of the parity bit (period 4; δ_2n = δ_n) | Refuted by factorizations up to 163 digits | F.31–F.38 |
 | **Infinitely many members of rank ≥ 2 (Problem H)** | **Open** | Appendix B, F.24 |
 
@@ -21,7 +22,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 189)
+paper/paper.md                 the paper (snapshot export, revision 193)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G

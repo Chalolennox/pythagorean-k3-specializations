@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent symbolic check of the identities in notes/2026-11-07_local_i0star_geometry.md, and of the
 'next step' proposed there (substitute X = X_P + lambda N^2).  Needs: python3, sympy.  Exit status 0 = all checks pass.
-Takes about a minute (the Groebner basis dominates)."""
+Takes a few minutes at most (the Groebner bases dominate)."""
 import sys
 from math import gcd, isqrt
 from sympy import symbols, Poly, expand, factor, simplify, cancel, resultant, discriminant, groebner, real_roots
@@ -42,6 +42,31 @@ elim = factor(G.exprs[-1])
 check('V2 is a square only if c^6 + 16c^4 + 432c^2 + 1472 = 0 (with lambda != 0, c(c^2-4) != 0)', expand(elim - (c**6 + 16*c**4 + 432*c**2 + 1472)) == 0)
 rr = [float(v) for v in real_roots(Poly(x**3 + 16*x**2 + 432*x + 1472, x))]
 check('x^3+16x^2+432x+1472 has no positive real root (so no real c, in particular no rational c)', all(v < 0 for v in rr))
+
+# --- the full statement of F.47: only lambda != 0 is saturated, then the specialised cases c = 0 and c = +-2 ---
+eqsG = [expand(u - v) for u, v in zip(Poly(V2, t).all_coeffs(), sq.all_coeffs())] + [s*lam - 1]
+GG = groebner(eqsG, s, p2, p1, p0, lam, c, order='lex')
+G_c = c*(c**6 + 16*c**4 + 432*c**2 + 1472)
+check('F.47: the elimination polynomial (only lambda != 0 saturated) is G(c) = c(c^6+16c^4+432c^2+1472)', expand(factor(GG.exprs[-1]) - G_c) == 0)
+def system_at(cv):
+    Nc = cv*(cv**2-4)*t**2 - 16*t + cv*(cv**2+4)
+    R = expand((cv*(1+t**2)*Nc + lam*Nc**2)**3 + A*Nc**2*(cv*(1+t**2)*Nc + lam*Nc**2) + B*Nc**3)
+    rhs = Poly(expand(Nc**4*(p2*t**2 + p1*t + p0)**2), t); lhs = Poly(R, t)
+    d = max(lhs.degree(), rhs.degree()); a_ = lhs.all_coeffs(); b_ = rhs.all_coeffs()
+    a_ = [0]*(d+1-len(a_)) + a_; b_ = [0]*(d+1-len(b_)) + b_
+    return [expand(u - v) for u, v in zip(a_, b_)] + [s*lam - 1]
+for cv in (2, -2):
+    check('c = %d: no solution with lambda != 0 even over C (the ideal is the unit ideal)' % cv,
+          groebner(system_at(cv), s, p2, p1, p0, lam, order='lex').exprs == [1])
+G0 = groebner(system_at(0), s, p2, p1, p0, lam, order='lex')
+hpoly = Poly(1024*lam**4 + 16*lam + 1, lam)
+check('c = 0: the system reduces to 1024 lambda^4 + 16 lambda + 1 = 0, that is h^4 + 16h^3 + 1024 = 0 for h = 1/lambda',
+      any(expand(g - hpoly.as_expr()) == 0 for g in G0.exprs))
+hh = symbols('h')
+from sympy import divisors
+Ph = Poly(hh**4 + 16*hh**3 + 1024, hh)
+check('c = 0: h^4+16h^3+1024 has no integer root (monic, so no rational root)', all(Ph.eval(d*sg) != 0 for d in divisors(1024) for sg in (1, -1)))
+
 # bounded search for rational points on the curves (10) and (13)
 def issq(n): return n >= 0 and isqrt(n)**2 == n
 B_ = 600
