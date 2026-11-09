@@ -16,3 +16,4 @@ jobs:
       - run: python3 code/verify_reviewer_context.py
       - run: python3 code/curated/check_curated_python.py
       - run: python3 code/verify_two_cover_note.py
+      - run: python3 code/verify_local_sign.py
