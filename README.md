@@ -37,9 +37,12 @@ notes/                         research notes from collaborators, each with a re
 code/verify_local_i0star.py    symbolic check of the 7 Nov 2026 note on the I0* fibres
 code/verify_fibre_configuration.py   exact check of the fibre configuration of S_c for every rational c (F.43, F.47)
 code/verify_two_cover_note.py   checks of the two-cover note (notes/REVIEW_2026-11-07_constant_x_two_cover_note.md)
+code/verify_square_class_identity.py  exact check of the face identity and of its specialization mod p (notes/index_four_obstruction.md)
+code/verify_partial_split.py          the identity in every Frobenius class of f mod p, and the rational-root relations R1-R3
+code/verify_index_four.py             scan of the parity law and the index-four obstruction (counts T_p and S_p)
+code/verify_local_sign.py             closed form of the local sign at the primes dividing F_n (both orbits)
+code/index_four/                      C scanner (scan.c) and point-counting helper (curve.py) used by the scripts above
 code/verify_reviewer_context.py   recomputation of the data in the independent reviewer's files (notes/REVIEW_2026-11-07_independent_reviewer_context.md)
-code/verify_local_sign.py      local root number at a prime dividing F_n as a character of t_n (notes/index_four_obstruction.md, §6)
-code/verify_square_class_identity.py   the face identity of notes/index_four_obstruction.md (needs code/index_four/scan.c, not yet in the repository)
 code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by verify_reviewer_context.py and curated/check_curated_python.py)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
