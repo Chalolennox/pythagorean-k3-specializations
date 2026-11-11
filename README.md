@@ -41,6 +41,7 @@ code/verify_reviewer_context.py   recomputation of the data in the independent r
 code/verify_local_sign.py      local root number at a prime dividing F_n as a character of t_n (notes/index_four_obstruction.md, §6)
 code/verify_square_class_identity.py   the face identity of notes/index_four_obstruction.md (needs code/index_four/scan.c, not yet in the repository)
 code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by verify_reviewer_context.py and curated/check_curated_python.py)
+code/verify_18P_note.py               checks of the 18P memorandum (notes/REVIEW_2026-11-11_18P_symmetry_note.md; finds an index shift in its sign factor)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
