@@ -1,6 +1,6 @@
 // odd_order_density.c -- density of primes p for which alpha = (c, ck) has ODD order in E(F_p),  E : y^2 = x^3 + a x^2 + b x,  b = c k^2 - a c - c^2   (Liang-Rouse parametrisation).
 // Our curve C : y^2 = x^3 - 2x^2 + 2x with P = (1,1) is [a,c,k] = [-2,1,1].   Build: gcc -O2 -o odd_order_density code/odd_order_density.c -lm
-// Usage: ./odd_order_density a c k LIMIT     prints the fraction of primes q <= LIMIT (q not dividing 2 b (a^2-4b) c) with odd order, overall and by q mod 8 and mod 3.
+// Usage: ./odd_order_density a c k LIMIT     prints the fraction of primes q <= LIMIT (q not dividing 2 b (a^2-4b) c) with odd order, overall and by q mod 8, 16, 32, 64 and mod 3.
 // The order of alpha is found by baby-step giant-step in the Hasse interval.  Validated against Table 1 of Liang-Rouse (arXiv 1810.10583) at LIMIT = 10^7 (see notes/odd_order_density_check.md).
 // For each prime 5 <= p <= LIM: order r_p of P = (1,1) in C(F_p), C : y^2 = x^3 - 2x^2 + 2x.  Count primes with r_p odd, overall and by classes of p.
 #include <stdio.h>
@@ -55,11 +55,14 @@ int main(int argc,char**argv){
   Aa=atoll(argv[1]); i64 cc=atoll(argv[2]), kk=atoll(argv[3]); Cc=cc; Kc=kk; Bc=cc*kk*kk-Aa*cc-cc*cc; i64 disc=2*Bc*(Aa*Aa-4*Bc)*cc; if(disc<0) disc=-disc;
   i64 LIM=atoll(argv[4]); char*sv=calloc(LIM+1,1);
   for(i64 i=2;i*i<=LIM;i++) if(!sv[i]) for(i64 j=i*i;j<=LIM;j+=i) sv[j]=1;
-  long tot=0, odd=0; long c8[8][2]; memset(c8,0,sizeof c8); long c3[3][2]; memset(c3,0,sizeof c3);
+  long tot=0, odd=0; long c8[8][2]; memset(c8,0,sizeof c8); static long c16[16][2]; static long c32[32][2]; static long c64[64][2]; long c3[3][2]; memset(c3,0,sizeof c3);
   long checkpoint=1000000;
-  for(i64 q=3;q<=LIM;q++){ if(sv[q]) continue; if(disc%q==0) continue; p=q; u64 r=order_of_P(); int o=(r&1); tot++; odd+=o; c8[p%8][o]++; c3[p%3][o]++;
+  for(i64 q=3;q<=LIM;q++){ if(sv[q]) continue; if(disc%q==0) continue; p=q; u64 r=order_of_P(); int o=(r&1); tot++; odd+=o; c8[p%8][o]++; c16[p%16][o]++; c32[p%32][o]++; c64[p%64][o]++; c3[p%3][o]++;
     if(q>=checkpoint){ printf("p <= %lld: %ld primes, odd order at %ld (%.5f)\n",(long long)q,tot,odd,(double)odd/tot); fflush(stdout); checkpoint*=10; if(checkpoint<=LIM && 0) ; } }
   printf("FINAL p <= %lld: %ld primes (p >= 5), odd order %ld = %.6f\n",(long long)LIM,tot,odd,(double)odd/tot);
   for(int a=1;a<8;a+=2) printf("  p = %d mod 8: %ld primes, odd-order fraction %.5f\n",a,c8[a][0]+c8[a][1],(double)c8[a][1]/(c8[a][0]+c8[a][1]));
+  for(int a=1;a<16;a+=2) printf("  p = %d mod 16: %ld primes, odd-order fraction %.5f\n",a,c16[a][0]+c16[a][1],(double)c16[a][1]/(c16[a][0]+c16[a][1]));
+  for(int a=1;a<32;a+=2) printf("  p = %d mod 32: %ld primes, odd-order fraction %.5f\n",a,c32[a][0]+c32[a][1],(double)c32[a][1]/(c32[a][0]+c32[a][1]));
+  for(int a=1;a<64;a+=2) printf("  p = %d mod 64: %ld primes, odd-order fraction %.5f\n",a,c64[a][0]+c64[a][1],(double)c64[a][1]/(c64[a][0]+c64[a][1]));
   for(int a=1;a<3;a++) printf("  p = %d mod 3: %ld primes, odd-order fraction %.5f\n",a,c3[a][0]+c3[a][1],(double)c3[a][1]/(c3[a][0]+c3[a][1]));
   return 0; }
