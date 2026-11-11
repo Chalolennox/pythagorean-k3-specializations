@@ -4,7 +4,7 @@ by the method of Liang-Rouse (Section 4) / Dokchitser-Dokchitser: a subgroup H o
 is an integer (the zeta are algebraic integers).  Starting from Gamma_0^o(2) and descending through maximal (= index 2) subgroups, the image is the last subgroup that passes.
 Points are computed numerically (mpmath, 100 digits) by repeated halving; the basis of E[2^k] is chosen with 2^(k-1) B = T (so the image lies in Gamma_0(2)) and 2^(k-1) A = another 2-torsion point.
 Elements of AGL_2(Z/2^k) are tuples (e, f, a, b, c, d): the map x -> (e,f) + x M on row vectors, M = [[a,b],[c,d]]; the Galois action is sigma(A) = aA + bB, sigma(B) = cA + dB, sigma(beta_k) = beta_k + eA + fB."""
-import sys, random, time, itertools
+import sys, os, random, time, itertools
 from mpmath import mp, mpf, mpc, sqrt, polyroots, nint
 mp.dps = 100
 EPS = mpf(10)**(-60)
@@ -51,9 +51,10 @@ class Curve:
         disc = sqrt(s.a*s.a - 4*s.b); r1 = (-s.a + disc)/2
         T = (mpc(0), mpc(0)); T1 = (r1, mpc(0))
         B = [None, T]; A = [None, T1]
-        for j in range(1, k): B.append(s.halves(B[j])[0]); A.append(s.halves(A[j])[0])
+        ch = [int(x) for x in os.environ.get('TAU_CHOICE', '0,0,0').split(',')]            # branch used when halving B, A, beta (default 0,0,0); any choice gives a valid frame
+        for j in range(1, k): B.append(s.halves(B[j])[ch[0]]); A.append(s.halves(A[j])[ch[1]])
         alpha = (mpc(s.c), mpc(s.c*s.kk)); beta = [alpha]
-        for j in range(1, k + 1): beta.append(s.halves(beta[j - 1])[0])
+        for j in range(1, k + 1): beta.append(s.halves(beta[j - 1])[ch[2]])
         s.A, s.B, s.beta = A[k], B[k], beta
         assert s.same(s.mul(2**k, beta[k]), alpha) and s.same(s.mul(2**(k - 1), A[k]), T1) and s.same(s.mul(2**(k - 1), B[k]), T)
         # table X[(u, w)] = x(beta_k + u A + w B)   (the points beta_k + r1 A + r2 B have x-coordinates integral over Z[a,c,k]; built from beta_2 = 2^(k-2) beta_k the coset sums

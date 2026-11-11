@@ -17,6 +17,7 @@ jobs:
       - run: python3 code/curated/check_curated_python.py
       - run: python3 code/verify_two_cover_note.py
       - run: python3 code/verify_18P_note.py
+      - run: python3 code/verify_chebotarev_mod8.py
       - run: python3 code/verify_local_sign.py
       - run: python3 code/verify_square_class_identity.py 1000000
       - run: python3 code/verify_index_four.py
