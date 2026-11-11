@@ -1,0 +1,28 @@
+[   16s] level 3 (mod 8): |I| = 2^8
+[   16s] level 3 -> 4: |I| = 2^8, |N(I)| = 2^10, 4 cosets of I in N(I)
+[   17s]    |H| = 2^14: 7 maximal subgroups, 4 not containing the kernel part
+[   25s]       one passes -> |H| = 2^13
+[   25s]    |H| = 2^13: 3 maximal subgroups, 0 not containing the kernel part
+[   25s] level 4 (mod 16): |I| = 2^13 (full preimage: 2^14)
+[   26s] level 4 -> 5: |I| = 2^13, |N(I)| = 2^16, 8 cosets of I in N(I)
+[   58s]    |H| = 2^19: 7 maximal subgroups, 4 not containing the kernel part
+[   70s]       one passes -> |H| = 2^18
+[   73s]    |H| = 2^18: 3 maximal subgroups, 0 not containing the kernel part
+[   73s] level 5 (mod 32): |I| = 2^18 (full preimage: 2^19)
+[  122s] stable image from level 2^5 on; density of odd-order reductions = 48673/114688 = 0.424395
+   p =  1 mod 32 (prob 1/16): predicted fraction 3873/7168 = 0.54032
+   p =  3 mod 32 (prob 1/16): predicted fraction 1 = 1.00000
+   p =  5 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p =  7 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p =  9 mod 32 (prob 1/16): predicted fraction 1/2 = 0.50000
+   p = 11 mod 32 (prob 1/16): predicted fraction 1 = 1.00000
+   p = 13 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p = 15 mod 32 (prob 1/16): predicted fraction 1/2 = 0.50000
+   p = 17 mod 32 (prob 1/16): predicted fraction 7/12 = 0.58333
+   p = 19 mod 32 (prob 1/16): predicted fraction 1 = 1.00000
+   p = 21 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p = 23 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p = 25 mod 32 (prob 1/16): predicted fraction 1/2 = 0.50000
+   p = 27 mod 32 (prob 1/16): predicted fraction 1 = 1.00000
+   p = 29 mod 32 (prob 1/16): predicted fraction 0 = 0.00000
+   p = 31 mod 32 (prob 1/16): predicted fraction 1/6 = 0.16667
