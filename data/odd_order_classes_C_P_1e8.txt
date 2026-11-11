@@ -1,6 +1,7 @@
+# output of code/odd_order_density.c -2 1 1 100000000 (classes mod 8/16/32/64); the count includes p = 3 (the label originally printed '(p >= 5)' was wrong)
 p <= 1000003: 78498 primes, odd order at 33326 (0.42455)
 p <= 10000019: 664579 primes, odd order at 281913 (0.42420)
-FINAL p <= 100000000: 5761454 primes (p >= 5), odd order 2445403 = 0.424442
+FINAL p <= 100000000: 5761454 primes (3 <= p, p not dividing 2b(a^2-4b)c), odd order 2445403 = 0.424442
   p = 1 mod 8: 1439970 primes, odd-order fraction 0.53099
   p = 3 mod 8: 1440544 primes, odd-order fraction 1.00000
   p = 5 mod 8: 1440534 primes, odd-order fraction 0.00000

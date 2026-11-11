@@ -4,11 +4,34 @@ F(G) = sum over g in G of mu_r(g),  with mu_r given by Lemmas 6-10 of the paper 
 from fractions import Fraction as Fr
 import itertools, functools
 def agl_size(r): return 3 * 2**(6*r - 3)
+def _val(x, q):
+    """2-adic valuation of x mod q (q for x = 0)"""
+    x %= q
+    return q.bit_length() - 1 if x == 0 else (x & -x).bit_length() - 1
+def in_rowspace(na, nb, nc, nd, e, f, q):
+    """is (e, f) = x * [[na, nb], [nc, nd]] solvable over Z/q (q a power of 2)?  Elimination with a pivot of minimal 2-adic valuation."""
+    rows = [[na % q, nb % q], [nc % q, nd % q]]; v = [e % q, f % q]; k2 = q.bit_length() - 1
+    best = None
+    for i in (0, 1):
+        for j in (0, 1):
+            if rows[i][j] % q and (best is None or _val(rows[i][j], q) < _val(rows[best[0]][best[1]], q)): best = (i, j)
+    if best is None: return v[0] == 0 and v[1] == 0
+    i, j = best; piv = rows[i][j]; kv = _val(piv, q); u = piv >> kv; ui = pow(u, -1, q)
+    if _val(v[j], q) < kv: return False
+    t = ((v[j] >> kv) * ui) % q                                   # v - t*row_i has column j equal to 0
+    v = [(v[0] - t*rows[i][0]) % q, (v[1] - t*rows[i][1]) % q]
+    o = rows[1 - i]
+    if _val(o[j], q) < kv: raise AssertionError("pivot not minimal")
+    t2 = ((o[j] >> kv) * ui) % q if o[j] % q else 0
+    o = [(o[0] - t2*rows[i][0]) % q, (o[1] - t2*rows[i][1]) % q]  # other row with column j cleared
+    jj = 1 - j
+    if o[jj] % q == 0: return v[jj] % q == 0
+    return _val(v[jj], q) >= _val(o[jj], q)
 def mu(r, v, M, m):
     q = 2**r; (a, b), (c, d) = M; e, f = v
     na, nb, nc, nd = (a - 1) % q, b % q, c % q, (d - 1) % q          # N = M - I
     # Lemma 6: v must lie in the row space of N
-    inrow = any(((x1*na + x2*nc) % q, (x1*nb + x2*nd) % q) == (e % q, f % q) for x1 in range(q) for x2 in range(q))
+    inrow = in_rowspace(na, nb, nc, nd, e % q, f % q, q)
     if not inrow: return Fr(0)
     if na % 2 == 0 and nb % 2 == 0 and nc % 2 == 0 and nd % 2 == 0:                        # M = I mod 2  (then v = 0 mod 2, since v is in the row space)
         if (e % q, f % q, na, nb, nc, nd) == (0, 0, 0, 0, 0, 0):                        # Lemma 10: (v, M) = (0, I) mod 2^r
