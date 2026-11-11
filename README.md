@@ -48,6 +48,7 @@ code/verify_18P_note.py               checks of the 18P memorandum (notes/REVIEW
 code/odd_order_density.c              density of primes where P = (1,1) has odd order, vs. Liang-Rouse (notes/odd_order_density_check.md; not in CI)
 code/tau_image/                       2-adic image of the Kummer representation of P and the exact odd-order density (Python, replaces Magma; see its README; not in CI)
 data/odd_order_classes_C_P_1e8.txt    odd-order counts of P by class of p mod 8, 16, 32, 64 (primes up to 1e8)
+code/verify_chebotarev_mod8.py        checks of the Chebotarev mod-8 draft on every prime p = 7 mod 8 below 3e5 (notes/REVIEW_2026-11-12_chebotarev_mod8_density.md)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
