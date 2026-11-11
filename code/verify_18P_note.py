@@ -3,9 +3,11 @@
 Orbit Q_n = nP + T on C : y^2 = x^3 - 2x^2 + 2x, t_n = 1 - x(Q_n).  g(t) = t^6 - 30t^4 - 24t^2 - 1,  F(t) = 4a^3 + 27 b^2 c.
 What is checked:  A the homogeneous identity; B,C the reduction mod 7 (Theorem 1);  D the factorization and the neutrality at n = 3 (Section 6);
   E,F,G the sign factor f(n): period 18 holds, but the memo's f(n) is the repository's f(t_{n+1}), so f(3) = -1 (not +1), W(E_{31/49}) = -1;
-  H the genuine neutral anchors (t = 1 on nP + T; t = 0 and n = 9 on nP);  I Theorem 2 (fixed-gap common primes), J the recurrence of Section 5.
+  H the genuine neutral anchors (t = 1 on nP + T; t = 0 and n = 9 on nP);  I Theorem 2 (fixed-gap common primes), J the recurrence of Section 5;
+  K,L,M f(t_n) = +1 for every n = 0 (mod 6) (Lemma: f(t) = +1 when v_2(t-1) >= 3 and v_3(t-1) >= 2; valuations of t_n - 1);  N the anchor-avoidance statement
+  Q_{M L(S) j} = T mod p for p in S, with L(S) = lcm ord_p(P)/gcd(ord_p(P), M), M = 18 and M = 6.
 Needs python3, sympy; imports the local factor f(t) from code/scripts_as_run/eps.py and reads data/factorizations.json.  Exit 0 = all pass."""
-import sys, os, json, re, collections
+import sys, os, json, re, collections, random
 from fractions import Fraction as Fr
 from math import gcd
 sys.set_int_max_str_digits(0)
@@ -107,4 +109,44 @@ for p in primerange(5, 60):
             return (R[0].numerator*pow(R[0].denominator, -1, p) % p, R[1].numerator*pow(R[1].denominator, -1, p) % p)
         tested += 1; bad += (red_pt(n1) != red_pt(n2))
 check('J  Q_{r+18(k+m_p)} = Q_{r+18k} mod p for m_p = ord_p(P)/gcd(ord_p(P), 18): %d cases, %d failures' % (tested, bad), tested > 0 and bad == 0)
+
+# K. valuations of t_n - 1 along nP + T:  v_2 = 1 + 2 v_2(n) (n even), v_3 = 2 v_3(n) (3 | n)   (F.22: v_p(D_n) = v_p(n), x(nP + T) = 2/x(nP))
+def val(q, p):
+    q = Fr(q)
+    if q == 0: return 10**9
+    k = 0; a_, b_ = q.numerator, q.denominator
+    while a_ % p == 0: a_ //= p; k += 1
+    while b_ % p == 0: b_ //= p; k -= 1
+    return k
+check('K  v_2(t_n - 1) = 1 + 2 v_2(n) for even n and v_3(t_n - 1) = 2 v_3(n) for 3 | n (n <= 79)',
+      all(val(tPT(n) - 1, 2) == 1 + 2*val(n, 2) for n in range(2, 80, 2)) and all(val(tPT(n) - 1, 3) == 2*val(n, 3) for n in range(3, 80, 3)))
+# L. Lemma:  f(t) = -w2 w3 (2/|c|) = +1 whenever v_2(t-1) >= 3 and v_3(t-1) >= 2.
+#    By hand: t = 1 + e;  (a/c, b/c) = (-e(1 + e/2)/(1 + e + e^2/2), (1+e)/(1+e+e^2/2)) = (-e, 1) mod 32, so (A16, B16) in {(0,1), (8,1)} (both in the list W2): w2 = -1;
+#    c = v^2 (1 + e + e^2/2) = 1 mod 8: (2/|c|) = +1;  (A9, B9) = (0, 1) != (3, 8): w3 = +1;  hence f = -(-1)(+1)(+1) = +1.
+random.seed(5); nsamp = 0; allone = True
+for _ in range(2000):
+    r = random.randint(-10**6, 10**6) or 1; sden = random.choice([k for k in range(1, 5000) if k % 2 and k % 3]); tt = 1 + Fr(72*r, sden)
+    if tt.numerator == 0: continue
+    nsamp += 1; allone &= (pieces(tt)[0] == 1)
+check('L  Lemma f(t) = +1 for v_2(t-1) >= 3, v_3(t-1) >= 2: %d random rationals t = 1 + 72r/s, gcd(s,6) = 1, all give f = +1; just outside (t = 5 mod 8) f = -1' % nsamp,
+      allone and all(pieces(1 + Fr(36*k, 5))[0] == -1 for k in (1, 3, 5, 7, 9, 11)))
+check('M  hence f(t_n) = +1 for every n = 0 (mod 6) on nP + T (n = 6, 12, ..., 78): the class n = 0 (mod 18) has f = +1 without any periodicity input', all(fc[n] == 1 for n in (6, 12, 18, 24, 30, 36, 42, 48, 54, 60)) and all(pieces(tPT(n))[0] == 1 for n in range(6, 79, 6)))
+# N. anchor avoidance:  Q_{M L j} = T mod p for all p in S,  L(S) = lcm_p ord_p(P)/gcd(ord_p(P), M);  t = 1 mod p and F(1) = 27, so p does not divide F
+def mulp(k, A, p):
+    R = None
+    while k:
+        if k & 1: R = addp(R, A, p)
+        A = addp(A, A, p); k >>= 1
+    return R
+from math import lcm
+okN = True; info = {}
+for M_ in (18, 6):
+    S = list(primerange(5, 101)); orders = {p: order_p(p) for p in S}
+    L = 1
+    for p in S: L = lcm(L, orders[p]//gcd(orders[p], M_))
+    info[M_] = L
+    for j in (1, 2):
+        for p in S:
+            okN &= (mulp(M_*L*j, (1, 1), p) is None)               # M L j P = O mod p, so Q = M L j P + T = T mod p, i.e. t = 1 mod p, F(1) = 27 prime to p
+check('N  S = primes in [5, 100]: M L(S) j P = O mod p for all p in S (M = 18: L = %d; M = 6: L = %d; j = 1, 2), so no p in S divides F(t_{M L j}) (t = 1 mod p, F(1) = 27)' % (info[18], info[6]), okN)
 print('ALL CHECKS PASS' if OK else 'SOME CHECK FAILED'); sys.exit(0 if OK else 1)
