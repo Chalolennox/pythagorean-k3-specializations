@@ -25,6 +25,10 @@ The draft is correct where it can be checked, with one false sentence (harmless)
 
 The logic of Section 5 and Addendum B.1 is sound: a root of the halving quartic over 𝔽_p gives a rational point R or −R, and Frobenius cannot send R to −R because it fixes Q = 2R, which has order > 2. The one non-elementary input is the synchronization of the two quartics (both have roots or neither), supplied by the Magma coset counts; the cycle-type census above confirms exactly that behaviour.
 
+## Update (same day): the image is NOT stable at level 32
+
+`code/tau_image/stability_mod64.py` predicts the odd-order fractions mod 64 under the assumption that the image at level 64 is the full preimage of I₃₂, and compares them with the 10⁸ prime data. The prediction has **no split** of the classes 1, 33 and 31, 63 (mod 64) (0.54032 and 0.54031; 1/6 and 1/6). The data split them: 0.52876 versus 0.55227 (about 10σ from the prediction) and 0.25038 versus 0.08326 (82σ and 128σ), i.e. 1/4 versus 1/12 to within 0.4σ. All other classes mod 32 are unsplit. Hence the image at level 64 is a proper subgroup of the full preimage of I₃₂, and the level-32 image is **not** the stable image. The new constraint involves only the classes p ≡ ±1 mod 32 and, to the precision of the data, leaves the class means unchanged (class 31 mod 32: mean 0.16682 against 1/6; class 1: 0.54052 against 0.54032). Consequences for this note: the level-32 weights (item 6 and the value 1/6 computed from them) are **not** the final values; the exact statements of items 1–5 (finite levels ≤ 32) are unaffected; the pattern in item 7 (a_j for j ≤ 5) is exact but its limit is unproved. My statement that the matrix part is stable from level 32 on (Rouse–Zureick-Brown) stands; the new constraint is in the joint structure of the Kummer and the cyclotomic part.
+
 ## An independent proof route: the finite image
 
 `image_densities.py` reads the computed images I₈, I₁₆, I₃₂ of the Kummer representation of (C, P) (README of `code/tau_image`). For a Frobenius class (v, M): #C(𝔽_p) ≡ det(I − M), p ≡ det M mod 2^k, and P ∈ 2^jC(𝔽_p) iff x ↦ v + xM has a fixed point mod 2^j. By Chebotarev every statement below is an exact count in a finite group; it is **conditional on the image having been computed correctly** (numerical coset criterion, validated in the README).
@@ -34,12 +38,12 @@ The logic of Section 5 and Addendum B.1 is sound: a root of the halving quartic 
 3. **The valuation law.** From I₃₂: Pr(v₂(#C) = 2, 3, 4 | p ≡ 7 mod 8) = 1/2, 1/4, 1/8, and Pr(v₂ ≥ 5) = 1/8, exactly the draft's model 2^{−(k−1)}.
 4. **P in 2^jC (exact at each level).** Pr(P ∈ 2^jC | p ≡ 7 mod 8) = 1, 1/2, 1/4, **3/16, 11/64** for j = 1, …, 5. The draft's "separate conjecture" predicts 2^{−(j−1)} = 1/8, 1/16 at j = 4, 5. Prime data (p < 3·10⁵, 6 522 primes): 0.189 and 0.177 at j = 4, 5, in agreement with the image and not with the conjecture.
 5. **Why the conjecture must fail.** If P has odd order it is divisible by 2^j for every j (P = 2^j(mP) with 2^jm ≡ 1 mod ord P). So Pr(P ∈ 2^jC) ≥ Pr(odd order) for all j, and 2^{−(j−1)} < 1/6 for j ≥ 4. The draft's own conjectured density 1/6 contradicts its separate conjecture.
-6. **Conditional odd-order laws.** With the Liang–Rouse weights at level 32: Pr(odd | r = 2, 3, 4) = 0, 1/2, 1/4 and Pr(odd | r ≥ 5) = 1/12, which is exactly what the draft's heuristic Pr(odd | r = k) = 2^{−(k−2)} gives (aggregated over k ≥ 5: 1/12). The total is exactly **1/6** (and 1/6 is also the exact value at levels 8, 16, 32 of the class-by-class prediction for p ≡ 7 mod 8). This relies on the image above level 32 being the full preimage, which is not proved.
+6. **Conditional odd-order laws.** With the Liang–Rouse weights at level 32: Pr(odd | r = 2, 3, 4) = 0, 1/2, 1/4 and Pr(odd | r ≥ 5) = 1/12, which is exactly what the draft's heuristic Pr(odd | r = k) = 2^{−(k−2)} gives (aggregated over k ≥ 5: 1/12). The total is exactly **1/6** (and 1/6 is also the exact value at levels 8, 16, 32 of the class-by-class prediction for p ≡ 7 mod 8). This assumed the image above level 32 to be the full preimage; the update above shows that assumption is false (a new constraint at level 64), so these level-32 numbers are a model, not the density.
 7. **A pattern, not a proof.** a_j = Pr(P ∈ 2^jC | 7 mod 8) = 1/4, 3/16, 11/64 for j = 3, 4, 5 equals 1/6 + (1/12)·4^{−(j−3)}, whose limit is 1/6. This is a three-parameter fit to three points; a_6 would test it and needs level 64.
 
 ## The matrix part and the translation part
 
-Splitting the computed images: the image of ρ_{C,2^k} has index **24, 48, 96** in GL₂(ℤ/2^k) at k = 3, 4, 5, while the translation part keeps constant index 16. So the extra constraints at levels 16 and 32 are constraints on the 2-adic Galois image of C itself. For non-CM E/ℚ the index of the 2-adic image divides 64 or 96 and the image is determined mod 32 (Rouse–Zureick-Brown, which I confirmed in the sources); C has j = 128, which is not a CM j-invariant. Hence the index-96 image found at level 32 is the 2-adic image of C, stable from level 32 on (conditional on the computed matrix part). Whether the *joint* image of (v, M) is stable above level 32 is not settled; that is what a proof of the infinite-level odd-order density 1/6 needs.
+Splitting the computed images: the image of ρ_{C,2^k} has index **24, 48, 96** in GL₂(ℤ/2^k) at k = 3, 4, 5, while the translation part keeps constant index 16. So the extra constraints at levels 16 and 32 are constraints on the 2-adic Galois image of C itself. For non-CM E/ℚ the index of the 2-adic image divides 64 or 96 and the image is determined mod 32 (Rouse–Zureick-Brown, which I confirmed in the sources); C has j = 128, which is not a CM j-invariant. Hence the index-96 image found at level 32 is the 2-adic image of C, stable from level 32 on (conditional on the computed matrix part). The *joint* image of (v, M) is not stable at level 32 (see the update); the level at which it stabilizes is unknown, and a proof of the infinite-level odd-order density needs it.
 
 ## Status
 
@@ -51,7 +55,7 @@ Splitting the computed images: the image of ρ_{C,2^k} has index **24, 48, 96** 
 | level-16 analogue false (Addendum C) | proved (p = 31; 512 of 2 048 classes) |
 | valuation law Pr(r = k) = 2^{−(k−1)} | exact for k ≤ 4 from I₃₂ (conditional on the image) |
 | Pr(P ∈ 2^jC) = 2^{−(j−1)} for j ≥ 4 | **false** (3/16, 11/64; and Pr ≥ 1/6 by the odd-order argument) |
-| odd-order density 1/6 | supported (exact at levels 8, 16, 32; data 0.1668 ± 0.0003); not proved |
+| odd-order density 1/6 | supported (exact at levels 8, 16, 32; data 0.1668 ± 0.0003); not proved; the level-32 image is not stable (new constraint at level 64 for p ≡ ±1 mod 32) |
 
 ## Suggested corrections to the draft
 
