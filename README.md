@@ -45,6 +45,7 @@ code/index_four/                      C scanner (scan.c) and point-counting help
 code/verify_reviewer_context.py   recomputation of the data in the independent reviewer's files (notes/REVIEW_2026-11-07_independent_reviewer_context.md)
 code/ec.py                     exact elliptic-curve arithmetic and canonical heights (used by verify_reviewer_context.py and curated/check_curated_python.py)
 code/verify_18P_note.py               checks of the 18P memorandum (notes/REVIEW_2026-11-11_18P_symmetry_note.md; finds an index shift in its sign factor)
+code/odd_order_density.c              density of primes where P = (1,1) has odd order, vs. Liang-Rouse (notes/odd_order_density_check.md; not in CI)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
