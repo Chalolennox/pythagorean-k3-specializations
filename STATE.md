@@ -30,6 +30,13 @@ For the elliptic K3 surface E_t : y² = x³ + 4A(t)x − 8B(t), A² + B² = 1, w
 9. **Unexamined ideas** (F.34): arithmetic identities at the points nP that are not identities of functions; Heegner-type or descent constructions of a second point; the ideal-class route in the sextic field.
 10. **Presentation:** turn the bold lead-ins of F.1–F.46 into headings; decide whether `paper/paper.md` or the claude.ai working document is the source of truth.
 
+## Index-four obstruction (a smaller result; it does not bear on Problem H)
+
+For p = 1 (mod 8) with all six candidate roots of f qualifying (T_p = 6 or S_p = 6, see the note), the number D_p of candidate points in 2C(F_p) satisfies (-1)^(D_p/2) = -chi_p(1+i); hence d_p = 4 implies D_p <= 4.
+The proof rests on an identity of square classes for the cubic factors of f (a polynomial identity plus f(i) = -8), on 2-descent, and on T_p = 6 implying S_p = 6 and p = 1 (mod 24).
+Status: **Conditional on a human reading of the proof.** The algebra is checked exactly in sympy and the statements on 2 382 (T_p) and 9 664 (S_p) primes up to 1.2e9; no human has refereed it. Details: `notes/index_four_obstruction.md`; checks: `code/verify_square_class_identity.py`, `code/verify_partial_split.py`, `code/verify_index_four.py`, `code/verify_local_sign.py`.
+The extension to partially split primes gives no restriction on H_p beyond 2-descent, and the local-sign formula sigma_p = -chi(-6) chi(t_n) is a reformulation of (ab/p); neither is a route to H.
+
 ## What went wrong before (do not repeat)
 
 - H was claimed equivalent to Chowla's conjecture for F(u, v); it is not (Helfgott's result is about averages over the whole family).
