@@ -45,3 +45,5 @@ If the image at level k+1 is the full preimage of the level-k image (k ≥ 3), i
 | 32 | 2¹⁸ | 2¹⁹ | 48673/114688 = 0.424395 |
 
 Not shown stable (each level so far adds one constraint); level 64 is too large for this implementation (2²⁴ elements). The data (p ≤ 10⁸) confirm the constraints at levels 16 and 32 and show further splitting of the classes 1 and 31 mod 32 at mod 64; see `notes/odd_order_density_check.md`.
+
+**Update (12 November 2026):** not stable. `stability_mod64.py` shows a new constraint at level 64 (classes ±1 mod 32 split, up to 128σ), so 48673/114688 is a model value, not the density; see `notes/REVIEW_2026-11-12_chebotarev_mod8_density.md`.

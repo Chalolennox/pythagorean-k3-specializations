@@ -32,6 +32,8 @@ Result for C (frame fixed by β_k, A_k, B_k; each level found by the coset test,
 
 The generators are in `code/tau_image/image_generators_-2_1_1.json` (2, 2 and 4 generators).
 
+**Update (12 November 2026).** The assumption behind the last column is false at level 32: `code/tau_image/stability_mod64.py` shows that the full preimage of I₃₂ predicts no split of the classes ±1 (mod 32) at mod 64, while the 10⁸ data split them by up to 128σ, so there is a new constraint at level 64 (see `notes/REVIEW_2026-11-12_chebotarev_mod8_density.md`, Update). 48673/114688 is therefore a model value, not the density; the measured 0.424442 (p ≤ 10⁸) stands, and the exact density is unknown. The sentence "I do not claim a level-64 constraint" below is superseded.
+
 ## Do the data confirm the extra constraints at levels 16 and 32?
 
 Yes. For primes in classes mod 2^r the predicted odd-order fraction comes from the image (class densities, `descend.class_densities`). The full preimage of the lower-level image would give very different values, and the data side with the computed images (`fullpre_test.py`, `fullpre_test32.py`; standard errors from the class sizes, about 720 000 and 360 000 primes):
