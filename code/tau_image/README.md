@@ -13,6 +13,7 @@ Our curve C : y² = x³ − 2x² + 2x with P = (1,1) is [a,c,k] = [−2,1,1]. Wr
 | `test_density.py` | rows 1–17 only |
 | `fullpre_test.py`, `fullpre_test32.py` | data check: computed image versus the full preimage of the level below, class densities mod 16 / mod 32 against `data/odd_order_classes_C_P_1e8.txt` |
 | `image_densities.py` | Chebotarev densities of the draft 'Chebotarev density calculation for C' read off the computed images: density 1/8, Theorem B as a finite statement, valuation laws, Pr(P in 2^j C), odd-order laws, matrix/translation split |
+| `stability_mod64.py` | tests whether the image above level 32 is the full preimage of I_32: predicts the odd-order fractions mod 64 and compares with the 10^8 prime data. Result: it is not (classes p = +-1 mod 32 split; up to 128 sigma). About 10 s for classes 1, 31 |
 | `check_ours.py` | rebuilds our images mod 8, 16, 32 from `image_generators_-2_1_1.json` and recomputes the densities (about 1 min) |
 | `verify_identity.py` | confirms that the computed images belong to exactly C : y² = x³ − 2x² + 2x, P = (1,1): parameter map, numerical objects, an independent naive recount of the odd-order primes, frame independence (about 3 min) |
 | `save_generators.py` | stores an image as a small generating set |
@@ -44,3 +45,5 @@ If the image at level k+1 is the full preimage of the level-k image (k ≥ 3), i
 | 32 | 2¹⁸ | 2¹⁹ | 48673/114688 = 0.424395 |
 
 Not shown stable (each level so far adds one constraint); level 64 is too large for this implementation (2²⁴ elements). The data (p ≤ 10⁸) confirm the constraints at levels 16 and 32 and show further splitting of the classes 1 and 31 mod 32 at mod 64; see `notes/odd_order_density_check.md`.
+
+**Update (12 November 2026):** not stable. `stability_mod64.py` shows a new constraint at level 64 (classes ±1 mod 32 split, up to 128σ), so 48673/114688 is a model value, not the density; see `notes/REVIEW_2026-11-12_chebotarev_mod8_density.md`.

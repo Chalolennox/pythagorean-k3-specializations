@@ -1,7 +1,9 @@
 """Chebotarev densities for C : y^2 = x^3 - 2x^2 + 2x, P = (1,1), read off the computed images I_8, I_16, I_32 of the Kummer representation (image_generators_-2_1_1.json).
 For a prime p with Frobenius (v, M) in I_{2^k}:  #C(F_p) = det(I - M) mod 2^k,  p = det M mod 2^k,  and  P is in 2^j C(F_p)  iff  the affine map x -> v + xM has a fixed point mod 2^j.
 Every statement below is an exact count in a finite group (Chebotarev), CONDITIONAL on the image having been computed correctly (numerical coset criterion; see README) and, for the odd-order
-statements, on the density formula of Liang-Rouse (which also needs the image above the level used)."""
+statements, on the density formula of Liang-Rouse (which also needs the image above the level used).
+PART 4 IS A MODEL, NOT THE DENSITY: it assumes the image above level 32 is the full preimage of I_32, and stability_mod64.py shows this is false (a new constraint at level 64 for p = +-1 mod 32).
+Parts 1, 2, 3 (levels <= 32, events decided at those levels), 5 and 6 do not depend on that assumption."""
 import json, os, sys, time
 from fractions import Fraction as Fr
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
@@ -34,7 +36,7 @@ for j, k in ((1, 3), (2, 3), (3, 3), (4, 4), (5, 5)):
     G = I[k]; q = 2**k; cls = [g for g in G if det(g, q) % 8 == 7]
     res[j] = Fr(sum(1 for g in cls if fixed_point(g, j)), len(cls))
 print("3. Pr(P in 2^j C(F_p) | p = 7 mod 8):", {j: str(res[j]) for j in res}, "  (note: j = 1: 1, j = 2: 1/2 (Theorem B), j = 3: 1/4, conjecture 2^-(j-1))   [%.0fs]" % (time.time() - t0), flush=True)
-# ---- 4. joint law of (odd order, r)  via the Liang-Rouse weights at level 32 (assumes the image above level 32 is the full preimage: NOT proved)
+# ---- 4. joint law of (odd order, r)  via the Liang-Rouse weights at level 32.  MODEL ONLY: assumes the image above level 32 is the full preimage, which stability_mod64.py shows to be false.
 G = I[5]; q = 32; m = agl_size(5)//len(G); cls = [g for g in G if det(g, q) % 8 == 7]
 tot = {}; num = {}
 for g in cls:
@@ -42,7 +44,7 @@ for g in cls:
     tot[r] = tot.get(r, 0) + 1; num[r] = num.get(r, 0) + w
 print("4. Pr(odd order | r = k, p = 7 mod 8) from the level-32 image:", {("r>=5" if k == 5 else "r=%d" % k): "%s = %.5f" % (num[k]*len(G)/tot[k], float(num[k]*len(G)/tot[k])) for k in sorted(tot)}, "  (note: 0, 1/2, 1/4, ...)")
 allodd = sum(num.values())*len(G)/len(cls)
-print("   Pr(odd order | p = 7 mod 8) = %s = %.6f  (note: conjectured 1/6)   [%.0fs]" % (allodd, float(allodd), time.time() - t0))
+print("   [model, see header] Pr(odd order | p = 7 mod 8) = %s = %.6f  (note: conjectured 1/6)   [%.0fs]" % (allodd, float(allodd), time.time() - t0))
 
 # ---- 5. Theorem B as a statement about the finite group:  for EVERY Frobenius class (v, M) in I_8 with det M = 7 mod 8:  8 | det(I-M)  <=>  the affine map has a fixed point mod 4  (P in 4C(F_p)).
 #         Every element of the image is the Frobenius of infinitely many primes (Chebotarev), so this is exactly the equivalence for all unramified p = 7 mod 8, conditional on the image I_8.
