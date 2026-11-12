@@ -1,6 +1,6 @@
 # pythagorean-k3-specializations
 
-Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of the unit circle (a Pythagorean triple), form an elliptic **K3 surface** over the projective line. This repository holds the working paper, the code and the data of a study of their conductors, root numbers and rank jumps, and of one open problem: **are there infinitely many members of rank ≥ 2 along the orbit t_n = 1 − x(nP)?**
+Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of the unit circle (a Pythagorean triple), form an elliptic **K3 surface** over the projective line. This repository holds the working paper, the code and the data of a study of their conductors, root numbers and rank jumps, and of one open problem, **Problem H: is the root number W(E_{t_n}) = +1 for infinitely many n along the orbit t_n = 1 − x(nP)?** By the 2-parity theorem, a yes would give infinitely many members of rank ≥ 2 or infinite Sha[2^∞], and rank ≥ 2 if Sha[2^∞] is finite (paper §6).
 
 > **Project status (7 November 2026): open problem; project paused; this repository is a reproducible record of what was tried.** Problem H is not solved, and no work is in progress. Start with [`STATE.md`](STATE.md): it says what is proved, what was tried and closed, and what has not been tried.
 
@@ -18,14 +18,15 @@ Elliptic curves **y² = x³ + 4Ax − 8B**, where (A, B) is a rational point of 
 | No section of the shape X = X_P + λN_c² on the twist of any constant-x cover with rational c (other shapes are not covered) | Certified | F.47 |
 | Conjectured patterns of the parity bit (period 4; δ_2n = δ_n) | Refuted by factorizations up to 163 digits | F.31–F.38 |
 | For fixed distinct rational a, b, only finitely many t have rational points at both x = a and x = b (genus 2 or 3 fibre product) | Proved | F.48 |
-| **Infinitely many members of rank ≥ 2 (Problem H)** | **Open** | Appendix B, F.24 |
+| **Problem H: W(E_{t_n}) = +1 for infinitely many n** | **Open** | Appendix B, F.24 |
+| Infinitely many members of rank ≥ 2 | Open; follows from Problem H if Sha[2^∞] is finite (unconditionally, Problem H gives rank ≥ 2 or infinite Sha[2^∞]) | §6, §9 |
 
 The labels are those of the paper: Proved, Certified, Observed, Conditional, Open. "Conditional" results depend on stated hypotheses (for example the Tate conjecture for K3 surfaces over finite fields).
 
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 206)
+paper/paper.md                 the paper (snapshot export, revision 218)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G
@@ -49,6 +50,7 @@ code/odd_order_density.c              density of primes where P = (1,1) has odd 
 code/tau_image/                       2-adic image of the Kummer representation of P and the exact odd-order density (Python, replaces Magma; see its README; not in CI)
 data/odd_order_classes_C_P_1e8.txt    odd-order counts of P by class of p mod 8, 16, 32, 64 (primes up to 1e8)
 code/verify_chebotarev_mod8.py        checks of the Chebotarev mod-8 draft on every prime p = 7 mod 8 below 3e5 (notes/REVIEW_2026-11-12_chebotarev_mod8_density.md)
+code/check_problem_h_definition.py   checks that Problem H is defined the same way in README.md, STATE.md and the paper
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected

@@ -22,3 +22,4 @@ jobs:
       - run: python3 code/verify_square_class_identity.py 1000000
       - run: python3 code/verify_index_four.py
       - run: python3 code/verify_partial_split.py 60000
+      - run: python3 code/check_problem_h_definition.py

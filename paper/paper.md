@@ -6,11 +6,13 @@
 
 ## Abstract
 
-The curves E\_t : y² = x³ + 4A(t)x − 8B(t), where (A, B) = ((1 − t²)/(1 + t²), 2t/(1 + t²)) is a rational point of the unit circle, are the fibres of an elliptic K3 surface S over ℙ¹ with Picard number 16 and generic Mordell–Weil rank 0. We determine the conductor and the global root number of E\_t for every rational t, show that infinitely many t have rank ≥ 1, exhibit fibres of rank 2 and 3, and study how the rank jumps. Along the orbit t\_n = 1 − x(nP) of the point P = (1, 1) on the elliptic curve y² = z³ − 2z² + 2z, the root number is the product of a periodic sign (period 6 along nP, period 3 along nP + T), local factors at 2 and 3 that are completely determined, and one remaining bit: the parity of the number of prime factors of the values of an irreducible binary sextic. That bit is the only obstacle to infinitely many members of rank ≥ 2 (Problem H, open). The paper proves everything else, records the routes that cannot work (identities of functions, degree reduction, primitive divisors, a second section on a constant-x cover), and reports computations that exclude a second section for 18 such covers.
+The curves E\_t : y² = x³ + 4A(t)x − 8B(t), where (A, B) = ((1 − t²)/(1 + t²), 2t/(1 + t²)) is a rational point of the unit circle, are the fibres of an elliptic K3 surface S over ℙ¹ with Picard number 16 and generic Mordell–Weil rank 0. We determine the conductor and the global root number of E\_t for every rational t, show that infinitely many t have rank ≥ 1, exhibit fibres of rank 2 and 3, and study how the rank jumps. Along the orbit t\_n = 1 − x(nP) of the point P = (1, 1) on the elliptic curve y² = z³ − 2z² + 2z, the root number is the product of a periodic sign (period 6 along nP, period 3 along nP + T), local factors at 2 and 3 that are completely determined, and one remaining bit: the parity of the number of prime factors of the values of an irreducible binary sextic. That bit is the only obstacle to Problem H, the statement that W(E\_{t\_n}) = +1 for infinitely many n, which is open; by the 2-parity theorem it would give infinitely many t with rank ≥ 2 or infinite Sha\[2^∞\], and rank ≥ 2 if Sha\[2^∞\] is finite. The paper proves everything else, records the routes that cannot work (identities of functions, degree reduction, primitive divisors, a second section on a constant-x cover), and reports computations that exclude a second section for 18 such covers.
 
 ## Results at a glance
 
 Each row carries one of the five labels of the paper: Proved, Certified (exact computation, independently re-checked), Observed (finite computation), Conditional (depends on a stated hypothesis) or Open.
+
+**Problem H.** Throughout, Problem H is the statement about the sign of the root number along the orbit t\_n = 1 − x(nP), P = (1, 1) on y² = z³ − 2z² + 2z: W(E\_{t\_n}) = +1 for infinitely many n (stated in elementary terms in Appendix B). It is a statement about signs, not about ranks. Its consequence for ranks is in §6 and row 14: if it holds, infinitely many t have rank ≥ 2 or infinite Sha\[2^∞\], hence rank ≥ 2 if Sha\[2^∞\] is finite. The same question along nP + T is called Problem H along nP + T. In §6 the letter H denotes the hypothesis H\_c for a cover C\_c, that W(E\_t) = +1 for infinitely many admissible t on C\_c (those with P\_t non-torsion and E\_t(ℚ)\[2\] = 0); Problem H implies H\_2.
 
 | # | Result | Status | Where | Depends on |
 | --- | --- | --- | --- | --- |
@@ -30,7 +32,8 @@ Each row carries one of the five labels of the paper: Proved, Certified (exact c
 | 13a | No section X = X\_P + λN\_c², Y = N\_c²·(quadratic) with λ ≠ 0 on the twist S\_c for any rational c; sections meeting the identity components of the I₀\* fibres are not covered | Certified | F.47 | exact elimination (Magma, reproduced in sympy); Faltings’ theorem for the local lemma only |
 | 14 | If W(E\_t) = +1 and E\_t has a non-torsion point: dim Sel₂ ≥ 2, and rank ≥ 2 or Sha\[2^∞\] infinite | Proved | §6 | 2-parity theorem |
 | 15 | Conjectured patterns of the parity bit (period 4; δ\_{2n} = δ\_n) are false | Observed | F.31–F.38 | complete factorizations up to 163 digits |
-| 16 | Infinitely many t with rank ≥ 2 | Open | Problem H, F.24 | the parity barrier |
+| 16 | Problem H: W(E\_{t\_n}) = +1 for infinitely many n | Open | Appendix B, F.24 | the parity barrier |
+| 17 | Infinitely many t with rank ≥ 2 | Open | §6, §9 | Problem H (row 16) and finiteness of Sha\[2^∞\] (row 14) |
 
 ## Reader's guide
 
@@ -72,6 +75,7 @@ Each row carries one of the five labels of the paper: Proved, Certified (exact c
 | 5 | A point-counting routine failed for fibres whose points have small order (found at p = 37, repaired and revalidated) | F.44, F.45 |
 | 6 | Four paragraphs of F.8 and F.9 stood after F.46 and were moved back | Appendix F |
 | 7 | A period-4 pattern and Conjecture D for the parity bit were proposed; complete factorizations refute both | F.31–F.38 |
+| 8 | Problem H was labelled, in the abstract, the results table and the list of open items, as the statement that infinitely many t have rank ≥ 2; it is the sign statement W(E\_{t\_n}) = +1 for infinitely many n, and rank ≥ 2 follows from it only through §6 and the finiteness of Sha\[2^∞\]. The hypothesis H of §6 (for a cover C\_c) was not tied to it | Abstract; Results at a glance (new paragraph, rows 16 and 17); the open item of the introduction; §6 (H\_c); Appendix B |
 
 ## Limitations and provenance
 
@@ -112,7 +116,7 @@ The paper has three parts. §§1–4 treat the surface and the arithmetic of the
 - **D (Certified).** Ranks 0, 1, 2 and 3 all occur, with bases and regulators for the curves of rank ≥ 1 listed in §5.
 - **E (Proved).** Infinitely many rational t have rank ≥ 1, through the elliptic curve w² = z³ − 2z² + 2z. The x-fibration has generic rank 0, so jumps are not produced by a section of either fibration. E\_t has a rational 2-torsion point for only finitely many t (§6, §8).
 - **F (Proved).** The quadratic twist E^d has rank exactly 1 over ℚ(t) and geometric rank exactly 1 (§7).
-- **Open.** Infinitely many t with rank ≥ 2 (Problem H, reduced to one parity statement; §9, F.24).
+- **Open.** Problem H, W(E\_{t\_n}) = +1 for infinitely many n (reduced to one parity statement; §9, F.24), and through it infinitely many t with rank ≥ 2 (rank ≥ 2 if Sha\[2^∞\] is finite; §6).
 
 Results added after the first version, in Appendices B–F, extend this list:
 
@@ -330,7 +334,7 @@ In all 48 cases (−1)^{s₂} = W, as the 2-parity theorem requires, and the roo
 
 **Conditional theorem (Conditional on H).** Let c ∈ {2, 1, 4, −11/5, 14/45}, so that the genus-one curve C\_c has a positive-rank Jacobian and infinitely many rational points. For P = (t, w) ∈ C\_c(ℚ) with E\_t nonsingular let P\_t = (c, w/(1 + t²)) ∈ E\_t(ℚ). Let 𝒯\_c be the set of t = t(P) for which P\_t is non-torsion and E\_t(ℚ)\[2\] = 0. Then 𝒯\_c contains all but finitely many t(P): the section of the twist E^{f\_c} has Shioda height 1, hence is non-torsion over ℚ(C\_c), and by Silverman's specialization theorem the points of C\_c(ℚ) at which it specializes to a torsion point have bounded height, hence are finite in number; the t with 2-torsion are finite in number by §8. Consider the hypothesis
 
-**H.** W(E\_t) = +1 for infinitely many t ∈ 𝒯\_c.
+**H.** W(E\_t) = +1 for infinitely many t ∈ 𝒯\_c (written H\_c when c must be named). For c = 2 the set 𝒯\_2 contains all but finitely many t(nP) and t(nP + T), so Problem H (Appendix B), and its analogue along nP + T, each imply H\_2.
 
 By the formula of §4 this means that −w₂w₃(2/c′)(−1)^{ω(R\_F)}(ab/R\_F) = +1 for infinitely many of these t, where c′ is the odd part of the hypotenuse (for c = 2, c′ is a perfect square, so (2/c′) = 1); the factors w₂ and w₃ take finitely many values, so H asks for a prescribed value of the Liouville-type term. Then:
 
@@ -462,7 +466,7 @@ The 2-adic and 3-adic rules are the finite tables of §4; the structure of the t
 
 ## Appendix B. Problem H, stated independently of the rest of the paper
 
-This appendix defines the hypothesis H of §6 in elementary terms, so that it can be studied without elliptic curves of rank ≥ 2 or K3 surfaces.
+This appendix defines Problem H, the sign statement along the orbit nP (the case c = 2 of the hypothesis H of §6), in elementary terms, so that it can be studied without elliptic curves of rank ≥ 2 or K3 surfaces.
 
 **Objects.** Let E′ : v² = z³ − 2z² + 2z, with the rational points P = (1, 1) (infinite order) and T = (0, 0) (order 2); E′(ℚ) = ⟨P⟩ × ⟨T⟩. For R = (z, v) ∈ E′(ℚ) put t(R) = 1 − z(R) (these are exactly the rational t with (1 − t)(1 + t²) a square). Write t\_n = t(nP) and t′\_n = t(nP + T): 0, −1, 3/4, −7, −40/9, 31/49, −561/400, 161/961, 34440/34969, −69409/529, −2047837/2965284, −917447/5013121, …
 
@@ -482,7 +486,7 @@ n = 1, …, 18 :  − − − + − + + + − + + + − + − − − +
 
 (f(t′\_n) = +1 for n = 4, 6, 7, 8, 10, 11, 12, 14, 18). By compactness of E′(ℚ₂) and E′(ℚ₃) the sequence f is periodic in n.
 
-**Problem H.** Show that W(E\_{t\_n}) = +1 for infinitely many n, that is, that s(t\_n) is even for infinitely many n (equivalently, for the other sequence, that (−1)^{s(t′\_n)} = f(t′\_n) for infinitely many n). A weaker version allows any infinite subset of E′(ℚ) in place of {nP}.
+**Problem H.** Show that W(E\_{t\_n}) = +1 for infinitely many n, that is, that s(t\_n) is even for infinitely many n; along the other sequence t′\_n the same question (Problem H along nP + T) asks for (−1)^{s(t′\_n)} = f(t′\_n) for infinitely many n, that is, W(E\_{t′\_n}) = +1 for infinitely many n. A weaker version allows any infinite subset of E′(ℚ) in place of {nP}.
 
 **Data.** The primes ≥ 5 dividing F all occur to the first power in the examples below.
 
