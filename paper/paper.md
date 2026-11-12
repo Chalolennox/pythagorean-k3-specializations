@@ -468,7 +468,11 @@ The 2-adic and 3-adic rules are the finite tables of §4; the structure of the t
 
 This appendix defines Problem H, the sign statement along the orbit nP (the case c = 2 of the hypothesis H of §6), in elementary terms, so that it can be studied without elliptic curves of rank ≥ 2 or K3 surfaces.
 
-**Objects.** Let E′ : v² = z³ − 2z² + 2z, with the rational points P = (1, 1) (infinite order) and T = (0, 0) (order 2); E′(ℚ) = ⟨P⟩ × ⟨T⟩. For R = (z, v) ∈ E′(ℚ) put t(R) = 1 − z(R) (these are exactly the rational t with (1 − t)(1 + t²) a square). Write t\_n = t(nP) and t′\_n = t(nP + T): 0, −1, 3/4, −7, −40/9, 31/49, −561/400, 161/961, 34440/34969, −69409/529, −2047837/2965284, −917447/5013121, …
+**Objects.** Let E′ : v² = z³ − 2z² + 2z, with the rational points P = (1, 1) (infinite order) and T = (0, 0) (order 2); E′(ℚ) = ⟨P⟩ × ⟨T⟩. For R = (z, v) ∈ E′(ℚ) put t(R) = 1 − z(R) (these are exactly the rational t with (1 − t)(1 + t²) a square). Write t\_n = t(nP) and t′\_n = t(nP + T): 0, −1, 3/4, −7, −40/9, 31/49, −561/400, 161/961, 34440/34969, −69409/529, −2047837/2965284, −917447/5013121, … (Figure B.1 shows the orbit of P + T on the unit circle)
+
+&#91;image: Figure B.1: the orbit of P + T on the unit circle, n = 1, …, 30\]
+
+**Figure B.1. The orbit of P + T on the unit circle (illustration from exact rational data; code/figure\_p\_plus\_t\_orbit.py).** Point n is (A, B) = ((1 − t²)/(1 + t²), 2t/(1 + t²)) for t = t(n(P + T)), n = 1, …, 30. Since n(P + T) = nP + nT, this is t′\_n for odd n and t\_n for even n; for example n = 1 gives t = −1, the point (0, −1), and n = 2 gives t = 3/4, the point (7/25, 24/25). Because t(Q) = t(−Q), translation by P + T is a two-valued correspondence t(Q) ↦ {t(Q + P + T), t(Q − P − T)}; along the orbit the two values are the neighbours n + 1 (solid arrows) and n − 1 (dashed arcs).
 
 For t = u/v in lowest terms put d = gcd(v² − u², 2uv, v² + u²) ∈ {1, 2}, a = (v² − u²)/d, b = 2uv/d, c = (v² + u²)/d, so a² + b² = c², and
 
