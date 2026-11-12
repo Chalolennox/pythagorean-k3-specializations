@@ -23,3 +23,4 @@ jobs:
       - run: python3 code/verify_index_four.py
       - run: python3 code/verify_partial_split.py 60000
       - run: python3 code/check_problem_h_definition.py
+      - run: python3 code/figure_p_plus_t_orbit.py --check
