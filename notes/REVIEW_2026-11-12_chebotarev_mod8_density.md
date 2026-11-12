@@ -1,5 +1,6 @@
 # Review of "A Chebotarev density calculation for y² = x³ − 2x² + 2x" (extended independent-review draft, 11 November 2026)
 
+Draft reviewed (as received, unchanged): `notes/drafts/chebotarev_density_mod8_extended_independent_review.md`.
 Reviewer: Claude (a language model); a check by recomputation, not a referee's report. Scripts: `code/verify_chebotarev_mod8.py` (20 s), `code/tau_image/image_densities.py` (30 s).
 I could not rerun the Magma computations quoted in the draft (Galois group of f of order 32 and its coset counts; the relative orders 8, 8, 8; the joint counts (3, 5, 0, 0)). What I did instead: (a) checked every exact identity and every deterministic claim of the draft directly; (b) re-derived the draft's densities from a *different* finite computation, the 2-adic image of the Kummer representation of (C, P) computed in `code/tau_image`.
 
