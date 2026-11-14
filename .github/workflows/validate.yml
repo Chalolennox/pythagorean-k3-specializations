@@ -30,3 +30,4 @@ jobs:
       - run: python3 code/verify_rotation_coding.py --quick
       - run: python3 code/verify_twist_rank_over_F5.py
       - run: python3 code/verify_integral_resolution_note.py
+      - run: python3 code/apparition_pattern.py --quick
