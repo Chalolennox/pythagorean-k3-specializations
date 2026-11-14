@@ -32,6 +32,20 @@ jobs:
         with:
           name: paper-pdf
           path: paper/paper.pdf
+      - name: Page previews (first two pages, the first table page, the page of Figure B.1)
+        run: |
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          mkdir -p preview; pdfinfo paper/paper.pdf | grep Pages
+          pdftoppm -r 70 -png -f 1 -l 2 paper/paper.pdf preview/page
+          for pat in 'Proved' 'Figure B.1. The orbit'; do
+            pg=$(for i in $(seq 1 "$(pdfinfo paper/paper.pdf | awk '/^Pages/ {print $2}')"); do pdftotext -f $i -l $i paper/paper.pdf - | grep -q "$pat" && { echo $i; break; }; done)
+            [ -n "$pg" ] && pdftoppm -r 70 -png -f $pg -l $pg paper/paper.pdf preview/page && echo "'$pat' first on page $pg"
+          done
+          ls preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-preview
+          path: preview/
       - name: Commit the rebuilt PDF to main
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
