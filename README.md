@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 249)
+paper/paper.md                 the paper (snapshot export, revision 250)
 paper/figures/                  Figure B.1 as PNG and PDF (paper.md shows images as a text placeholder; paper.pdf contains the figure)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
@@ -60,7 +60,8 @@ code/verify_mirror_collapse.py   F.51 (b): finite exact verification of eps = h(
 code/verify_rotation_coding.py   F.51 (a), (c): rotation coding of sign F_s from the elliptic-logarithm definitions, exact consequences (--quick for CI)
 code/verify_twist_rank_over_F5.py   F.49: point counts over F_5^k, Frobenius polynomials of the genus-0 twists (embeds and compiles its C counter; needs gcc)
 code/verify_integral_resolution_note.py   F.49: audit of the smooth model of S^d over Z_(5), twist selected by TWIST_D (default t(t-1))
-code/apparition_pattern.py   which primes can divide F_n: the psi-form, the rank-of-apparition classes N_p, checks against exact F_n (notes/apparition_pattern_F_n.md)
+code/apparition_pattern.py   F.54: which primes can divide F(t_n): the psi-form, the rank-of-apparition classes N_p, checks against exact values (notes/apparition_pattern_F_n.md)
+code/rotation_coding_F_n.py   F.54: the real sign of F(t_n) and G(t'_n) as an exact coding of the rotation by theta: closed forms (k = cos(pi/8)), four real classes, first-return gaps (notes/rotation_coding_sign_F_n.md)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
