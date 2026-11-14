@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 220)
+paper/paper.md                 the paper (snapshot export, revision 221)
 paper/figures/                  Figure B.1 as PNG and PDF (paper.md shows images as a text placeholder; paper.pdf contains the figure)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
