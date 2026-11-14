@@ -57,6 +57,8 @@ code/verify_fourfold_separation.py   F.50 (ii): four-way coprimality of the valu
 code/mirror_projection_eps.py   F.50 (iii): periodic part of the sign along the four sequences (proved laws as control; rotation law of the mirror sequences)
 code/verify_mirror_collapse.py   F.51 (b): finite exact verification of eps = h(n) s_n along 1 + x(nP), 1 + 2/x(nP) for all n (--quick for CI)
 code/verify_rotation_coding.py   F.51 (a), (c): rotation coding of sign F_s from the elliptic-logarithm definitions, exact consequences (--quick for CI)
+code/verify_twist_rank_over_F5.py   F.49: point counts over F_5^k, Frobenius polynomials of the genus-0 twists (embeds and compiles its C counter; needs gcc)
+code/verify_integral_resolution_note.py   F.49: audit of the smooth model of S^d over Z_(5), twist selected by TWIST_D (default t(t-1))
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
