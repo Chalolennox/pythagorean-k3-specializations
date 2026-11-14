@@ -24,3 +24,5 @@ jobs:
       - run: python3 code/verify_partial_split.py 60000
       - run: python3 code/check_problem_h_definition.py
       - run: python3 code/figure_p_plus_t_orbit.py --check
+      - run: python3 code/verify_fourfold_separation.py
+      - run: python3 code/mirror_projection_eps.py 40

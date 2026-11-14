@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 219)
+paper/paper.md                 the paper (snapshot export, revision 220)
 paper/figures/                  Figure B.1 as PNG and PDF (paper.md shows images as a text placeholder; paper.pdf contains the figure)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
@@ -53,6 +53,8 @@ data/odd_order_classes_C_P_1e8.txt    odd-order counts of P by class of p mod 8,
 code/verify_chebotarev_mod8.py        checks of the Chebotarev mod-8 draft on every prime p = 7 mod 8 below 3e5 (notes/REVIEW_2026-11-12_chebotarev_mod8_density.md)
 code/check_problem_h_definition.py   checks that Problem H is defined the same way in README.md, STATE.md and the paper
 code/figure_p_plus_t_orbit.py   draws Figure B.1 (orbit of P + T on the unit circle); --check runs only its exact computation and assertions
+code/verify_fourfold_separation.py   F.50 (ii): four-way coprimality of the values along 1 -+ x(nP), 1 -+ 2/x(nP) (resultants, orbit test, brute force)
+code/mirror_projection_eps.py   F.50 (iii): periodic part of the sign along the four sequences (proved laws as control; rotation law of the mirror sequences)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
 ERRATA.md                      errors found and corrected
