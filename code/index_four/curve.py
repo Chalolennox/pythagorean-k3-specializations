@@ -49,6 +49,10 @@ def group_order(p):
         G=add(G,mQ,p)
     good=[N for N in res if all(order_divides(Pt,N,p) for Pt in pts[1:])]
     cand=[N for N in good if (p%4!=1 or N%4==0)]
+    if len(cand)!=1:
+        # the random points did not separate the candidates (e.g. p = 23: 20 and 30 when all points have order dividing 10);
+        # count exactly: #C(F_p) = p + 1 + sum_x chi(x^3 - 2x^2 + 2x)
+        cand=[p+1+sum(1 if (s:=pow(x*(x*x-2*x+2)%p,(p-1)//2,p))==1 else (-1 if s==p-1 else 0) for x in range(p))]
     return sorted(cand)
 def point_order(P_,N,p):
     o=N
