@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 236)
+paper/paper.md                 the paper (snapshot export, revision 249)
 paper/figures/                  Figure B.1 as PNG and PDF (paper.md shows images as a text placeholder; paper.pdf contains the figure)
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
@@ -55,6 +55,7 @@ code/check_problem_h_definition.py   checks that Problem H is defined the same w
 code/figure_p_plus_t_orbit.py   draws Figure B.1 (orbit of P + T on the unit circle); --check runs only its exact computation and assertions
 code/verify_fourfold_separation.py   F.50 (ii): four-way coprimality of the values along 1 -+ x(nP), 1 -+ 2/x(nP) (resultants, orbit test, brute force)
 code/mirror_projection_eps.py   F.50 (iii): periodic part of the sign along the four sequences (proved laws as control; rotation law of the mirror sequences)
+code/verify_orbit_laws.py   F.53: the period laws along nP and nP + T for all n >= 2 (Lemma R, Lemma L, four real-sign classes; --quick for CI)
 code/verify_mirror_collapse.py   F.51 (b): finite exact verification of eps = h(n) s_n along 1 + x(nP), 1 + 2/x(nP) for all n (--quick for CI)
 code/verify_rotation_coding.py   F.51 (a), (c): rotation coding of sign F_s from the elliptic-logarithm definitions, exact consequences (--quick for CI)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
