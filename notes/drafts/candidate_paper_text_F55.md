@@ -1,4 +1,4 @@
-# Candidate paper text (NOT in the paper; for the repository owner to accept or reject)
+# Candidate paper text (applied to paper/paper.md on 14 November 2026 at the repository owner's request: (a) in F.25(b), (b) in F.26(e), (c) as a remark after F.54 (d); (d) not applied)
 
 ## (a) Sentence for F.25(b)
 The factor at the primes p ≥ 5 dividing c cancels in the pair: the primitive triple of t′ = R(t) is (−b, −a, c), so v_p(c) is the same for t and t′ and w_p(E_t)w_p(E_{t′}) = (2/p)^{2v_p(c)} = 1 (Appendix B); likewise (2/c) cancels. With F.28 the displayed product formula for W(E_{t_n})W(E_{t′_n}) is therefore unconditional. *(Proved from F.28 and Appendix B; checked on 1958 pairs, code/verify_paired_root_numbers_note.py.)*
