@@ -1,0 +1,58 @@
+name: paper-pdf
+# Builds paper/paper.pdf from paper/paper.md (paper/pdf-build/build_pdf.sh).
+# Pull requests: the built PDF is attached to the run as the artifact "paper-pdf" for review; nothing is committed.
+# Pushes to main: the rebuilt PDF is committed back to main when it changed (pushes made with GITHUB_TOKEN do not trigger new runs).
+on:
+  push:
+    branches: [main]
+    paths: ['paper/paper.md', 'paper/figures/**', 'paper/pdf-build/**', '.github/workflows/paper-pdf.yml']
+  pull_request:
+    paths: ['paper/paper.md', 'paper/figures/**', 'paper/pdf-build/**', '.github/workflows/paper-pdf.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: paper-pdf-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pandoc and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends pandoc fontconfig fonts-noto-core fonts-noto-mono fonts-dejavu fonts-freefont-ttf fonts-stix libpango-1.0-0 libpangoft2-1.0-0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install weasyprint==62.3 pydyf==0.10.0
+      - run: bash paper/pdf-build/build_pdf.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/paper.pdf
+      - name: Page previews (first two pages, the first table page, the page of Figure B.1)
+        run: |
+          sudo apt-get install -y --no-install-recommends poppler-utils
+          mkdir -p preview; pdfinfo paper/paper.pdf | grep Pages
+          pdftoppm -r 70 -png -f 1 -l 2 paper/paper.pdf preview/page
+          for pat in 'Proved' 'Figure B.1. The orbit'; do
+            pg=$(for i in $(seq 1 "$(pdfinfo paper/paper.pdf | awk '/^Pages/ {print $2}')"); do pdftotext -f $i -l $i paper/paper.pdf - | grep -q "$pat" && { echo $i; break; }; done)
+            [ -n "$pg" ] && pdftoppm -r 70 -png -f $(( pg > 1 ? pg - 1 : 1 )) -l $pg paper/paper.pdf preview/page && echo "'$pat' first on page $pg"
+          done
+          ls preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper-preview
+          path: preview/
+      - name: Commit the rebuilt PDF to main
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/paper.pdf
+          if git diff --cached --quiet; then echo "paper.pdf unchanged"; exit 0; fi
+          git commit -m "Rebuild paper/paper.pdf from paper/paper.md"
+          git pull --rebase origin main
+          git push origin HEAD:main

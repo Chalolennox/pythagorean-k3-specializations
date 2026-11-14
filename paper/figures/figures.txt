@@ -1,0 +1,2 @@
+# Figure label -> file in paper/figures/ (used by paper/pdf-build/build_pdf.sh to replace the '[image: Figure <label>: ...]' placeholders of paper.md)
+B.1 p_plus_t_orbit.png
