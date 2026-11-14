@@ -26,15 +26,11 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-<<<<<<< HEAD
 paper/paper.md                 the paper (snapshot export, revision 253; see paper/REVISION)
-paper/figures/                  Figure B.1 as PNG and PDF (paper.md shows images as a text placeholder; paper.pdf contains the figure)
-=======
-paper/paper.md                 the paper (snapshot export, revision 250)
+paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
 paper/figures/                  Figure B.1 as PNG and PDF; figures.txt maps the figure placeholders of paper.md to these files for the PDF build
->>>>>>> origin/main
 code/fibrecount.c              point counts on the fibres of the twist surface over F_(p^k)
 code/lfunc.py                  from the counts to the Picard number and the discriminant class
 code/validate.py               reproduces the validation table of Appendix G
