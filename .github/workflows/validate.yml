@@ -26,6 +26,7 @@ jobs:
       - run: python3 code/figure_p_plus_t_orbit.py --check
       - run: python3 code/verify_fourfold_separation.py
       - run: python3 code/mirror_projection_eps.py 40
+      - run: python3 code/verify_orbit_laws.py --quick
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick
       - run: python3 code/verify_twist_rank_over_F5.py
