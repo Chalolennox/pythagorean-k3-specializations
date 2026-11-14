@@ -4,9 +4,10 @@
 where eps = f(t) (ab/N) is the periodic-part factor of F.24.  Steps (the numbering of F.51 (b)):
   (1) an exact reciprocity formula eps = G(local data) is validated against the direct Jacobi computation for 596 values (n = 2..150, all four sequences 1 -+ x(nP), 1 -+ 2/x(nP));
   (2) the division-polynomial values psi_n(P) are computed modulo 2^80 and 3^14 and checked against the exact orbit (n <= 60);
-  (3) the remaining 2-adic and 3-adic data are periodic (periods 8 and 729, checked over many periods; joint period 5832); one factor has unbounded 3-adic valuation and is shown not to matter;
+  (3) the local data are periodic: Lemma L of F.52 proves that they depend only on the coset of nP modulo the level subgroups (hence on n mod 2^8 and n mod 3^8); the checks below verify its inputs (levels of p^j P,
+      the congruence A = 1 mod 8 / mod 3 when p | B, bounded valuations) and then the periods 8 and 729 over full cycles; joint period 5832; one factor has unbounded 3-adic valuation and is shown not to matter;
   (4) over a full period, G = h(n) * sign F_s for both signs.
-Usage: python3 code/verify_mirror_collapse.py [--quick]   (full run about 2 minutes; --quick compares the formula on n <= 40 only and uses shorter period checks, about 20 s; exit 0 = all checks pass).   Needs sympy and code/mirror_projection_eps.py (direct Jacobi computation).
+Usage: python3 code/verify_mirror_collapse.py [--quick]   (full run about 2 minutes; --quick compares the formula directly on n <= 40 only; exit 0 = all checks pass).   Needs sympy and code/mirror_projection_eps.py (direct Jacobi computation).
 """
 import sys, os, itertools, time
 from math import gcd
@@ -198,10 +199,28 @@ if __name__ == '__main__':
             d = 2 if (U % 2 and V % 2) else 1; sg = (sign(U), sign(V), sign((V - U)//d), sign((V + U)//d))
             tot += 1; bad += (eps_from_residues(U % M, V % M, sg, sign(Fs_int(U, V)), 40, 30, sq) != eps_direct(t))
     check('reciprocity formula = direct Jacobi computation for %d values (n = 2..%d, four sequences)' % (tot, NV), bad == 0 and tot == (596 if not QUICK else 4*(NV - 1)))
+    # Lemma L inputs (F.52 (b)):  (L1) levels: v_3(psi_{3^j}(P)) = j (j <= 6), v_2(psi_{2^j}(P)) = j (j <= 8);  (L2) A = 1 mod 8 (resp. mod 3) whenever 2 | B (resp. 3 | B), x_n = A/B^2, B = psi_n, A = phi_n
+    def vp(x, p, cap=200):
+        x = abs(x); k = 0
+        while x and x % p == 0 and k < cap: x //= p; k += 1
+        return k
+    W3 = make(3**14, False); W2 = make(2**80, True)
+    check('level of 3^j P: v_3(psi_{3^j}(P)) = j for j = 1..6 (so 3^m P lies in E_m)', all(vp(W3(3**j) % 3**14, 3) == j for j in range(1, 7)))
+    check('level of 2^j P: v_2(psi_{2^j}(P)) = j for j = 1..8 (so 2^m P lies in E_m)', all(vp(W2(2**j) % 2**40, 2) == j for j in range(1, 9)))
+    bad2 = sum(1 for n in range(1, 4001) if W2(n) % 2 == 0 and (W2(n)**2 - W2(n + 1)*W2(n - 1)) % 8 != 1)
+    bad3 = sum(1 for n in range(1, 6562) if W3(n) % 3 == 0 and (W3(n)**2 - W3(n + 1)*W3(n - 1)) % 3 != 1)
+    check('A_n = phi_n = 1 (mod 8) whenever 2 | B_n (n <= 4000) and A_n = 1 (mod 3) whenever 3 | B_n (n <= 6561) [from C^2 = A^3 - 2A^2B^2 + 2AB^4]', bad2 == 0 and bad3 == 0)
     # (3), (4) periods, free factor, law over a full period
     for which in ('S1', 'S2'):
-        N3 = (3*729 + 40) if QUICK else 3**8*3 + 40; T2, T3, kdata = build(which, 200 if QUICK else 4000, N3)
+        N3 = 3**8*3 + 40; T2, T3, kdata = build(which, 4000, N3)                  # >= 15 cycles of 2^8 and >= 3 cycles of 3^8
         p2 = minperiod([key2(d) for d in T2]); p3 = minperiod([key3(t) for t in T3]); Lp = p2*p3//gcd(p2, p3)
+        v2max = max(d[k][0] for d in T2 for k in ('U', 'V', 'P', 'Q', 'F') if k in d); v3max = max(t[0][k][0] for t in T3 for k in ('U', 'V', 'P', 'Q', 'F') if k in t[0] and k != FREE[which])
+        # the free factor's data (valuation < 6, or 'high') must be a function of n mod 3^6 as well:
+        fc = {}
+        for n, t in enumerate(T3, 1): fc.setdefault(n % 729, set()).add(t[0][FREE[which]])
+        check('%s: valuations of the non-square factors and of F_s (free factor excepted) are <= %d at 2 and <= %d at 3 over all n <= %d; the free factor\'s data (valuation < 6 or "high") is a function of n mod 3^6 (%d classes, none ambiguous); '
+              'the periods %d and %d divide 2^8 and 3^8 (cycles checked: n <= 4000, n <= %d)' % (which, v2max, v3max, N3, len(fc), p2, p3, N3),
+              v2max <= 1 and v3max <= 4 and all(len(v) == 1 for v in fc.values()) and 2**8 % p2 == 0 and 3**8 % p3 == 0)
         free = FREE[which]; bad_indep = bad_law = nhigh = 0
         for n in range(1, Lp + 1):
             d2 = T2[(n - 1) % p2]; d3b, U9, V9 = T3[(n - 1) % p3]; A9B9v = A9B9(U9, V9, d2['d']); high = (d3b[free][0] == 'high'); nhigh += high
