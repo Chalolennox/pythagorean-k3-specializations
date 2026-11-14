@@ -35,7 +35,7 @@ done < <(perl -CSD -ne 'printf "%x\n", ord for /[^\x00-\x7F]/g' "$SRC" | sort -u
 echo "glyph check: all $n distinct non-ASCII characters of paper.md are covered by installed fonts"
 
 # 3.-4. pandoc and WeasyPrint (superscript/subscript/TeX extensions off: the export writes math as plain Unicode, and ^ or ~ in it must stay literal)
-pandoc -f markdown-implicit_figures-superscript-subscript-tex_math_dollars-raw_tex -t html5 -s \
+pandoc -f markdown-implicit_figures-superscript-subscript-tex_math_dollars-raw_tex -t html5 -s -V document-css=false \
   --metadata pagetitle="Pythagorean Specializations of an Elliptic K3 Surface" -o "$TMP/paper.html" "$TMP/paper.md"
 weasyprint --base-url "$ROOT/" -s "$ROOT/paper/pdf-build/paper.css" "$TMP/paper.html" "$OUT"
 echo "built $OUT ($(wc -c < "$OUT") bytes)"
