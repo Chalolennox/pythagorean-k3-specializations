@@ -29,6 +29,7 @@ jobs:
       - run: python3 code/verify_orbit_laws.py --quick
       - run: python3 code/verify_angular_symmetry.py
       - run: python3 code/root_number_formula.py
+      - run: python3 code/root_number_crosscheck.py --check data/root_number_crosscheck_pari.txt
       - run: python3 code/verify_paired_root_numbers_note.py
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick

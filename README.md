@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 254; see paper/REVISION)
+paper/paper.md                 the paper (snapshot export, revision 256; see paper/REVISION)
 paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
@@ -53,6 +53,7 @@ code/verify_18P_note.py               checks of the 18P memorandum (notes/REVIEW
 code/odd_order_density.c              density of primes where P = (1,1) has odd order, vs. Liang-Rouse (notes/odd_order_density_check.md; not in CI)
 code/tau_image/                       2-adic image of the Kummer representation of P and the exact odd-order density (Python, replaces Magma; see its README; not in CI)
 data/odd_order_classes_C_P_1e8.txt    odd-order counts of P by class of p mod 8, 16, 32, 64 (primes up to 1e8)
+data/root_number_crosscheck_pari.txt   PARI/GP root numbers of 877 curves E_t, input of code/root_number_crosscheck.py --check
 code/verify_chebotarev_mod8.py        checks of the Chebotarev mod-8 draft on every prime p = 7 mod 8 below 3e5 (notes/REVIEW_2026-11-12_chebotarev_mod8_density.md)
 code/check_problem_h_definition.py   checks that Problem H is defined the same way in README.md, STATE.md and the paper
 code/figure_p_plus_t_orbit.py   draws Figure B.1 (orbit of P + T on the unit circle); --check runs only its exact computation and assertions
@@ -62,6 +63,7 @@ code/verify_orbit_laws.py   F.53: the period laws along nP and nP + T for all n 
 code/verify_angular_symmetry.py   z(Q+T) = -i conj z(Q) on C, explicit Haar density on the circle, moments mu_1..mu_4 (notes/REVIEW_2026-11-14_angular_symmetry_note.md)
 code/verify_paired_root_numbers_note.py   audit of the paired-root-numbers draft, 19 checks (notes/REVIEW_2026-11-14_paired_root_numbers_note.md; uses root_number_formula.py)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)
+code/root_number_crosscheck.py   compares PARI/Magma root numbers with the closed formula and the reflection formula (F.25 remark; a new PARI or Magma run is needed for new curves, see its docstring; CI re-checks the stored PARI output with --check)
 code/verify_mirror_collapse.py   F.51 (b): finite exact verification of eps = h(n) s_n along 1 + x(nP), 1 + 2/x(nP) for all n (--quick for CI)
 code/verify_rotation_coding.py   F.51 (a), (c): rotation coding of sign F_s from the elliptic-logarithm definitions, exact consequences (--quick for CI)
 code/verify_twist_rank_over_F5.py   F.49: point counts over F_5^k, Frobenius polynomials of the genus-0 twists (embeds and compiles its C counter; needs gcc)
