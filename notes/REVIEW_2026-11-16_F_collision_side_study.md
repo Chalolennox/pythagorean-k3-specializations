@@ -1,10 +1,10 @@
 # Review of "Repeated Values of F(t) and Discriminant Rigidity" (request of 16 Nov 2026) and of the orbit-distinctness sketch
 
 Sources: `drafts/F_collision_dossier.md` and `drafts/F_orbit_distinctness_review.md` (verbatim). Checks: `code/verify_F_collisions.py`. Paper: the remark at the end of F.54.
-Labels: formulas and the genus-5 reduction **Proved**; searches and the orbit data **Observed**; the Magma data in the dossier **not reproduced**. **No human has checked this.**
+Labels: formulas, the genus-5 reduction and the distinctness of F°(t_n) **Proved**; searches and the distinctness of the integers F(t_n) **Observed**; the Magma data in the dossier **not reproduced**. **No human has checked this.**
 
 ## Verdict
-The algebra of the dossier is correct. The collision conjecture (F(t) = F(u) implies u = ±t on all of Q) is open; what can be proved is finiteness (Faltings, ineffective). The statement that matters for the paper is different: the values F(t_n) along t_n = 1 - x(nP) are pairwise distinct for n ≥ 1. It is Observed for n ≤ 120 and reduces to a finite computation (height argument) or to the strict growth of the odd part of U_n² + V_n²; neither is proved. Nothing here bears on Problem H.
+The algebra of the dossier is correct. The collision conjecture (F(t) = F(u) implies u = ±t on all of Q) is open; what can be proved is finiteness (Faltings, ineffective). The statement that matters for the paper is different: the values F°(t_n) = 4A³ + 27B² along t_n = 1 - x(nP) are pairwise distinct for n ≥ 1. This is **Proved** (remark at the end of F.54): the denominator of F°(t_n) is c_n³ with c_n = U_n²+V_n² odd, and c_n is strictly increasing, by log c_n = 4ĥ(P)n² + O(1) with the explicit constant K = 10.99 (duplication forms with resultant 2^16, cofactor sum T = 638976, C0 = (log T)/3 = 4.456) for n ≥ 13 and exact computation for n ≤ 120. The integers F(t_n) = c_n³F°(t_n) are only Observed to be distinct (n ≤ 120): distinctness of F° does not give it, and |F(t_n)| = 4V_n⁶|D(t_n)| depends on how close t_n comes to the real roots of D. Nothing here bears on Problem H.
 
 ## Checked exactly
 - F(t) - F(u) = -4(t²-u²)Q(t²,u²)/((1+t²)³(1+u²)³) with the dossier's Q; the parametrisation x = A0/B0, y = -C0/D0 satisfies Q = 0 and G(x) = G(y).
@@ -18,11 +18,11 @@ The algebra of the dossier is correct. The collision conjecture (F(t) = F(u) imp
 ## Observed (bounded)
 - H3(Q): only m = 23, 39 for |p|, q ≤ 12000. x a square: m = infinity, 23, -481/8; y a square: m = 31, 23, 22087/729 (the sigma-image of -481/8; beyond the search bound). Both: only m = 23.
 - No F(t) = F(u), 0 ≤ t < u, with t = a/b, a,b ≤ 3000 (5.47 million values).
-- Orbit: F(t_n) pairwise distinct for 1 ≤ n ≤ 120; h(F(t_n)) - 12 ĥ(P) n² in [-1.21, 4.05], ĥ(P) = 0.21616; the denominator of F(t_n) is (U_n²+V_n²)³; the odd part of U_n²+V_n² grows by a factor ≥ 25 per step.
+- Orbit data behind the proof: F°(t_n) and the integers F(t_n) pairwise distinct for 1 ≤ n ≤ 120; log c_n - 4ĥ(P)n² in [-0.96, 0.82] for n ≤ 200 (the proof needs only |.| ≤ 10.99); ĥ(P) = 0.21616; c_{n+1}/c_n ≥ 25 for n ≤ 120.
 
 ## Not done / not reproduced
 - Selmer dimension 4, rank bound 2, rank E_1 = 1, the automorphism group of order 4 (sigma and the hyperelliptic involution were verified; that there are no others was not), and the rank of J2: no Magma or PARI was available. rank J2 ≤ 1 would allow Chabauty on H2, then on H3 (rank ≤ 2 < 3); rank J2 = 2 defeats Chabauty on H3 and on C. The rank of E_A and E_B was not computed (suggested: `EllipticCurve([-154587,-22664054])` in Magma, `Rank`).
-- Explicit height constants for the orbit argument.
+- The constants of the orbit proof are my own computation; no one else has checked them. They are written out in the remark so that they can be checked by hand: 2^16 X^7 = A1 f + B1 g and 2^16 Z^7 = A2 f + B2 g with f = (X²-2Z²)², g = 4XZ(X²-2XZ+2Z²), A1 = 2^16 X(X²-2XZ+3Z²), B1 = 2^14(2X³+5X²Z-2XZ²-6Z³), A2 = 2^12 Z(3X²-4XZ+4Z²), B2 = -2^10(3X³+2X²Z-10XZ²-8Z³); code/verify_F_collisions.py check 4g expands them. The step from these identities to the bound -log T ≤ h(x(2Q)) - 4h(x(Q)) ≤ log 20 uses both gcd(f,g) | R and the archimedean bound |R| M⁷ ≤ T M³ max(|f|,|g|) (the resultant alone gives only the first). Distinctness of the integers F(t_n) is not proved.
 
 ## Review of the orbit-distinctness sketch (drafts/F_orbit_distinctness_review.md)
-Its opening ("does not prove") contradicts its body, which shows the argument works for n ≥ 1 once C0 and C1 are explicit. Accepted corrections: t_{-n} = t_n, so n ≥ 1; n²-m² ≥ n+m (stronger than 2 min(n,m)+1) bounds both indices; the result concerns the orbit only, not the global conjecture. Added: a route without height constants (odd part of U²+V²).
+Its opening ("does not prove") contradicts its body, which shows the argument works for n ≥ 1 once the constants are explicit. Accepted corrections: t_{-n} = t_n, so n ≥ 1; the result concerns the orbit only, not the global conjecture. The final remark carries out the argument in the sharper form c_n = U_n²+V_n² (no C1 is needed: log c_n = 2h(t_n) + O(1) directly), with the constant C0 computed from the duplication forms.

@@ -9,6 +9,11 @@ Checks (one line each; exit status 0 if all pass, 1 otherwise):
     (a) the values F(t_n) are pairwise distinct and t_m != +-t_n for m != n
     (b) the denominator of F(t_n) is (U_n^2 + V_n^2)^3 (t_n = U_n/V_n)
     (c) the odd part of U_n^2 + V_n^2 grows by a factor > 4 at every step
+ 4e. c_n = U_n^2 + V_n^2 is strictly increasing for 1 <= n <= N
+ 4f. constants of the proof that c_n increases for all n (remark at the end of F.54): Res of the duplication forms,
+     the cofactor sum T, C0 = log(T)/3, K = 2 C0 + 3 log 2, a rigorous lower bound for hhat(P) from h(x(NP)), and the
+     threshold n0 beyond which log c_{n+1} - log c_n >= 4 hhat (2n+1) - 2K > 0; passes if n0 <= N
+ 4g. the four cofactor identities written out in the remark, checked by explicit expansion; their coefficient sums give T
  4d. the integers F(t_n) = -4 Phi(U_n, V_n) of Appendix F are pairwise distinct as well
  5. no rational t = a/b >= 0 with a, b <= B has F(t) = F(u) for another u >= 0 with a, b <= B
 Usage: python3 code/verify_F_collisions.py [--quick]   (full run about 15 s; --quick about 2 s)
@@ -107,6 +112,81 @@ oc = [odd(ts[n].numerator ** 2 + ts[n].denominator ** 2) for n in range(1, N + 1
 minratio = min(oc[i + 1] / oc[i] for i in range(N - 1)) if N > 1 else 0
 check("4c odd part of U^2+V^2 grows by a factor > 4 at every step", all(oc[i + 1] > 4 * oc[i] for i in range(N - 1)),
       "(smallest ratio %.3g)" % minratio)
+
+check("4e c_n strictly increasing, 1 <= n <= %d" % N, all(oc[i + 1] > oc[i] for i in range(N - 1)) and
+      all((ts[n].numerator ** 2 + ts[n].denominator ** 2) % 2 == 1 for n in range(1, N + 1)),
+      "(c_n odd as well)")
+
+# 4f constants of the proof ---------------------------------------------------------------
+fx = [1, 0, -4, 0, 4]; gx = [0, 4, -8, 8, 0]      # f = (X^2-2Z^2)^2, g = 4XZ(X^2-2XZ+2Z^2), coefficients of X^4, X^3Z, ..., Z^4
+def sylv(f_, g_, deg=4):
+    rows = []
+    for ff in (f_, g_):
+        for i in range(deg):
+            r = [0] * (2 * deg)
+            for j, c in enumerate(ff): r[i + j] = c
+            rows.append(r)
+    return rows
+def det_(M):
+    M = [[Fr(x) for x in r] for r in M]; n = len(M); d = Fr(1)
+    for i in range(n):
+        p = next((r for r in range(i, n) if M[r][i] != 0), None)
+        if p is None: return Fr(0)
+        if p != i: M[i], M[p] = M[p], M[i]; d = -d
+        d *= M[i][i]
+        for r in range(i + 1, n):
+            q = M[r][i] / M[i][i]
+            for c in range(i, n): M[r][c] -= q * M[i][c]
+    return d
+def solve_(S_, target):                              # solve S^T x = target
+    n = len(S_)
+    A_ = [[Fr(S_[j][i]) for j in range(n)] + [Fr(target[i])] for i in range(n)]
+    for i in range(n):
+        p = next(r for r in range(i, n) if A_[r][i] != 0)
+        A_[i], A_[p] = A_[p], A_[i]
+        pv = A_[i][i]; A_[i] = [v / pv for v in A_[i]]
+        for r in range(n):
+            if r != i and A_[r][i] != 0:
+                q = A_[r][i]; A_[r] = [a - q * b for a, b in zip(A_[r], A_[i])]
+    return [A_[i][n] for i in range(n)]
+S_ = sylv(fx, gx)
+Rres = int(det_(S_))
+xa = solve_(S_, [Rres] + [0] * 7); xb = solve_(S_, [0] * 7 + [Rres])   # R X^7 and R Z^7 = A f + B g
+integral = all(v.denominator == 1 for v in xa + xb)
+T = int(max(sum(abs(v) for v in xa), sum(abs(v) for v in xb)))
+Sbound = max(sum(abs(c) for c in fx), sum(abs(c) for c in gx))
+C0 = max(math.log(T), math.log(Sbound)) / 3
+K = 2 * C0 + 3 * math.log(2)
+xN = None
+Rp = None
+for n in range(1, N + 1):
+    Rp = add(Rp, P)
+xN = Rp[0]
+hN = math.log(max(abs(xN.numerator), xN.denominator))
+hlow = (hN - C0) / (2 * N * N)                     # rigorous: |h(x(NP)) - 2 N^2 hhat| <= C0
+n0 = None
+for n in range(1, 10**6):
+    if 4 * hlow * (2 * n + 1) > 2 * K: n0 = n; break
+check("4f proof constants: Res = %d, T = %d, C0 = %.3f, K = %.3f, hhat >= %.4f, increase proved for n >= %s" % (Rres, T, C0, K, hlow, n0),
+      Rres == 65536 and integral and n0 is not None and n0 <= N)
+
+# 4g the cofactor identities written out in the remark, verified by explicit expansion (independent of the solver above)
+def pm(a, b):
+    r = [0] * (len(a) + len(b) - 1)
+    for i, x in enumerate(a):
+        for j, y in enumerate(b): r[i + j] += x * y
+    return r
+# forms as coefficient lists in descending powers of X (X^k Z^(d-k))
+A1 = [2**16, -2 * 2**16, 3 * 2**16, 0]
+B1 = [2 * 2**14, 5 * 2**14, -2 * 2**14, -6 * 2**14]
+A2 = [0, 3 * 2**12, -4 * 2**12, 4 * 2**12]
+B2 = [-3 * 2**10, -2 * 2**10, 10 * 2**10, 8 * 2**10]
+lhs1 = [a + b for a, b in zip(pm(A1, fx), pm(B1, gx))]
+lhs2 = [a + b for a, b in zip(pm(A2, fx), pm(B2, gx))]
+id_ok = lhs1 == [2**16] + [0] * 7 and lhs2 == [0] * 7 + [2**16]
+sums = (sum(map(abs, A1 + B1)), sum(map(abs, A2 + B2)))
+check("4g identities 2^16 X^7 = A1 f + B1 g, 2^16 Z^7 = A2 f + B2 g (explicit), coefficient sums %s, T = %d" % (sums, T),
+      id_ok and max(sums) == T)
 
 ints = [-4 * (ts[n].numerator**6 - 30 * ts[n].numerator**4 * ts[n].denominator**2
               - 24 * ts[n].numerator**2 * ts[n].denominator**4 - ts[n].denominator**6) for n in range(1, N + 1)]
