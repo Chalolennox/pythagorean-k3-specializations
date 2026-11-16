@@ -21,7 +21,7 @@ A single zip with the following parts. Leave out what does not apply.
 | Manifest | `HANDOFF.txt` | Required in every delivery; see section 3. |
 | The paper | `paper/paper.md` | The complete exported file, not only a patch. |
 | Revision number | `paper/REVISION` | Required whenever `paper.md` changes (section 4). |
-| A patch for the paper (optional) | `paper.patch` | A diff against `paper/paper.md` at the base commit. It is used to show the change in review; the complete `paper.md` is what gets applied. |
+| A patch for the paper (optional) | `paper.patch` | A diff against `paper/paper.md` at the base commit. It is used to show the change in review; the complete `paper.md` is what gets applied. Use repository paths in its header (`--- a/paper/paper.md` and `+++ b/paper/paper.md`, as `git diff` writes them), not the paths of your scratch folder, so that `git apply --check paper.patch` works at the repository root. |
 | New or changed figures | `paper/figures/<name>.png` (and `.pdf`) and the line `<label> <name>.png` in `paper/figures/figures.txt` | See section 5. |
 | Code | `code/...` | See section 6. |
 | Notes and reviews | `notes/...`, `notes/drafts/...` | Reviews as `notes/REVIEW_<date>_<topic>.md`; reviewed source texts, word for word with a provenance header, in `notes/drafts/`. |
