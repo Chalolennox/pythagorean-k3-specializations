@@ -21,3 +21,7 @@ Most of what a proposal "Transferring Prime-Factor Parity Results to Problem H" 
 * The 2-adic law (F.55) is independent of odd-prime multiplicities.
 * Conclusion: a clean decomposition, but all the difficulty is in (A); it does not reduce Problem H.
 * Correction of an earlier remark in the same review: (N/q) in the reciprocity expansion is not the hard part; it is elementary (F.56 (d)). The hard part of h~_n is lambda(N_n).
+
+## 3. Approximation question (added at revision 266)
+
+The F.54 remark and F.55 (f) now say that the 2-adic law proves distinctness of the integers F(t_n) without any information on how close t_n comes to the real roots of D. It gives only |D(t_n)| >= V_n^{-6} (from F_n != 0). A non-trivial lower bound for |D(t_n)| is Open and is not used by F.55; the |F_n| are not shown to be distinct.
