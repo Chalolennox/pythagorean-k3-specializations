@@ -78,7 +78,7 @@ code/apparition_pattern.py   F.54: which primes can divide F(t_n): the psi-form,
 code/rotation_coding_F_n.py   F.54: the real sign of F(t_n) and G(t'_n) as an exact coding of the rotation by theta: closed forms (k = cos(pi/8)), four real classes, first-return gaps (notes/rotation_coding_sign_F_n.md)
 data/point_counts_*.jsonl      point counts N_1..N_4 for the covers
 STATE.md                       where the research stands and what to do next (start here to resume)
-HANDOFF.md                     how to prepare a delivery to this repository (paper, revision number, figures, code); read before every delivery
+WORKFLOW.md                    how changes enter this repository (branch and pull request, revision number, figures, code); read before every change
 ERRATA.md                      errors found and corrected
 CONTRIBUTING.md               how to contribute and the claims policy
 ```
