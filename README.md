@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 292; see paper/REVISION)
+paper/paper.md                 the paper (snapshot export, revision 303; see paper/REVISION)
 paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
@@ -70,6 +70,7 @@ code/verify_consecutive_qualifying.py  F.57: the relation between t_n and t_{n+1
 code/verify_gap_two.py  gap two: the relation between t_n and t_{n+2}, its exact norm, the orbits modulo 47, 947, 18637, 36997, the prime 2325076196570957, the sieve at n = 4683, 4685 and the scan of all primes below 10^4 for gap-one and gap-two coincidences (notes/REVIEW_2026-11-17_gap_two_dossier.md; --quick for CI)
 code/verify_gap_three.py  gap three and all gaps: the relation G3 between t_n and t_{n+3}, its exact norm, the dossier's resultant, the local tests at the nine candidate primes (with a Pocklington certificate for the largest), the scan of all primes below 10^4 for gap-one, gap-two and gap-three coincidences, the premises of the theorem 'no geometric exceptional gaps' and the universal correspondence Phi_{u_k} for every gap (notes/REVIEW_2026-11-17_gap_three_dossier.md; --quick for CI)
 code/verify_gap_k.py  gaps k = 4..7 from the universal correspondence: exact norms and their factorizations, primality certificates, local group-law tests at every prime found, orbit indices of the coincidences, scan of all primes below 10^4 for gaps 1..12 (notes/REVIEW_2026-11-17_gap_k_classification.md; --quick for CI)
+code/verify_group_G.py  F.57 (b'): the group G of order 24576 built from the three relations among the thirteen radicals, its action on the 48 roots of Rp and the 24 roots of Rm, the character chi2 (the subgroup fixing sqrt 2), the fixed-point-free counts 22035, 19709, 11013, 9854 and the density 20867/24576 (notes/REVIEW_2026-11-17_group_G_sqrt2.md; numpy, about 5 seconds)
 code/scan_gaps.c  C scan of all primes up to 3*10^5 for coincidences at the gaps 1..12 (output data/gap_coincidences_p300000.txt; not in CI)
 code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)

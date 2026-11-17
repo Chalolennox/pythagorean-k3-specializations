@@ -1,6 +1,6 @@
 # State of the research (start here)
 
-*As of 7 November 2026: **the project is paused.** Problem H is open and no work is in progress; this file and the repository are kept as a reproducible record of what was tried. The paper snapshot in `paper/paper.md` is revision 292 of the working document (see `paper/REVISION`).*
+*As of 7 November 2026: **the project is paused.** Problem H is open and no work is in progress; this file and the repository are kept as a reproducible record of what was tried. The paper snapshot in `paper/paper.md` is revision 303 of the working document (see `paper/REVISION`).*
 
 ## In one paragraph
 
