@@ -1,6 +1,6 @@
 # Review, 17 November 2026: "Universal gap-three exclusion" (review dossier), the theorem "no geometric exceptional gaps" and the universal gap correspondence
 
-Status: language-model derivation and recomputation. No human has checked the proofs or this assessment. The dossier is recorded word for word in `notes/drafts/gap_three_independent_review.md`, the pasted theorem in `notes/drafts/no_geometric_exceptional_gaps_theorem.md`, the pasted universal correspondence in `notes/drafts/universal_gap_correspondence.md`, and the checks are in `code/verify_gap_three.py` (standard library, about 4 s, `--quick` for CI). The paper text is changed only in F.57 (revision 282: items (f), (g), (h)).
+Status: language-model derivation and recomputation. No human has checked the proofs or this assessment. The dossier is recorded word for word in `notes/drafts/gap_three_independent_review.md`, the pasted theorem in `notes/drafts/no_geometric_exceptional_gaps_theorem.md`, the pasted universal correspondence in `notes/drafts/universal_gap_correspondence.md`, and the checks are in `code/verify_gap_three.py` (standard library, about 4 s, `--quick` for CI). The paper text is changed only in F.57 (revision 285: items (f), (g), (h); condensed in revision 292 to (e) the universal correspondence, (f) gaps two and three, (g) all gaps).
 
 ## 1. What the dossier claims
 
@@ -51,7 +51,7 @@ cofactor 1. **Candidate primes ≥ 5: 7, 71, 397, 4919, 8887, 19427, 206215327, 
 
 **Proof** (valid as written). For Q = (X, Y), R = kP = (u, v), the chord slope λ = (Y − v)/(X − u) gives Z = λ² + 2 − X − u, i.e. (X − u)²(Z + X + u − 2) = (Y − v)² = f_C(X) + f_C(u) − 2Yv; moving f_C(X) + f_C(u) across and squaring gives 4 f_C(X) f_C(u), and the difference of the two sides is (X − u)²Φ_u by (i). So Φ_u(X, Z) = 0 whenever X ≠ u. The case X = u also holds: then Q = R (Q = −R has no finite Z), Z = x(2R) = (u² − 2)²/(4 f_C(u)), and Φ_u(u, Z) = −4 f_C(u) Z + (u² − 2)² = 0; this is the instance n = k of check (iv). "The identity extends to all points by closure" is therefore correct, with the one added line for X = u.
 
-**Consequences.** G2 and G3 no longer need a resultant and a division: they are read off from x(2P) = 1/4 and x(3P) = 49/9. For any k the candidate primes of F.57 (a), (e), (f) are the primes dividing the exact norm of Φ_{u_k}(1 − t, 1 − w) on ℚ[t, w]/(f(t), f(w)), a single 36×36 determinant after clearing the denominator of u_k; that is the E_k of the theorem of section 4, and it makes E_L computable for each L (the cost grows with the height of u_k, not with new elimination). Nothing is added to the classification beyond k = 1, 2, 3: for k ≥ 4 neither the norms nor the local tests have been run.
+**Consequences.** G2 and G3 no longer need a resultant and a division: they are read off from x(2P) = 1/4 and x(3P) = 49/9. For any k the candidate primes of F.57 (a) and (f) are the primes dividing the exact norm of Φ_{u_k}(1 − t, 1 − w) on ℚ[t, w]/(f(t), f(w)), a single 36×36 determinant after clearing the denominator of u_k; that is the E_k of the theorem of section 4, and it makes E_L computable for each L (the cost grows with the height of u_k, not with new elimination). Nothing is added to the classification beyond k = 1, 2, 3: for k ≥ 4 neither the norms nor the local tests have been run.
 
 ## 6. What this does and does not say
 

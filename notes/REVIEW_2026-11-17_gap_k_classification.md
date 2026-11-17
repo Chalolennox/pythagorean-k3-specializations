@@ -1,10 +1,10 @@
 # Gaps k >= 4: which primes can lie in both Q_n and Q_{n+k}? (exploration, 17 November 2026)
 
-Status: language-model computation. No human has checked it. Nothing in the paper changes with this note (revision 285 stays); a proposed paragraph is at the end. Code: `code/verify_gap_k.py` (stdlib, 5 s, `--quick` 1 s, in CI), `code/scan_gaps.c` (not in CI), output `data/gap_coincidences_p300000.txt`.
+Status: language-model computation. No human has checked it. The paper takes from this note only one sentence in F.57 (g) (revision 292, condensed F.57); the gaps four and five are not written out in the paper (section 4). Code: `code/verify_gap_k.py` (stdlib, 5 s, `--quick` 1 s, in CI), `code/scan_gaps.c` (not in CI), output `data/gap_coincidences_p300000.txt`.
 
 ## 1. Method
 
-By the universal correspondence (F.57 (h)) the relation between t_n and t_{n+k} is G_k(t,w) = Phi_{u_k}(1-t, 1-w), u_k = x(kP). If p >= 5 lies in Q_n and Q_{n+k}, both parameters are p-integral roots of f modulo p, so p divides the exact norm N_k of G_k (cleared of its denominator) on Q[t,w]/(f(t), f(w)), a 36x36 determinant. Because G_k is symmetric, N_k = D_k * O_k^2, where D_k = Res(f, G_k(t,t)) (equal parameters, 6x6 determinant) and O_k is an integer; D_k and O_k are much smaller than N_k and can be factored by Pollard rho. Then for every prime p >= 5 of D_k O_k the roots of f modulo p, the points above them and the points Q +- kP by the group law (including the case kP = O modulo p) decide whether two qualifying points differ by kP; an index pair then follows by a discrete logarithm. Factorizations are checked in `code/verify_gap_k.py`; the large prime factors are proved prime by Pocklington (p-1) and Lucas (p+1) certificates verified in the script.
+By the universal correspondence (F.57 (e)) the relation between t_n and t_{n+k} is G_k(t,w) = Phi_{u_k}(1-t, 1-w), u_k = x(kP). If p >= 5 lies in Q_n and Q_{n+k}, both parameters are p-integral roots of f modulo p, so p divides the exact norm N_k of G_k (cleared of its denominator) on Q[t,w]/(f(t), f(w)), a 36x36 determinant. Because G_k is symmetric, N_k = D_k * O_k^2, where D_k = Res(f, G_k(t,t)) (equal parameters, 6x6 determinant) and O_k is an integer; D_k and O_k are much smaller than N_k and can be factored by Pollard rho. Then for every prime p >= 5 of D_k O_k the roots of f modulo p, the points above them and the points Q +- kP by the group law (including the case kP = O modulo p) decide whether two qualifying points differ by kP; an index pair then follows by a discrete logarithm. Factorizations are checked in `code/verify_gap_k.py`; the large prime factors are proved prime by Pocklington (p-1) and Lucas (p+1) certificates verified in the script.
 
 Reformulation (local, immediate from the definitions): p is in Q_n and Q_{n+k} for some n iff k is congruent modulo m_p = ord(P mod p) to a difference r - r' of two qualifying indices r, r' of one branch (r = r' only when m_p divides k). So every prime contributes a fixed finite set of residues of gaps, at most |R|(|R|-1) <= 132 of them modulo m_p, and the exceptional set E_L of F.57 (g) is the set of primes with such a residue <= L.
 
@@ -13,7 +13,7 @@ Reformulation (local, immediate from the definitions): p is in Q_n and Q_{n+k} f
 | k | primes >= 5 dividing N_k | primes in Q_n and Q_{n+k} | status |
 | --- | --- | --- | --- |
 | 1 | 7, 103, 113, 13085561 | none | F.57 (a) |
-| 2 | 47, 947, 18637, 36997, 2325076196570957 | 18637 | F.57 (e); 2325076196570957 is now proved prime |
+| 2 | 47, 947, 18637, 36997, 2325076196570957 | 18637 | F.57 (f); 2325076196570957 is now proved prime |
 | 3 | 7, 71, 397, 4919, 8887, 19427, 206215327, 49831710601, pi (33 digits) | none | F.57 (f) |
 | 4 | 5, 23, 83, 823, 2141, 4211, 4241, 18329, 5304889, 110840087, 110873747, 5473007569 and a 60-digit prime | **83, 823, 4241** | complete (all primes proved prime) |
 | 5 | 7, 11, 17, 47, 67, 137, 151, 631, 1009, 8849, 11393, 19391, 24337, 6164369, 33898211, 2136952387, 11513351653907, 52679765626351 and a 95-digit prime | none | complete (the 95-digit prime is proved prime by a 17-node chain of Lucas and Pocklington certificates) |
@@ -34,6 +34,6 @@ Details for the complete cases (indices are those of the orbit nP + eps T, "bran
 * Local, no consequence for Problem H: nothing here says anything on the parity of #Q_n or on W(E_{t_n}); F.57 (b') stays Conditional.
 * The scripts of the first pass (Python scratch files for norms, factoring and certificates) are consolidated in `code/verify_gap_k.py`; the C scan is `code/scan_gaps.c`.
 
-## 4. Proposed paragraph for F.57 (not in the paper; to be added only if the owner says so)
+## 4. What went into the paper
 
-*(i) Gaps four and five (Proved given the finite computations; derived with a language model, no human has checked it).* For p >= 5, Q\_n ∩ Q\_{n+4} ⊆ {83, 823, 4241}, with equality of the three primes occurring (83 at n ≡ 12 mod 39 on nP, 823 and 4241 likewise), and Q\_n ∩ Q\_{n+5} = ∅. Proof: the exact norms of Φ\_{u\_k}(1 − t, 1 − w) for k = 4, 5 (246 and 366 digits) factor completely, all prime factors are proved prime by certificates, and the group law at every root of f modulo each of them leaves exactly the primes above. For k = 6 and 7 the norms are only partly factored; coincidences exist at 307 and 34389517 (k = 6) and at 83 (k = 7). Code: code/verify\_gap\_k.py; note notes/REVIEW\_2026-11-17\_gap\_k\_classification.md.
+Revision 292 condenses F.57 to (a) to (d), (e) the universal correspondence, (f) gaps two and three as examples of it, (g) all gaps in characteristic 0. The gap-k results above enter only as one sentence of (g): the difference-set description (p is in Q_n and Q_{n+k} iff k is congruent to r - r' modulo m_p for two qualifying indices), the exact sets for k = 4 (83, 823, 4241) and k = 5 (none), and the primes 307 and 34389517 for k = 6 (the latter not visible in a scan of all primes below 3*10^5). The norm factorizations, certificates and scan data stay in `code/verify_gap_k.py`, `code/scan_gaps.c` and `data/`.
