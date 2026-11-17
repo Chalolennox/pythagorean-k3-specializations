@@ -1,0 +1,45 @@
+# Output of code/scan_gaps.c: every prime 5 <= p <= 300000, full orbits of P and P + T, qualifying indices, coincidences at the gaps 1..12 (cyclic mod the order).
+# Run as two ranges: ./scan_gaps 230000 5   and   ./scan_gaps 300000 230001   (about 3 and 2 minutes). Derived with a language model; no human has checked it.
+# 'trivial 1' would mean that the gap is a multiple of the order of P (never occurs here).
+# --- range 5..230000
+gap 4: p=83 branch 0 n=12 order 39 trivial 0
+gap 7: p=83 branch 0 n=16 order 39 trivial 0
+gap 11: p=83 branch 0 n=12 order 39 trivial 0
+gap 6: p=307 branch 0 n=160 order 163 trivial 0
+gap 9: p=673 branch 1 n=80 order 169 trivial 0
+gap 12: p=757 branch 0 n=72 order 356 trivial 0
+gap 4: p=823 branch 0 n=211 order 426 trivial 0
+gap 4: p=823 branch 1 n=424 order 426 trivial 0
+gap 9: p=2381 branch 1 n=555 order 1176 trivial 0
+gap 12: p=2549 branch 0 n=202 order 416 trivial 0
+gap 4: p=4241 branch 0 n=1027 order 1029 trivial 0
+gap 12: p=6907 branch 0 n=1145 order 1151 trivial 0
+gap 10: p=12281 branch 0 n=1529 order 1534 trivial 0
+gap 2: p=18637 branch 1 n=4683 order 9368 trivial 0
+primes scanned: 20435 (5..230000)
+gap 1: 0 (prime,branch) pairs
+gap 2: 1 (prime,branch) pairs
+gap 3: 0 (prime,branch) pairs
+gap 4: 4 (prime,branch) pairs
+gap 5: 0 (prime,branch) pairs
+gap 6: 1 (prime,branch) pairs
+gap 7: 1 (prime,branch) pairs
+gap 8: 0 (prime,branch) pairs
+gap 9: 2 (prime,branch) pairs
+gap 10: 1 (prime,branch) pairs
+gap 11: 1 (prime,branch) pairs
+gap 12: 3 (prime,branch) pairs
+# --- range 230001..300000
+primes scanned: 5560 (230001..300000)
+gap 1: 0 (prime,branch) pairs
+gap 2: 0 (prime,branch) pairs
+gap 3: 0 (prime,branch) pairs
+gap 4: 0 (prime,branch) pairs
+gap 5: 0 (prime,branch) pairs
+gap 6: 0 (prime,branch) pairs
+gap 7: 0 (prime,branch) pairs
+gap 8: 0 (prime,branch) pairs
+gap 9: 0 (prime,branch) pairs
+gap 10: 0 (prime,branch) pairs
+gap 11: 0 (prime,branch) pairs
+gap 12: 0 (prime,branch) pairs

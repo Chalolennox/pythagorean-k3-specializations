@@ -37,6 +37,7 @@ jobs:
       - run: python3 code/verify_consecutive_qualifying.py --quick
       - run: python3 code/verify_gap_two.py --quick
       - run: python3 code/verify_gap_three.py --quick
+      - run: python3 code/verify_gap_k.py --quick
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick
       - run: python3 code/check_revision.py
