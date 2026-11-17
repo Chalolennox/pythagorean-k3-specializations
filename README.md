@@ -53,6 +53,7 @@ code/verify_18P_note.py               checks of the 18P memorandum (notes/REVIEW
 code/odd_order_density.c              density of primes where P = (1,1) has odd order, vs. Liang-Rouse (notes/odd_order_density_check.md; not in CI)
 code/tau_image/                       2-adic image of the Kummer representation of P and the exact odd-order density (Python, replaces Magma; see its README; not in CI)
 data/odd_order_classes_C_P_1e8.txt    odd-order counts of P by class of p mod 8, 16, 32, 64 (primes up to 1e8)
+data/gap_coincidences_p300000.txt   coincidences of qualifying indices at the gaps 1..12 for all primes up to 300000 (output of code/scan_gaps.c)
 data/root_number_crosscheck_pari.txt   PARI/GP root numbers of 877 curves E_t, input of code/root_number_crosscheck.py --check
 code/verify_chebotarev_mod8.py        checks of the Chebotarev mod-8 draft on every prime p = 7 mod 8 below 3e5 (notes/REVIEW_2026-11-12_chebotarev_mod8_density.md)
 code/check_problem_h_definition.py   checks that Problem H is defined the same way in README.md, STATE.md and the paper
@@ -68,6 +69,8 @@ code/verify_jacobi_identities.py  F.56: coprimality of ab with F, the parity fun
 code/verify_consecutive_qualifying.py  F.57: the relation between t_n and t_{n+1}, the resultant, the orbits modulo 7, 103, 113, 13085561 and the counts of primes with a qualifying root (notes/REVIEW_2026-11-17_problem_h_dossier.md; --quick for CI)
 code/verify_gap_two.py  gap two: the relation between t_n and t_{n+2}, its exact norm, the orbits modulo 47, 947, 18637, 36997, the prime 2325076196570957, the sieve at n = 4683, 4685 and the scan of all primes below 10^4 for gap-one and gap-two coincidences (notes/REVIEW_2026-11-17_gap_two_dossier.md; --quick for CI)
 code/verify_gap_three.py  gap three and all gaps: the relation G3 between t_n and t_{n+3}, its exact norm, the dossier's resultant, the local tests at the nine candidate primes (with a Pocklington certificate for the largest), the scan of all primes below 10^4 for gap-one, gap-two and gap-three coincidences, the premises of the theorem 'no geometric exceptional gaps' and the universal correspondence Phi_{u_k} for every gap (notes/REVIEW_2026-11-17_gap_three_dossier.md; --quick for CI)
+code/verify_gap_k.py  gaps k = 4..7 from the universal correspondence: exact norms and their factorizations, primality certificates, local group-law tests at every prime found, orbit indices of the coincidences, scan of all primes below 10^4 for gaps 1..12 (notes/REVIEW_2026-11-17_gap_k_classification.md; --quick for CI)
+code/scan_gaps.c  C scan of all primes up to 3*10^5 for coincidences at the gaps 1..12 (output data/gap_coincidences_p300000.txt; not in CI)
 code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)
 code/root_number_crosscheck.py   compares PARI/Magma root numbers with the closed formula and the reflection formula (F.25 remark; a new PARI or Magma run is needed for new curves, see its docstring; CI re-checks the stored PARI output with --check)
