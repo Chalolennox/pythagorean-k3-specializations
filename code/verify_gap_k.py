@@ -19,6 +19,8 @@ Checks (one PASS line each, exit status 1 on any failure; standard library only;
      between indices n, n + k of the orbit nP or nP + T
   7  scan of the full orbits of all primes 5 <= p < LIMIT, gaps 1..12 (both branches): the hits are exactly the expected list, and every
      hit divides the exact norm N_k
+  8  the primes 47, 83, 113 divide O_k for two gaps each (47: 2 and 5, 83: 4 and 6, 113: 1 and 6); the zero pairs of G_k over F_p^2 show why
+     (same pair because u_k = u_k' for k' = -k mod m_p; different pairs; pairs exchanged by Frobenius), none of this being a coincidence over F_p
 """
 import math
 import random
@@ -514,6 +516,50 @@ expected = sorted(e for e in EXPECTED if e[1] < LIMIT)
 check('7 scan of the full orbits of all primes 5 <= p < %d, gaps 1..12, both branches: %d hits, exactly the expected list; each hit divides N_gap' % (LIMIT, len(found)),
       found == expected and all(NORMS[g] % pp == 0 for g, pp, eps in found),
       str(found) if found != expected else '')
+
+# ---------------------------------------------------------------- check 8: primes that divide O_k for several k (47, 83, 113)
+# O_k = prod_{i<j} G_k(alpha_i, alpha_j) (the off-diagonal factors); a prime dividing O_k need not give a coincidence over F_p.
+def f2_ops(p):
+    nn = next(x for x in range(2, p) if pow(x, (p - 1) // 2, p) == p - 1)
+    mulf = lambda A, B: ((A[0] * B[0] + nn * A[1] * B[1]) % p, (A[0] * B[1] + A[1] * B[0]) % p)
+    addf = lambda A, B: ((A[0] + B[0]) % p, (A[1] + B[1]) % p)
+    subf = lambda A, B: ((A[0] - B[0]) % p, (A[1] - B[1]) % p)
+    return nn, mulf, addf, subf
+def zero_pairs(p, k):
+    nn, mul2, add2, sub2 = f2_ops(p)
+    u = uk(k); uu = (u.numerator * pow(u.denominator, -1, p)) % p
+    els = [(a, b) for a in range(p) for b in range(p)]
+    def pw(A, e):
+        r = (1, 0)
+        for _ in range(e): r = mul2(r, A)
+        return r
+    sc = lambda c, A: ((c * A[0]) % p, (c * A[1]) % p)
+    roots = [t for t in els if add2(add2(pw(t, 6), sc(-30, pw(t, 4))), add2(sc(-24, pw(t, 2)), (p - 1, 0))) == (0, 0)]   # f(t) = 0
+    def Phi(X, Z):
+        U = (uu, 0); XmU = sub2(X, U)
+        c1 = add2(add2(sc(-2 * uu * uu, X), sc(-2 * uu, mul2(X, X))), add2(sc(8 * uu, X), add2(sc(-4 * uu, (1, 0)), sc(-4, X))))
+        c0 = add2(add2(sc(uu * uu, mul2(X, X)), sc(-4 * uu, X)), (4, 0))
+        return add2(add2(mul2(mul2(XmU, XmU), mul2(Z, Z)), mul2(c1, Z)), c0)
+    one = (1, 0)
+    pairs = [(roots[i], roots[j]) for i in range(len(roots)) for j in range(i + 1, len(roots))
+             if Phi(sub2(one, roots[i]), sub2(one, roots[j])) == (0, 0)]
+    diag = [r for r in roots if Phi(sub2(one, r), sub2(one, r)) == (0, 0)]
+    return uu, roots, pairs, diag
+ok8, det8 = True, []
+for pp_, ks in ((47, (2, 5)), (83, (4, 6)), (113, (1, 6))):
+    for kk in ks:
+        ok8 &= FACT[kk][1].get(pp_, 0) == 1                       # p divides O_k
+res8 = {(pp_, kk): zero_pairs(pp_, kk) for pp_, ks in ((47, (2, 5)), (83, (4, 6)), (113, (1, 6))) for kk in ks}
+u2, r2, pr2, d2 = res8[(47, 2)]; u5, r5, pr5, d5 = res8[(47, 5)]
+ok8 &= u2 == u5 == 12 and pr2 == pr5 and len(pr2) == 1 and all(a[1] == 0 and b[1] == 0 for a, b in pr2) and not d2 and not d5   # 5 = -2 mod 7
+p4, p6 = res8[(83, 4)][2], res8[(83, 6)][2]
+ok8 &= len(p4) == 1 and len(p6) == 1 and p4 != p6 and len(res8[(83, 6)][3]) == 1 and not res8[(83, 4)][3]
+q1, q6 = res8[(113, 1)][2], res8[(113, 6)][2]
+frob = lambda A: (A[0], (-A[1]) % 113)
+ok8 &= len(q1) == 1 and len(q6) == 1 and q1 != q6 and all(a[1] != 0 and frob(a) == b for a, b in q1 + q6) and len(res8[(113, 1)][3]) == 1
+det8 = ['47: u_2 = u_5 = 12, pair %s at both' % (pr2[0],), '83: pair %s at k=4, %s (and one diagonal zero) at k=6' % (p4[0], p6[0]),
+        '113 (s^2 = 3): pair %s at k=1, %s at k=6, conjugate under Frobenius' % (q1[0], q6[0])]
+check('8 47 | O_2, O_5 (same root pair, 5 = -2 mod 7), 83 | O_4, O_6 (different pairs, all roots in F_83), 113 | O_1, O_6 (pairs over F_p^2 swapped by Frobenius)', ok8, '(' + '; '.join(det8) + ')')
 
 print()
 print('FAILED: ' + ', '.join(FAILS) if FAILS else 'all checks passed')
