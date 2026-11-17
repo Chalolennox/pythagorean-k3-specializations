@@ -37,3 +37,13 @@ Details for the complete cases (indices are those of the orbit nP + eps T, "bran
 ## 4. What went into the paper
 
 Revision 292 condenses F.57 to (a) to (d), (e) the universal correspondence, (f) gaps two and three as examples of it, (g) all gaps in characteristic 0. The gap-k results above enter only as one sentence of (g): the difference-set description (p is in Q_n and Q_{n+k} iff k is congruent to r - r' modulo m_p for two qualifying indices), the exact sets for k = 4 (83, 823, 4241) and k = 5 (none), and the primes 307 and 34389517 for k = 6 (the latter not visible in a scan of all primes below 3*10^5). The norm factorizations, certificates and scan data stay in `code/verify_gap_k.py`, `code/scan_gaps.c` and `data/`.
+
+## 5. The factorization D_k = Delta_k S_k^2 and the primes 47, 83, 113 (17 November 2026, note "this for today")
+
+The owner's note (verbatim in notes/drafts/gap_resultant_factorization.md) states D_k = Delta_k S_k^2 with D_k the double resultant of h(X) = f(1 - X) against G_a, Delta_k the diagonal resultant and S_k = prod_{i<j} G_a(alpha_i, alpha_j). This is the decomposition N_k = D_k O_k^2 already used in F.57 (e) and in check 1 (S_k = O_k; the scaling of G_k by a clearing factor c multiplies D_k by c^36, Delta_k by c^6 and S_k by c^15, so the identity holds over Q as well as for the cleared form). Its proof (symmetry of G_a, symmetry of the product over the roots) is correct as written; h is monic of even degree, so Res_W(h(W), G) = prod_j G(X, beta_j) without sign.
+
+Checked here (code/verify_gap_k.py, check 8, exact arithmetic in F_p and F_{p^2}): 47 | O_2, O_5; 83 | O_4, O_6; 113 | O_1, O_6, as listed in the note, and the three explanations hold:
+- p = 47, m_p = 7: u_2 = u_5 = 12 (5 = -2 mod 7), the same pair of roots (9, 38) of f in F_47 vanishes at both gaps, no diagonal zero;
+- p = 83 (m_p = 39, all six roots in F_83): the pair (33, 51) at k = 4, the pair (18, 65) at k = 6 and a diagonal zero at k = 6;
+- p = 113 (m_p = 14, roots in F_{113^2}; s^2 = 3): the pair (15s, 98s) at k = 1 and (45s, 68s) at k = 6, each exchanged by Frobenius (98s = -15s).
+Of these primes only 83 has coincident qualifying points (k = 4, 7, 11), not at k = 6, so p | N_k does not imply a coincidence over F_p; this agrees with the classification above. The note's Magma statement for k = 1..6 is independent of the exact norms here (k = 1..7).
