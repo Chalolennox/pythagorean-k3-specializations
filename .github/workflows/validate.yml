@@ -35,6 +35,7 @@ jobs:
       - run: python3 code/verify_2adic_law.py --quick
       - run: python3 code/verify_jacobi_identities.py --quick
       - run: python3 code/verify_consecutive_qualifying.py --quick
+      - run: python3 code/verify_gap_two.py --quick
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick
       - run: python3 code/check_revision.py
