@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 277; see paper/REVISION)
+paper/paper.md                 the paper (snapshot export, revision 281; see paper/REVISION)
 paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
@@ -67,6 +67,7 @@ code/verify_2adic_law.py       F.55: the 2-adic law v2(F_n - F_m) = 1 + v2(n^2 -
 code/verify_jacobi_identities.py  F.56: coprimality of ab with F, the parity functions h_n and h~_n (h_n h~_n = (-1)^D_n), the reciprocity form of (ab/N_n), and the scan of p^2 | F_n (notes/REVIEW_2026-11-16_F56_parity_functions_and_proposal.md; --quick for CI)
 code/verify_consecutive_qualifying.py  F.57: the relation between t_n and t_{n+1}, the resultant, the orbits modulo 7, 103, 113, 13085561 and the counts of primes with a qualifying root (notes/REVIEW_2026-11-17_problem_h_dossier.md; --quick for CI)
 code/verify_gap_two.py  gap two: the relation between t_n and t_{n+2}, its exact norm, the orbits modulo 47, 947, 18637, 36997, the prime 2325076196570957, the sieve at n = 4683, 4685 and the scan of all primes below 10^4 for gap-one and gap-two coincidences (notes/REVIEW_2026-11-17_gap_two_dossier.md; --quick for CI)
+code/verify_gap_three.py  gap three and all gaps: the relation G3 between t_n and t_{n+3}, its exact norm, the dossier's resultant, the local tests at the nine candidate primes (with a Pocklington certificate for the largest), the scan of all primes below 10^4 for gap-one, gap-two and gap-three coincidences, and the premises of the theorem 'no geometric exceptional gaps' (notes/REVIEW_2026-11-17_gap_three_dossier.md; --quick for CI)
 code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)
 code/root_number_crosscheck.py   compares PARI/Magma root numbers with the closed formula and the reflection formula (F.25 remark; a new PARI or Magma run is needed for new curves, see its docstring; CI re-checks the stored PARI output with --check)
