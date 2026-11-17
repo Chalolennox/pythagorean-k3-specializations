@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 273; see paper/REVISION)
+paper/paper.md                 the paper (snapshot export, revision 277; see paper/REVISION)
 paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
