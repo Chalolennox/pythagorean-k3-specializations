@@ -26,7 +26,7 @@ The labels are those of the paper: Proved, Certified, Observed, Conditional, Ope
 ## Repository layout
 
 ```
-paper/paper.md                 the paper (snapshot export, revision 262; see paper/REVISION)
+paper/paper.md                 the paper (snapshot export, revision 273; see paper/REVISION)
 paper/REVISION                 the revision number of paper.md (single source; code/check_revision.py checks README.md and STATE.md against it)
 paper/paper.pdf                built from paper.md by CI (.github/workflows/paper-pdf.yml) on every push to main; do not edit or supply it by hand
 paper/pdf-build/                   the PDF build: build_pdf.sh (pandoc + WeasyPrint, figure substitution, glyph check) and paper.css
@@ -64,6 +64,9 @@ code/verify_angular_symmetry.py   z(Q+T) = -i conj z(Q) on C, explicit Haar dens
 code/verify_paired_root_numbers_note.py   audit of the paired-root-numbers draft, 19 checks (notes/REVIEW_2026-11-14_paired_root_numbers_note.md; uses root_number_formula.py)
 code/verify_F_collisions.py   F.54 remark: F(t)-F(u) factorisation, Q = 0 parametrisation, proof that F°(t_n) are pairwise distinct (explicit constants + finite check), direct search for repeated values (notes/REVIEW_2026-11-16_F_collision_side_study.md; --quick for CI)
 code/verify_2adic_law.py       F.55: the 2-adic law v2(F_n - F_m) = 1 + v2(n^2 - m^2), the arithmetic of psi_n (parity, v2, coprimality) and the interface inequalities of the proof (notes/REVIEW_2026-11-16_2adic_law_F55.md; --quick for CI)
+code/verify_jacobi_identities.py  F.56: coprimality of ab with F, the parity functions h_n and h~_n (h_n h~_n = (-1)^D_n), the reciprocity form of (ab/N_n), and the scan of p^2 | F_n (notes/REVIEW_2026-11-16_F56_parity_functions_and_proposal.md; --quick for CI)
+code/verify_consecutive_qualifying.py  F.57: the relation between t_n and t_{n+1}, the resultant, the orbits modulo 7, 103, 113, 13085561 and the counts of primes with a qualifying root (notes/REVIEW_2026-11-17_problem_h_dossier.md; --quick for CI)
+code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)
 code/root_number_crosscheck.py   compares PARI/Magma root numbers with the closed formula and the reflection formula (F.25 remark; a new PARI or Magma run is needed for new curves, see its docstring; CI re-checks the stored PARI output with --check)
 code/verify_mirror_collapse.py   F.51 (b): finite exact verification of eps = h(n) s_n along 1 + x(nP), 1 + 2/x(nP) for all n (--quick for CI)
