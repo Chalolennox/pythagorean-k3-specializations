@@ -21,11 +21,13 @@ Checks (one PASS line each, exit status 1 on any failure; standard library only;
      square, so the degree-12 polynomial g(y) = m(y^2) is irreducible and D is one Galois orbit; x(2P) = 1/4 is not an integer
  10  |R_{p,eps}| <= 12; qualifying indices come in pairs n, -n (n != -n); a prime with a qualifying index n coincides with itself at the
      gap (-2n) mod m_p, so every prime with a qualifying index lies in E_L for L >= its smallest gap
+ 11  the universal correspondence G_k(t,w) = Phi_{u_k}(1-t, 1-w), u_k = x(kP) (one symmetric biquadratic for every k; it reproduces Psi,
+     G2, G3 and vanishes exactly at (t_n, t_{n+k}) for k = 1..12)
 """
 import random
 import sys
 from fractions import Fraction
-from math import gcd
+from math import comb, gcd
 
 QUICK = '--quick' in sys.argv
 FAILS = []
@@ -642,6 +644,71 @@ check('10 for all primes 5 <= p < %d: |R_{p,eps}| <= 12 (maximum seen %d), |R| e
       'at the gap (-2n) mod m_p' % (LIMIT, maxR), ok10,
       '(%d of %d primes have a qualifying index; smallest gap over these primes between %d and %d)'
       % (with_index, len(data), min(mingaps.values()), max(mingaps.values())))
+
+# ---------------------------------------------------------------- check 11: the universal correspondence Phi_u(X, Z)
+def t_add(a, b, s=1):
+    r = dict(a)
+    for k, v in b.items():
+        r[k] = r.get(k, 0) + s * v
+        if r[k] == 0:
+            del r[k]
+    return r
+def t_mul(a, b):
+    r = {}
+    for (i, j, k), v in a.items():
+        for (l, m, n), w in b.items():
+            r[(i + l, j + m, k + n)] = r.get((i + l, j + m, k + n), 0) + v * w
+    return {k: v for k, v in r.items() if v}
+def t_pow(a, n):
+    r = {(0, 0, 0): 1}
+    for _ in range(n):
+        r = t_mul(r, a)
+    return r
+def t_c(x):
+    return {(0, 0, 0): x} if x else {}
+VX, VZ, VU = {(1, 0, 0): 1}, {(0, 1, 0): 1}, {(0, 0, 1): 1}
+def t_f(V):
+    return t_add(t_add(t_pow(V, 3), t_mul(t_c(-2), t_pow(V, 2))), t_mul(t_c(2), V))
+XmU = t_add(VX, VU, -1)
+inner = t_add(t_add(t_mul(t_pow(XmU, 2), t_add(t_add(VZ, VX), t_add(VU, t_c(-2)))), t_f(VX), -1), t_f(VU), -1)
+lhs = t_add(t_mul(inner, inner), t_mul(t_c(4), t_mul(t_f(VX), t_f(VU))), -1)      # ((X-u)^2 (Z+X+u-2) - f(X) - f(u))^2 - 4 f(X) f(u)
+coef = t_add(t_add(t_add(t_mul(t_c(-2), t_mul(t_pow(VU, 2), VX)), t_mul(t_c(-2), t_mul(VU, t_pow(VX, 2)))),
+                   t_mul(t_c(8), t_mul(VU, VX))), t_add(t_mul(t_c(-4), VU), t_mul(t_c(-4), VX)))
+PhiU = t_add(t_add(t_mul(t_pow(XmU, 2), t_pow(VZ, 2)), t_mul(coef, VZ)),
+             t_add(t_add(t_mul(t_pow(VU, 2), t_pow(VX, 2)), t_mul(t_c(-4), t_mul(VU, VX))), t_c(4)))
+sym_ok = lhs == t_mul(t_pow(XmU, 2), PhiU) and all(PhiU.get((j, i, k), 0) == v for (i, j, k), v in PhiU.items())
+def Phi_val(u, Xv, Zv):
+    return (Xv - u) ** 2 * Zv ** 2 + (-2 * u * u * Xv - 2 * u * Xv ** 2 + 8 * u * Xv - 4 * u - 4 * Xv) * Zv + u * u * Xv ** 2 - 4 * u * Xv + 4
+def Phi_tw(u):                                           # Phi_u(1 - t, 1 - w) as a polynomial in t, w (Fraction coefficients)
+    out = {}
+    for (i, j, k), v in PhiU.items():                    # X^i Z^j u^k with X = 1 - t, Z = 1 - w
+        for a in range(i + 1):
+            for b in range(j + 1):
+                cf = Fraction(v) * u ** k * comb(i, a) * (-1) ** a * comb(j, b) * (-1) ** b
+                out[(a, b)] = out.get((a, b), 0) + cf
+    return {k: v for k, v in out.items() if v}
+multiples, cur = {}, None
+for k in range(0, 14):
+    multiples[k] = cur
+    cur = add_q(cur, Pq)
+G2full = G2
+same = (Phi_tw(Fraction(1)) == {k: Fraction(v) for k, v in Psi.items()}
+        and Phi_tw(Fraction(1, 4)) == {k: Fraction(v, 16) for k, v in G2full.items()}
+        and Phi_tw(Fraction(49, 9)) == {k: Fraction(v, 81) for k, v in G3_expected.items()})
+orb_ok, npairs = True, 0
+for eps in (0, 1):
+    pts, cur = [], (Tq if eps else None)
+    for n in range(36):
+        pts.append(cur)
+        cur = add_q(cur, Pq)
+    for k in range(1, 13):
+        for n in range(36 - k):
+            if pts[n] is not None and pts[n + k] is not None:
+                orb_ok &= Phi_val(multiples[k][0], pts[n][0], pts[n + k][0]) == 0
+                npairs += 1
+check('11 universal correspondence G_k(t,w) = Phi_{u_k}(1-t, 1-w), u_k = x(kP): ((X-u)^2 (Z+X+u-2) - f(X) - f(u))^2 - 4 f(X) f(u) = (X-u)^2 Phi_u(X,Z) '
+      'symbolically; Phi symmetric of bidegree (2,2); Phi_1 = Psi, 16 Phi_{1/4} = G2, 81 Phi_{49/9} = G3 exactly; Phi_{u_k}(x_n, x_{n+k}) = 0 exactly '
+      'for k = 1..12 (%d pairs, both branches)' % npairs, sym_ok and same and orb_ok)
 
 print()
 print('FAILED: ' + ', '.join(FAILS) if FAILS else 'all checks passed')
