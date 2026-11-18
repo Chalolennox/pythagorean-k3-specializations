@@ -47,3 +47,17 @@ Checked here (code/verify_gap_k.py, check 8, exact arithmetic in F_p and F_{p^2}
 - p = 83 (m_p = 39, all six roots in F_83): the pair (33, 51) at k = 4, the pair (18, 65) at k = 6 and a diagonal zero at k = 6;
 - p = 113 (m_p = 14, roots in F_{113^2}; s^2 = 3): the pair (15s, 98s) at k = 1 and (45s, 68s) at k = 6, each exchanged by Frobenius (98s = -15s).
 Of these primes only 83 has coincident qualifying points (k = 4, 7, 11), not at k = 6, so p | N_k does not imply a coincidence over F_p; this agrees with the classification above. The note's Magma statement for k = 1..6 is independent of the exact norms here (k = 1..7).
+
+## 6. The shifted-gcd bound (18 November 2026)
+
+Statement (now in F.57 (e)): for p >= 5 with m_p not dividing k, v_p(gcd(F_n, F_{n+k})) <= v_p(N_k) for every n >= 1 and both branches; for k = 1 this means gcd(F_n, F_{n+1}) divides 2^a 3^b 7 103 113^3 13085561^2.
+
+Proof: two Bezout identities for the nested resultant (the independent validation, verbatim in notes/drafts/shifted_gcd_validation.md). The Cayley-Hamilton argument first used here (G_k divides its norm in Z[t,w]/(f(t), f(w)), then evaluate at (t_n, t_{n+k}) modulo p^e) is also correct; the Bezout version is shorter.
+
+Checks of the validation's three open points: (1) normalization: the unscaled nested resultant and the denominator-free N_k of the code have the same p-adic valuation for p >= 5 with m_p not dividing k, because G_k is scaled by den(u_k)^2 whose primes are 2 and primes with m_p | k; (2) N_k != 0 for every k by F.57 (g), D being stable under negation, and directly for k <= 12; (3) the branch nP + T uses the same proof (p | F_n forces p not dividing V_n there too).
+
+Why m_p | k must be excluded: then t_{n+k} = t_n modulo p, so p | F_n implies p | F_{n+k}, and v_p(F_n) is unbounded in n; the set of such p is finite for fixed k (primes dividing the denominator of x(kP)).
+
+Tests (code/verify_gap_k.py, check 9): n + k <= 60, k <= 7, both branches, 784 pairs, 30 with a common prime >= 5, none above v_p(N_k) (gcd with 2 and 3 removed divides N_k); no prime with m_p | k occurs in that range. For k = 4 the common primes are 23 (v_23(gcd) = 1 at most, attained at n = 28 where v_23(F_32) = 2, equal to v_23(N_4) = 1) and 83.
+
+Observed, not in the paper: log N_k = 144 h^(P) k^2 + O(1) with h^(P) = 0.21616 (144 h^ = 31.13; data 31.55 k^2 at k = 12, remainder 57-68 for k = 6..12) and log D_k close to 24 h^ k^2 = 5.19 k^2; 144 = (deg D)^2, as expected from a Neron-Tate pairing of D with its translate. Not proved.
