@@ -21,6 +21,7 @@ Checks (one PASS line each, exit status 1 on any failure; standard library only;
      hit divides the exact norm N_k
   8  the primes 47, 83, 113 divide O_k for two gaps each (47: 2 and 5, 83: 4 and 6, 113: 1 and 6); the zero pairs of G_k over F_p^2 show why
      (same pair because u_k = u_k' for k' = -k mod m_p; different pairs; pairs exchanged by Frobenius), none of this being a coincidence over F_p
+  9  shifted gcd: v_p(gcd(F_n, F_{n+k})) <= v_p(N_k) for p >= 5 with m_p not dividing k (tested for n + k <= 60, k <= 7, both branches)
 """
 import math
 import random
@@ -560,6 +561,30 @@ ok8 &= len(q1) == 1 and len(q6) == 1 and q1 != q6 and all(a[1] != 0 and frob(a) 
 det8 = ['47: u_2 = u_5 = 12, pair %s at both' % (pr2[0],), '83: pair %s at k=4, %s (and one diagonal zero) at k=6' % (p4[0], p6[0]),
         '113 (s^2 = 3): pair %s at k=1, %s at k=6, conjugate under Frobenius' % (q1[0], q6[0])]
 check('8 47 | O_2, O_5 (same root pair, 5 = -2 mod 7), 83 | O_4, O_6 (different pairs, all roots in F_83), 113 | O_1, O_6 (pairs over F_p^2 swapped by Frobenius)', ok8, '(' + '; '.join(det8) + ')')
+
+# ---------------------------------------------------------------- check 9: shifted gcd, v_p(gcd(F_n, F_{n+k})) <= v_p(N_k) for p >= 5, m_p not dividing k
+# (F.57 (e)).  Equivalent test: after removing 2 and 3, gcd(F_n, F_{n+k}) divides N_k (a prime with m_p | k would be an exception;
+# none occurs in the range).  F_n = |F(U_n, V_n)|, t_n = U_n/V_n = 1 - x(nP) or 1 - x(nP + T); N_k is the denominator-free norm.
+def _F_of(t):
+    U, V = t.numerator, t.denominator
+    return abs(U ** 6 - 30 * U ** 4 * V ** 2 - 24 * U ** 2 * V ** 4 - V ** 6)
+NMAX9 = 40 if QUICK else 60
+pts9 = [None]; Q9 = None
+for _n in range(1, NMAX9 + 1):
+    Q9 = add_q(Q9, (Fraction(1), Fraction(1))); pts9.append(Q9)
+ok9, tested9, hits9 = True, 0, 0
+for br in (0, 1):
+    Fs9 = {n: _F_of(1 - (pts9[n] if br == 0 else add_q(pts9[n], (Fraction(0), Fraction(0))))[0]) for n in range(1, NMAX9 + 1)}
+    for k in range(1, 8):
+        for n in range(1, NMAX9 + 1 - k):
+            g = gcd(Fs9[n], Fs9[n + k]); tested9 += 1
+            while g % 2 == 0: g //= 2
+            while g % 3 == 0: g //= 3
+            if g > 1: hits9 += 1
+            ok9 &= NORMS[k] % g == 0
+ok9 &= hits9 > 0
+check('9 shifted gcd: for n + k <= %d, k = 1..7, both branches, gcd(F_n, F_{n+k}) with 2 and 3 removed divides N_k (so v_p(gcd) <= v_p(N_k), p >= 5, m_p not dividing k)' % NMAX9,
+      ok9, '(%d pairs, %d with a common prime >= 5)' % (tested9, hits9))
 
 print()
 print('FAILED: ' + ', '.join(FAILS) if FAILS else 'all checks passed')
