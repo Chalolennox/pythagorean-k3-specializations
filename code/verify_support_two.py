@@ -6,7 +6,7 @@ R_p = {Q in C(F_p): H(t(Q)) = 0, (2t(1-t^2)/p) = +1}   (a union of +-pairs);
 S_p = R_p intersected with <P mod p>.
 
 Checks (all asserted):
-  1. Exact (Fractions): disc H = 2^6 3^18 23^2, disc f = 3^9 23 (f = z^3-30z^2-24z-1), N(a(t)) = -2^8 3^6, N(d(t)) = -2^7 3^3.
+  1. Exact (Fractions): disc H = 2^6 3^18 23^2, disc f = 3^9 23 (f = z^3-30z^2-24z-1), N(a(t)) = -2^8 3^6, N(d(t)) = -2^7 3^3, N(1-t) = N(1+t) = -54, N(1+t^2) = 64.
   2. Exact: phi_hat(P') = P for the 2-isogeny phi_hat: C' -> C, C': Y^2 = X^3 + 4X^2 - 4X, P' = (2,-4).
   3. For every prime 5 <= p < LIM: |{Q: delta(Q) trivial}| = N_p/2 (delta = x mod squares, delta(T) = 2),
      P lies in ker delta, hence m_p divides N_p/2 and the index [C(F_p):<P>] is even.
@@ -50,6 +50,8 @@ discH = (-1) ** (6 * 5 // 2) * res(H, dH)          # monic
 discf = (-1) ** (3 * 2 // 2) * res(f3, df3)
 assert factor_small(discH) == {2: 6, 3: 18, 23: 2}, factor_small(discH)
 assert factor_small(discf) == {3: 9, 23: 1}, factor_small(discf)
+# norms of the other radicands of L*: 1-t, 1+t (-> -54 = -2*3^3), 1+t^2 (-> 2^6): all {2,3}-units, so the Kummer layer of L* is unramified outside 2, 3
+assert res(H, [-1, 1]) == -54 and res(H, [1, 1]) == -54 and res(H, [1, 0, 1]) == 64
 # a(t) = 2t(1-t^2) = -2t^3 + 2t ; d(t) = (1-t)(1+t^2) = -t^3 + t^2 - t + 1   (H monic, so N = Res(H, .))
 Na = res(H, [-2, 0, 2, 0]);  Nd = res(H, [-1, 1, -1, 1])
 assert Na == -2 ** 8 * 3 ** 6, Na

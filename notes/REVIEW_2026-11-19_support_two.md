@@ -37,3 +37,22 @@ Infinitude of |S_p| = 2 most likely needs an elliptic Artin-type input, conditio
 
 ## What it rests on
 Exact algebra (Fractions) for item 1 of the audit and for phi_hat(P') = P; a full scan below 10^4 for the counts; the explicit model of G (F.57 (b'), floating-point signs, |G| = 24576 from F.5) for the densities. Not a literature search: the Route A lemmas are stated as a plan, with the entanglement claim about sqrt(-69) unchecked.
+
+## Second round (same day): audit of the follow-up brief "support-two progress"
+Code: code/support_two_affine_probability.py (standard library, about 3 seconds, in CI); the extra norms are in code/verify_support_two.py. Derived with a language model; no human check.
+
+Error found. The local probability beta_l that l divides j_p in the maximal affine model F_l^2 x| GL_2(F_l) (l odd) is beta_l = (l^3 - l - 1) / (l^2 (l-1)^2 (l+1)), not (l^2 - 2) / (l^2 (l^2 - 1)). Brute force over all (A, v): l = 3: 23/144 (the other formula gives 7/72), l = 5: 119/2400 (23/600), l = 7: 335/14112 (47/2352). Derivation: with g = (A, v), kappa_P = v mod (A - I)V and kappa_T = 0 for odd l; the condition fails when A = I (probability 1/(l (l-1)^2 (l+1))) and, when dim ker(A - I) = 1 (probability (l^2 - l - 1) / (l (l-1)^2)), with probability 1/l. Both versions are of size l^-2, so the sum converges and the brief's conclusions do not change.
+
+Checked and correct: j_p = [E(F_p) : <P', T'>] = #C / (2 m_p) (no mismatch on 428 primes below 3000); delta_p never trivial; for p = 3 (mod 8), j_p is odd (all primes below 3000; all 29 favorable primes below 10^4); psi_3 = 3X^4 + 16X^3 - 24X^2 - 16; the Kummer criterion (coinvariants V / (F - I)V, kappa_T = 0 for odd l); K_l unramified outside 2 and l (including l = 2); the p = 1187 witness (#C = 1222 = 2 * 13 * 47, ord P = 611, j = 1, roots 411 and 776, only t = 776 qualifies with x = 412 a square); the class-A index distribution (42, 13, 8, 4, 3, 2, 1, 1, 2, 1, 1, 1, 3, 1, 1; 15 primes with Q_p in <P> and j_p > 1). Q(zeta_8) is already contained in L* (i and sqrt 2), so L* Q(zeta_8) = L*. The count of good primes 5 <= p < 10^4 is 1227 (pi(10^4) - 2); the brief's 1226 omits one prime (probably 5 or 23).
+
+Ramification of L* (exact). The radicands 1 - t, 1 + t, 1 + t^2, a(t), d(t) have norms -54, -54, 2^6, -2^8 3^6, -2^7 3^3 over Q[t]/H, so every radicand is a {2, 3}-unit in the splitting field N of H; the Kummer layer is unramified outside 2 and 3, and disc H = 2^6 3^18 23^2 gives ramification of N at 2, 3, 23 only. Hence L* is ramified only at 2, 3, 23.
+
+Densities. A scan of all 13846 primes 5 <= p <= 1.5 * 10^5 gives |R_p| = 2 for 0.1601 (model 633/4096 = 0.1545, z = 1.8), class A 0.0797 (39/512 = 0.0762, z = 1.6), class B 0.0804 (321/4096 = 0.0784, z = 0.9): consistent with the model, not a certificate.
+
+Finite-set proposition (correct). For any finite set of primes avoiding some favorable prime with j_p = 1 (1187 or, e.g., 149, 197), the favorable primes with gcd(j_p, product) = 1 have positive density (conjugacy-invariant condition in K_l, unramified at the witness, Chebotarev). It does not give j_p = 1 itself, which needs all levels at once.
+
+Literature. arXiv:2304.03964 (read from its abstract page only): Theorem 1.2 characterises locally l-imprimitive points; our P = phi_hat(P') is its case (C) with l = 2. As read there, the density for "P generates E(F_p)" is only an upper density in general, and is not shown to be the true density even under GRH when positive. Moree-Stevenhagen, "A two-variable Artin conjecture" (2000), is the multiplicative analogue of "Q_p in <P>" and is proved under GRH; I know of no elliptic analogue. Gupta-Murty and Cojocaru-Murty are recalled from memory and unchecked.
+
+Open and unchecked: positivity of d_infinity (needs Serre's open image theorem and Bashmakov-Ribet for the Kummer images at large l; not written out); the uniform estimate (A); independence of P and Q modulo torsion over F_0 = Q(t, sqrt d).
+
+Strongest rigorous statement now (Chebotarev only, with the facts about L* above): class A has positive density; for every finite set avoiding a favorable j = 1 prime, favorable primes with gcd(j_p, product) = 1 have positive density (e.g. gcd(j_p, 6) = 1); S_p is empty on class B and on {R_p empty}; the upper density of {|R_p| = 2, S_p nonempty} is at most 39/512. Infinitude of |S_p| = 2 remains open.
