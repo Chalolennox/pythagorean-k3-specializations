@@ -74,6 +74,7 @@ code/verify_group_G.py  F.57 (b'): the group G of order 24576 built from the thr
 code/verify_support_two.py  support-two review: exact discriminants and norms, phi_hat(P') = P, |ker delta| = N_p/2 and the even index [C(F_p):<P>], scan of S_p and R_p below 10^4, the class A / class B split (notes/REVIEW_2026-11-19_support_two.md; standard library, about 6 seconds)
 code/support_two_densities.py  the densities 633/4096, 39/512, 321/4096 from the model of G (numpy)
 code/support_two_affine_probability.py  the local probability beta_l = (l^3 - l - 1)/(l^2 (l-1)^2 (l+1)) that l divides j_p in the maximal affine model, by brute force for l = 3, 5, 7 (standard library, about 3 seconds)
+code/verify_neutrality_circle.py  neutral points on the rational circle: the Magma summary (662 / 174 / 20, 71, 63, 177), the reflection proposition, the sharp congruence, the prime-value families t = 1/(12k) and t = 6w, the orbit checks and the negative result that these families miss the orbit (notes/REVIEW_2026-11-19_neutrality_circle.md; standard library, about 1 second)
 code/scan_gaps.c  C scan of all primes up to 3*10^5 for coincidences at the gaps 1..12 (output data/gap_coincidences_p300000.txt; not in CI)
 code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
 code/root_number_formula.py   closed formula of section 4 for W(E_t) as a module; run as a script it checks twelve independent Magma values (n <= 6 along nP and nP + T)
