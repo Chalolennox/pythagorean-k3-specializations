@@ -15,3 +15,19 @@ Status: derived with a language model, 22 November 2026; no human has checked it
 
 ## What is not formalized
 The reduction type (multiplicative at p | F because p does not divide c4), the local root numbers (-1 split, +1 non-split), the local signs at 2, 3 and at primes dividing c (Rizzo's tables), Appendix B, the product formula and its Jacobi-symbol form, and the quadratic-character reasoning. So F.28 as a whole is not machine-checked; what is checked is the list of polynomial identities above. A status line for the paper could read "the polynomial identities used in the proof are machine-checked in Coq (ring); the rest is not"; the paper is not edited here (the claude.ai document is the source of truth).
+
+## Second file (code/coq/F28_divisibility.v): fidelity audit
+Status: derived with a language model; no human has checked it; compiled only in CI (the sandbox has no Coq).
+The owner's file repeats the two identities of the first file and adds divisibility lemmas. Findings:
+- The lemmas (divide_product, divide_difference) and the three implications are correct and match the three cases of the paper (section 3, Setup): if p | F and p | c then p | 4a^3; if p | F and p | b then p | 4a^3; if p | F and p | a then p | 27 b^2 c. They hold for every integer p; no primality or size is used.
+- They do not by themselves state what the paper uses, that a prime p >= 5 dividing F does not divide abc. That needs (i) primality of p (Euclid's lemma) and p >= 5, to remove the factors 4 and 27; (ii) a^2 + b^2 = c^2 and gcd(a,b) = 1, which the paper uses to pass from "p | a and p | c" to "p | b" and to get the contradiction with coprimality ("p | a, then p | 27b^2c, p does not divide b because gcd(a,b) = 1, and p does not divide c because c^2 = a^2 + b^2"). The file's title "F.28 - arithmetic formalization" therefore overstates it; the closing comment "no additional Qed is required" is harmless.
+- Added in review (Part V): F28_prime_not_dividing_abc: for prime p >= 5, a^2 + b^2 = c^2, Z.gcd a b = 1 and p | F a b c, p divides none of a, b, c; with helper lemmas (prime_div_sq, prime_div_cube, ge5_div_4a3, ge5_not_div_27, coprime_contradiction). Its contrapositive gives the paper's "if p | c then F = 4a^3 (mod p) is not 0".
+
+Fidelity table (both files)
+| paper claim | Coq theorem | match |
+| Delta numerator -1024 F (rational model) | F28_discriminant_identity | exact; the integral-model version is F28_discriminant_integral_model |
+| (-c6/p) = (ab/p) for p | F, algebraic core | F28_character_identity | the ring identity only; the symbol manipulation is not formalized |
+| p | F, p | c => p | 4a^3 etc. (section 3) | F28_if_p_divides_{a,b,c} | exact for all integers p |
+| p >= 5, p | F => p does not divide abc | F28_prime_not_dividing_abc | exact, with the hypotheses of the paper |
+| a, b, c from a rational t; reduction types; local root numbers; Rizzo's tables; Appendix B | none | not formalized |
+
