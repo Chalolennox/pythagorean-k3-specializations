@@ -128,6 +128,7 @@ code/support_two_affine_probability.py  the local probability beta_l = (l^3 - l 
 code/verify_support_structure.py  support structure: 0/2/6 roots of H, evenness and bounds on |S_{p,j}|, the necessary congruences for |S|=12, the 2-descent parity law for p = 5 mod 8, the 12-index example p = 5251537 (stdlib, about 8 s; notes/REVIEW_2026-11-22_support_structure_proved.md)
 code/search_support_twelve.py  search for |S|=12 up to 3*10^7 (about 6 min; not in CI; output data/support_twelve_search_3e7.txt)
 code/support_density_sum.py  running sums of |S|/m_p and |N|/m_p to p = 30000 (about 35 s; not in CI; output data/support_sum_30000.txt)
+code/verify_kummer_compositum.py  ranks of the qualifying-root field L* and the parity characters a_j + i: rank 9 and 12, the exact identity s(a)^2 = 3(a^4-1), the 12-row certificate (stdlib, about 6 s; notes/REVIEW_2026-11-22_kummer_compositum.md)
 code/verify_neutrality_circle.py  neutral points on the rational circle: the Magma summary (662 / 174 / 20, 71, 63, 177), the reflection proposition, the sharp congruence, the prime-value families t = 1/(12k) and t = 6w, the orbit checks and the negative result that these families miss the orbit (notes/REVIEW_2026-11-19_neutrality_circle.md; standard library, about 1 second)
 code/scan_gaps.c  C scan of all primes up to 3*10^5 for coincidences at the gaps 1..12 (output data/gap_coincidences_p300000.txt; not in CI)
 code/density_qualifying_primes.c  F.57 (c): the density of primes without a qualifying root for p < 10^8 (C; not in CI)
