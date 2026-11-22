@@ -12,6 +12,7 @@ Checks the statements of notes/REVIEW_2026-11-22_kummer_compositum.md:
   4  the 12-row certificate data/kummer_rank_certificate.txt (ranks 12 and 9)
   5  locus: odd weight of the six bits chi(a_j +- i) <=> p = 5 mod 8; primes completely split in the
      criterion field are 1 mod 8
+  7  K5: at p = 1 mod 8 the characters chi(a_j + i) bound the support, |S_{p,j}| <= 4 (3 - w_j), on the 106 search cases
   6  single-root independence: over the degree-one primes of Q(a, i), the characters of
      g(a), 1 - a, 1 + a, 1 + a^2, 2 are independent and chi(a + i) is not a product of them
 
@@ -247,6 +248,25 @@ for p in primes(LIM6):
 ind = all(any(sum(r[0][k] for k in range(5) if m >> k & 1) % 2 == 1 for r in rows6) for m in range(1, 32))
 notin = all(any((sum(r[0][k] for k in range(5) if m >> k & 1) + r[1]) % 2 == 1 for r in rows6) for m in range(32))
 check("6  g(a), 1-a, 1+a, 1+a^2, 2 are independent and chi(a + i) is none of their 32 products (%d degree-one primes of Q(a,i), p <= %d)" % (len(rows6), LIM6), ind and notin)
+
+# ------------------------------------------------------------------ 7. K5: |S| <= 4 (3 - w) on the search survivors
+import re
+try:
+    cases = []
+    for line in open("data/support_twelve_search_3e7.txt"):
+        m = re.match(r"p=(\d+) .*branch (\d): .*\(\|S\|=(\d+)\)", line)
+        if m: cases.append(tuple(map(int, m.groups())))
+    bad = eq = 0; twelve = []
+    for p, j, sz in cases:
+        A, ii = embeddings(p)[0]
+        c1 = chi(-(1 + ii), p); target = 1 if j == 0 else c1
+        w = sum(1 for a in A if chi(a + ii, p) != target)
+        bad += sz > 4 * (3 - w); eq += sz == 4 * (3 - w)
+        if sz == 12: twelve.append((p, j, w))
+    check("7  K5: |S_{p,j}| <= 4(3 - w_j) on the %d prime-branch cases of data/support_twelve_search_3e7.txt (%d equalities); the |S| = 12 case has w = 0: %s" % (len(cases), eq, twelve),
+          len(cases) == 106 and bad == 0 and twelve == [(5251537, 1, 0)])
+except FileNotFoundError:
+    check("7  data/support_twelve_search_3e7.txt present (run from the repository root)", False)
 
 print()
 print("ALL CHECKS PASSED" if not fails else "FAILED: %s" % fails)

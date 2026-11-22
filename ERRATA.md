@@ -13,5 +13,6 @@ Errors found in earlier versions of the paper or in the code, with the place whe
 | 7 | Citations of the periodicity theorem as "F.17" in F.20–F.46; the theorem is in Appendix B (F.17 is the elliptic-net test). One citation of the group S₄ pointed to F.8 instead of Appendix E | Presentation only | 14 citations fixed |
 | 8 | Four paragraphs of F.8 and F.9 stood after F.46 | Presentation only | moved back |
 | 9 | The open-problems list (§9) still said the twist rank for c ≠ 2 was only estimated | Out of date | §9 rewritten |
+| 10 | Notes of 22 November 2026 (support structure, Kummer compositum) said that given x(Q) and r(Q) squares the 2-descent class lies in {0, delta(P)} automatically, so there is no descent obstruction to accessibility, and that the parity characters chi(a + i) do not constrain orbit membership | True for p = 5 mod 8 only. For p = 1 mod 8, P is in 2C(F_p), so chi(a + i) is constant on the orbit and a root is accessible only if chi(a + i) = +1 (nP) or chi(-(1 + i)) (nP + T). Proposition 6 (e) and K5 | notes/REVIEW_2026-11-22_support_structure_proved.md, notes/REVIEW_2026-11-22_kummer_compositum.md (this correction) |
 
 Not errata but worth knowing: three rank-3 values in §5 (t = −86/27, 55/37, 11/60) are *reported*, not recomputed; four others (t = −46/9, −12/11, −17/31, 15/8) are certified there.
