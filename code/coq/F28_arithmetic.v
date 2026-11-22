@@ -1,13 +1,19 @@
 (* code/coq/F28_arithmetic.v
 
-   The owner's consolidated F.28 file (seventh version, 22 November 2026): Parts I-XIV unchanged except for this header; the short
-   part after the line "ADDED IN REVIEW" is added.  The file proves, for a prime p >= 5, a^2 + b^2 = c^2, gcd(a,b) = 1 and p | F(a,b,c):
-     F28_main_arithmetic        : p divides none of a, b, c;
-     F28_c4_nondivisibility     : p does not divide c4_num a = -192 a   (the c4 of the model WITHOUT the powers of c).
-   WHAT IS ADDED: F28_c4_integral_nondivisibility, the same for -192 a c^3, which is the c4 of the integral model
+   The owner's consolidated F.28 file (eighth version, 22 November 2026): everything before the line "ADDED IN REVIEW" is the owner's text
+   unchanged except for this header.  The file proves, for a prime p >= 5, a^2 + b^2 = c^2, gcd(a,b) = 1 and p | F(a,b,c):
+     F28_main_arithmetic          : p divides none of a, b, c;
+     F28_c4_nondivisibility       : p does not divide c4_num a = -192 a   (the c4 of the model WITHOUT the powers of c);
+   and, for every integer p dividing F (no further hypothesis):
+     F28_square_class_identity / F28_square_class_congruence :
+       a^3 b c (-c6_num b) - (216 b^2 c)^2 = (-1728 b^2 c) F(a,b,c), hence p | a^3 b c (-c6_num b) - (216 b^2 c)^2.
+   This is the divisibility form of "-c6 is a square mod p iff abc is", i.e. (via c a square on the family, section 6) the paper's
+   criterion "(ab/p) = +1 iff split multiplicative reduction".  The step from the congruence to Legendre symbols, and "c is a square",
+   are NOT in Coq.
+   WHAT IS ADDED: F28_c4_integral_nondivisibility, the nondivisibility for -192 a c^3, the c4 of the integral model
    Y^2 = X^3 + 4 a c^3 X - 8 b c^5 (see F28_c4_integral_model in F28_identities.v).
    NOT FORMALIZED: the parametrization of (a,b,c) by a rational t, minimality of the model, the conclusion "multiplicative
-   reduction" itself, local root numbers.  Compiled in CI. *)
+   reduction" itself, Legendre symbols, local root numbers.  Compiled in CI. *)
 
 From Coq Require Import ZArith.
 From Coq Require Import Znumtheory.
@@ -15,10 +21,6 @@ From Coq Require Import Lia.
 From Coq Require Import Ring.
 
 Open Scope Z_scope.
-
-(* ======================================== *)
-(* F.28 - ARITHMETIC FORMALIZATION          *)
-(* ======================================== *)
 
 Definition F (a b c : Z) : Z :=
   4*a^3 + 27*b^2*c.
@@ -30,7 +32,7 @@ Definition c6_num (b : Z) : Z :=
   6912*b.
 
 (* ======================================== *)
-(* PART I: POLYNOMIAL IDENTITIES            *)
+(* VERIFIED POLYNOMIAL IDENTITIES           *)
 (* ======================================== *)
 
 Theorem F28_character_identity :
@@ -54,7 +56,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART II: DIVISIBILITY HELPERS            *)
+(* VERIFIED DIVISIBILITY HELPERS            *)
 (* ======================================== *)
 
 Lemma F28_divide_product :
@@ -83,7 +85,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART III: BASIC DIVISIBILITY             *)
+(* VERIFIED DIVISIBILITY IMPLICATIONS       *)
 (* ======================================== *)
 
 Theorem F28_if_p_divides_c :
@@ -138,7 +140,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART IV: NONDIVISIBILITY REDUCTION       *)
+(* VERIFIED NONDIVISIBILITY REDUCTION       *)
 (* ======================================== *)
 
 Theorem F28_nondivisibility_reduction :
@@ -197,7 +199,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART V: PRIMITIVE COPRIMALITY            *)
+(* VERIFIED PRIMITIVE COPRIMALITY           *)
 (* ======================================== *)
 
 Lemma F28_primitive_coprimality :
@@ -221,7 +223,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART VI: PYTHAGOREAN DIVISIBILITY        *)
+(* VERIFIED PYTHAGOREAN DIVISIBILITY        *)
 (* ======================================== *)
 
 Theorem F28_pythagorean_square_divisibility :
@@ -254,10 +256,6 @@ Proof.
   - rewrite <- Hpyth.
     ring.
 Qed.
-
-(* ======================================== *)
-(* PART VII: PRIME-SQUARE CANCELLATION      *)
-(* ======================================== *)
 
 Theorem F28_prime_square_cancel :
   forall p x : Z,
@@ -299,7 +297,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART VIII: SMALL FACTOR EXCLUSION        *)
+(* VERIFIED SMALL FACTOR EXCLUSION         *)
 (* ======================================== *)
 
 Lemma F28_no_small_divisor :
@@ -341,10 +339,6 @@ Proof.
   apply (F28_no_small_divisor p 3);
     lia.
 Qed.
-
-(* ======================================== *)
-(* PART IX: PRIME FACTOR CANCELLATION       *)
-(* ======================================== *)
 
 Lemma F28_prime_product_split :
   forall p x y : Z,
@@ -402,7 +396,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART X: CANCELLATION OF 4*a^3            *)
+(* VERIFIED CANCELLATION                    *)
 (* ======================================== *)
 
 Theorem F28_cancel_4a3 :
@@ -441,10 +435,6 @@ Proof.
       * exact Hp.
       * exact Ha2.
 Qed.
-
-(* ======================================== *)
-(* PART XI: CANCELLATION OF 27*b^2*c        *)
-(* ======================================== *)
 
 Theorem F28_cancel_27b2c :
   forall p b c : Z,
@@ -485,7 +475,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART XII: MAIN ARITHMETIC THEOREM        *)
+(* VERIFIED MAIN ARITHMETIC THEOREM         *)
 (* ======================================== *)
 
 Theorem F28_main_arithmetic :
@@ -530,8 +520,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART XIII: c4 NONDIVISIBILITY            *)
-(* CORRECTED - NO POWER INDUCTION           *)
+(* VERIFIED c4 NONDIVISIBILITY              *)
 (* ======================================== *)
 
 Lemma F28_prime_not_divide_neg3 :
@@ -572,7 +561,6 @@ Proof.
     as Hsplit1.
 
   destruct Hsplit1 as [Hneg3 | H64].
-
   - exact
       (F28_prime_not_divide_neg3
          p Hlarge Hneg3).
@@ -583,7 +571,6 @@ Proof.
       as Hsplit2.
 
     destruct Hsplit2 as [H4 | H16].
-
     + exact
         (F28_prime_not_divide_4
            p Hp Hlarge H4).
@@ -632,33 +619,67 @@ Proof.
     as Hsplit.
 
   destruct Hsplit as [H192 | Ha].
-
   - exact
       (F28_prime_not_divide_neg192
          p Hp Hlarge H192).
-
   - exact (Hna Ha).
 Qed.
 
 (* ======================================== *)
-(* PART XIV: FINAL VERIFICATION             *)
+(* NEW: EXACT SQUARE-CLASS IDENTITY         *)
 (* ======================================== *)
 
-Check F28_character_identity.
-Check F28_discriminant_identity.
+Theorem F28_square_class_identity :
+  forall a b c : Z,
+    a^3*b*c*(-c6_num b)
+      - (216*b^2*c)^2
+    =
+    (-1728*b^2*c)*F a b c.
+Proof.
+  intros a b c.
+  unfold F, c6_num.
+  ring.
+Qed.
 
-Check F28_primitive_coprimality.
-Check F28_pythagorean_prime_divisibility.
+(* ======================================== *)
+(* NEW: SQUARE-CLASS CONGRUENCE MOD p       *)
+(* ======================================== *)
 
-Check F28_cancel_4a3.
-Check F28_cancel_27b2c.
+Theorem F28_square_class_congruence :
+  forall p a b c : Z,
+    (p | F a b c) ->
+    (p |
+      a^3*b*c*(-c6_num b)
+        - (216*b^2*c)^2).
+Proof.
+  intros p a b c HF.
+
+  rewrite F28_square_class_identity.
+
+  replace
+    ((-1728*b^2*c)*F a b c)
+    with
+    (F a b c * (-1728*b^2*c))
+    by ring.
+
+  apply F28_divide_product.
+  exact HF.
+Qed.
+
+(* ======================================== *)
+(* FINAL VERIFICATION                       *)
+(* ======================================== *)
 
 Check F28_main_arithmetic.
-Check F28_prime_not_divide_neg192.
 Check F28_c4_nondivisibility.
+
+Check F28_square_class_identity.
+Check F28_square_class_congruence.
 
 Print Assumptions F28_main_arithmetic.
 Print Assumptions F28_c4_nondivisibility.
+Print Assumptions F28_square_class_identity.
+Print Assumptions F28_square_class_congruence.
 
 (* ======================================== *)
 (* END                                      *)
