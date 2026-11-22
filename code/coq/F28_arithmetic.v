@@ -1,15 +1,13 @@
 (* code/coq/F28_arithmetic.v
 
-   The owner's consolidated F.28 file (sixth version, 22 November 2026): Parts I-IX unchanged except for this header; the part
-   after the line "ADDED IN REVIEW" is added.  It regroups the earlier files (identities, divisibility helpers, the conditional
-   reduction F28_nondivisibility_reduction) and adds:
-     F28_primitive_coprimality           : 5 <= p, gcd a b = 1  =>  ~ (p | a /\ p | b)         (first assumption of the reduction)
-     F28_pythagorean_square_divisibility : a^2 + b^2 = c^2, p | a, p | c  =>  p | b^2           (any integer p)
-     F28_prime_square_cancel             : p prime, p | x^2  =>  p | x
-     F28_pythagorean_prime_divisibility  : p prime, a^2 + b^2 = c^2, p | a, p | c  =>  p | b     (last assumption of the reduction)
-   WHAT IS STILL OPEN HERE: the two cancellation assumptions of the reduction (4a^3 and 27b^2c) need p prime and p >= 5 (p does not
-   divide 27).  The added part supplies them and the unconditional corollary.
-   NOT FORMALIZED: the parametrization of (a,b,c) by a rational t, reduction types, local root numbers.  Compiled in CI. *)
+   The owner's consolidated F.28 file (seventh version, 22 November 2026): Parts I-XIV unchanged except for this header; the short
+   part after the line "ADDED IN REVIEW" is added.  The file proves, for a prime p >= 5, a^2 + b^2 = c^2, gcd(a,b) = 1 and p | F(a,b,c):
+     F28_main_arithmetic        : p divides none of a, b, c;
+     F28_c4_nondivisibility     : p does not divide c4_num a = -192 a   (the c4 of the model WITHOUT the powers of c).
+   WHAT IS ADDED: F28_c4_integral_nondivisibility, the same for -192 a c^3, which is the c4 of the integral model
+   Y^2 = X^3 + 4 a c^3 X - 8 b c^5 (see F28_c4_integral_model in F28_identities.v).
+   NOT FORMALIZED: the parametrization of (a,b,c) by a rational t, minimality of the model, the conclusion "multiplicative
+   reduction" itself, local root numbers.  Compiled in CI. *)
 
 From Coq Require Import ZArith.
 From Coq Require Import Znumtheory.
@@ -37,10 +35,8 @@ Definition c6_num (b : Z) : Z :=
 
 Theorem F28_character_identity :
   forall a b c : Z,
-    a^3 * (-c6_num b)
-    =
-    216^2*b^3*c
-    - 1728*b*F a b c.
+    a^3 * (-c6_num b) =
+    216^2*b^3*c - 1728*b*F a b c.
 Proof.
   intros a b c.
   unfold F, c6_num.
@@ -49,9 +45,7 @@ Qed.
 
 Theorem F28_discriminant_identity :
   forall a b c : Z,
-    -16*(4*(4*a)^3
-         + 27*(-8*b)^2*c)
-    =
+    -16*(4*(4*a)^3 + 27*(-8*b)^2*c) =
     -1024*F a b c.
 Proof.
   intros a b c.
@@ -89,7 +83,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART III: DIVISIBILITY IMPLICATIONS      *)
+(* PART III: BASIC DIVISIBILITY             *)
 (* ======================================== *)
 
 Theorem F28_if_p_divides_c :
@@ -227,7 +221,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART VI: PYTHAGOREAN SQUARE DIVISIBILITY *)
+(* PART VI: PYTHAGOREAN DIVISIBILITY        *)
 (* ======================================== *)
 
 Theorem F28_pythagorean_square_divisibility :
@@ -263,7 +257,6 @@ Qed.
 
 (* ======================================== *)
 (* PART VII: PRIME-SQUARE CANCELLATION      *)
-(* NEW                                      *)
 (* ======================================== *)
 
 Theorem F28_prime_square_cancel :
@@ -286,11 +279,6 @@ Proof.
     exact Hx.
 Qed.
 
-(* ======================================== *)
-(* PART VIII: PYTHAGOREAN PRIME DIVISIBILITY*)
-(* NEW                                      *)
-(* ======================================== *)
-
 Theorem F28_pythagorean_prime_divisibility :
   forall p a b c : Z,
     prime p ->
@@ -311,110 +299,396 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART IX: VERIFICATION                    *)
+(* PART VIII: SMALL FACTOR EXCLUSION        *)
+(* ======================================== *)
+
+Lemma F28_no_small_divisor :
+  forall p n : Z,
+    5 <= p ->
+    0 < n ->
+    n < 5 ->
+    ~ (p | n).
+Proof.
+  intros p n Hp Hnpos Hsmall Hdiv.
+  destruct Hdiv as [k Hk].
+
+  assert (Hcases :
+    k <= -1 \/ k = 0 \/ k >= 1) by lia.
+
+  destruct Hcases as [Hneg | [Hzero | Hpos]].
+  - nia.
+  - subst k.
+    nia.
+  - nia.
+Qed.
+
+Lemma F28_prime_not_divide_2 :
+  forall p : Z,
+    5 <= p ->
+    ~ (p | 2).
+Proof.
+  intros p Hp.
+  apply (F28_no_small_divisor p 2);
+    lia.
+Qed.
+
+Lemma F28_prime_not_divide_3 :
+  forall p : Z,
+    5 <= p ->
+    ~ (p | 3).
+Proof.
+  intros p Hp.
+  apply (F28_no_small_divisor p 3);
+    lia.
+Qed.
+
+(* ======================================== *)
+(* PART IX: PRIME FACTOR CANCELLATION       *)
+(* ======================================== *)
+
+Lemma F28_prime_product_split :
+  forall p x y : Z,
+    prime p ->
+    (p | x*y) ->
+    (p | x) \/ (p | y).
+Proof.
+  intros p x y Hp Hxy.
+  eapply prime_mult; eauto.
+Qed.
+
+Lemma F28_prime_not_divide_4 :
+  forall p : Z,
+    prime p ->
+    5 <= p ->
+    ~ (p | 4).
+Proof.
+  intros p Hp Hlarge H4.
+
+  replace 4 with (2*2) in H4 by ring.
+
+  pose proof
+    (F28_prime_product_split p 2 2 Hp H4)
+    as Hsplit.
+
+  destruct Hsplit as [H2 | H2].
+  - exact (F28_prime_not_divide_2 p Hlarge H2).
+  - exact (F28_prime_not_divide_2 p Hlarge H2).
+Qed.
+
+Lemma F28_prime_not_divide_27 :
+  forall p : Z,
+    prime p ->
+    5 <= p ->
+    ~ (p | 27).
+Proof.
+  intros p Hp Hlarge H27.
+
+  replace 27 with (3*(3*3)) in H27
+    by ring.
+
+  pose proof
+    (F28_prime_product_split
+       p 3 (3*3) Hp H27)
+    as Hsplit.
+
+  destruct Hsplit as [H3 | H9].
+  - exact (F28_prime_not_divide_3 p Hlarge H3).
+  - pose proof
+      (F28_prime_product_split p 3 3 Hp H9)
+      as Hsplit2.
+    destruct Hsplit2 as [H3 | H3].
+    + exact (F28_prime_not_divide_3 p Hlarge H3).
+    + exact (F28_prime_not_divide_3 p Hlarge H3).
+Qed.
+
+(* ======================================== *)
+(* PART X: CANCELLATION OF 4*a^3            *)
+(* ======================================== *)
+
+Theorem F28_cancel_4a3 :
+  forall p a : Z,
+    prime p ->
+    5 <= p ->
+    (p | 4*a^3) ->
+    (p | a).
+Proof.
+  intros p a Hp Hlarge Hdiv.
+
+  pose proof
+    (F28_prime_product_split
+       p 4 (a^3) Hp Hdiv)
+    as Hsplit.
+
+  destruct Hsplit as [H4 | Ha3].
+  - exfalso.
+    exact
+      (F28_prime_not_divide_4
+         p Hp Hlarge H4).
+
+  - replace (a^3) with (a*(a*a))
+      in Ha3 by ring.
+
+    pose proof
+      (F28_prime_product_split
+         p a (a*a) Hp Ha3)
+      as Hsplit2.
+
+    destruct Hsplit2 as [Ha | Ha2].
+    + exact Ha.
+    + replace (a*a) with (a^2)
+        in Ha2 by ring.
+      apply (F28_prime_square_cancel p a).
+      * exact Hp.
+      * exact Ha2.
+Qed.
+
+(* ======================================== *)
+(* PART XI: CANCELLATION OF 27*b^2*c        *)
+(* ======================================== *)
+
+Theorem F28_cancel_27b2c :
+  forall p b c : Z,
+    prime p ->
+    5 <= p ->
+    (p | 27*b^2*c) ->
+    (p | b) \/ (p | c).
+Proof.
+  intros p b c Hp Hlarge Hdiv.
+
+  replace (27*b^2*c)
+    with (27*(b^2*c)) in Hdiv
+    by ring.
+
+  pose proof
+    (F28_prime_product_split
+       p 27 (b^2*c) Hp Hdiv)
+    as Hsplit.
+
+  destruct Hsplit as [H27 | Hbc].
+  - exfalso.
+    exact
+      (F28_prime_not_divide_27
+         p Hp Hlarge H27).
+
+  - pose proof
+      (F28_prime_product_split
+         p (b^2) c Hp Hbc)
+      as Hsplit2.
+
+    destruct Hsplit2 as [Hb2 | Hc].
+    + left.
+      apply (F28_prime_square_cancel p b).
+      * exact Hp.
+      * exact Hb2.
+    + right.
+      exact Hc.
+Qed.
+
+(* ======================================== *)
+(* PART XII: MAIN ARITHMETIC THEOREM        *)
+(* ======================================== *)
+
+Theorem F28_main_arithmetic :
+  forall p a b c : Z,
+    prime p ->
+    5 <= p ->
+    a^2 + b^2 = c^2 ->
+    Z.gcd a b = 1 ->
+    (p | F a b c) ->
+    ~ (p | a) /\
+    ~ (p | b) /\
+    ~ (p | c).
+Proof.
+  intros p a b c
+         Hp Hlarge Hpyth Hgcd HF.
+
+  apply
+    (F28_nondivisibility_reduction
+       p a b c HF).
+
+  - apply
+      (F28_primitive_coprimality p a b).
+    + exact Hlarge.
+    + exact Hgcd.
+
+  - apply (F28_cancel_4a3 p a).
+    + exact Hp.
+    + exact Hlarge.
+
+  - apply (F28_cancel_27b2c p b c).
+    + exact Hp.
+    + exact Hlarge.
+
+  - intros Ha Hc.
+    apply
+      (F28_pythagorean_prime_divisibility
+         p a b c).
+    + exact Hp.
+    + exact Hpyth.
+    + exact Ha.
+    + exact Hc.
+Qed.
+
+(* ======================================== *)
+(* PART XIII: c4 NONDIVISIBILITY            *)
+(* CORRECTED - NO POWER INDUCTION           *)
+(* ======================================== *)
+
+Lemma F28_prime_not_divide_neg3 :
+  forall p : Z,
+    5 <= p ->
+    ~ (p | -3).
+Proof.
+  intros p Hlarge Hneg3.
+
+  assert (H3 : (p | 3)).
+  {
+    replace 3 with ((-3)*(-1))
+      by ring.
+    apply F28_divide_product.
+    exact Hneg3.
+  }
+
+  exact
+    (F28_prime_not_divide_3
+       p Hlarge H3).
+Qed.
+
+Lemma F28_prime_not_divide_neg192 :
+  forall p : Z,
+    prime p ->
+    5 <= p ->
+    ~ (p | -192).
+Proof.
+  intros p Hp Hlarge H192.
+
+  replace (-192)
+    with ((-3)*(4*(4*4)))
+    in H192 by ring.
+
+  pose proof
+    (F28_prime_product_split
+       p (-3) (4*(4*4)) Hp H192)
+    as Hsplit1.
+
+  destruct Hsplit1 as [Hneg3 | H64].
+
+  - exact
+      (F28_prime_not_divide_neg3
+         p Hlarge Hneg3).
+
+  - pose proof
+      (F28_prime_product_split
+         p 4 (4*4) Hp H64)
+      as Hsplit2.
+
+    destruct Hsplit2 as [H4 | H16].
+
+    + exact
+        (F28_prime_not_divide_4
+           p Hp Hlarge H4).
+
+    + pose proof
+        (F28_prime_product_split
+           p 4 4 Hp H16)
+        as Hsplit3.
+
+      destruct Hsplit3 as [H4 | H4].
+      * exact
+          (F28_prime_not_divide_4
+             p Hp Hlarge H4).
+      * exact
+          (F28_prime_not_divide_4
+             p Hp Hlarge H4).
+Qed.
+
+Theorem F28_c4_nondivisibility :
+  forall p a b c : Z,
+    prime p ->
+    5 <= p ->
+    a^2 + b^2 = c^2 ->
+    Z.gcd a b = 1 ->
+    (p | F a b c) ->
+    ~ (p | c4_num a).
+Proof.
+  intros p a b c
+         Hp Hlarge Hpyth Hgcd HF Hc4.
+
+  pose proof
+    (F28_main_arithmetic
+       p a b c Hp Hlarge Hpyth Hgcd HF)
+    as Hmain.
+
+  destruct Hmain as [Hna [Hnb Hnc]].
+
+  unfold c4_num in Hc4.
+
+  replace (-192*a) with ((-192)*a)
+    in Hc4 by ring.
+
+  pose proof
+    (F28_prime_product_split
+       p (-192) a Hp Hc4)
+    as Hsplit.
+
+  destruct Hsplit as [H192 | Ha].
+
+  - exact
+      (F28_prime_not_divide_neg192
+         p Hp Hlarge H192).
+
+  - exact (Hna Ha).
+Qed.
+
+(* ======================================== *)
+(* PART XIV: FINAL VERIFICATION             *)
 (* ======================================== *)
 
 Check F28_character_identity.
 Check F28_discriminant_identity.
-Check F28_nondivisibility_reduction.
-Check F28_primitive_coprimality.
-Check F28_pythagorean_square_divisibility.
 
-Check F28_prime_square_cancel.
+Check F28_primitive_coprimality.
 Check F28_pythagorean_prime_divisibility.
 
-Print Assumptions F28_prime_square_cancel.
-Print Assumptions
-  F28_pythagorean_prime_divisibility.
+Check F28_cancel_4a3.
+Check F28_cancel_27b2c.
+
+Check F28_main_arithmetic.
+Check F28_prime_not_divide_neg192.
+Check F28_c4_nondivisibility.
+
+Print Assumptions F28_main_arithmetic.
+Print Assumptions F28_c4_nondivisibility.
 
 (* ======================================== *)
 (* END                                      *)
 (* ======================================== *)
 
 (* ======================================== *)
-(* ADDED IN REVIEW (22 November 2026): p >= 5 cancellation and the unconditional statement *)
+(* ADDED IN REVIEW (22 November 2026): c4 of the integral model, with the powers of c *)
 (* ======================================== *)
 
-Lemma F28_prime_not_div_small :
-  forall p n : Z, prime p -> 0 < n -> n < p -> ~ (p | n).
-Proof.
-  intros p n Hp Hn Hlt H.
-  pose proof (Z.divide_pos_le p n Hn H) as H1.
-  lia.
-Qed.
-
-Lemma F28_prime_div_cube :
-  forall p a : Z, prime p -> (p | a^3) -> (p | a).
-Proof.
-  intros p a Hp H.
-  replace (a^3) with (a*(a*a)) in H by ring.
-  destruct (prime_mult p Hp a (a*a) H) as [H1 | H1].
-  - exact H1.
-  - destruct (prime_mult p Hp a a H1) as [H2 | H2]; exact H2.
-Qed.
-
-Lemma F28_ge5_div_4a3 :
-  forall p a : Z, prime p -> 5 <= p -> (p | 4*a^3) -> (p | a).
-Proof.
-  intros p a Hp Hge H.
-  destruct (prime_mult p Hp 4 (a^3) H) as [H1 | H1].
-  - exfalso.
-    refine (F28_prime_not_div_small p 4 Hp _ _ H1); lia.
-  - exact (F28_prime_div_cube p a Hp H1).
-Qed.
-
-Lemma F28_ge5_not_div_27 :
-  forall p : Z, prime p -> 5 <= p -> ~ (p | 27).
-Proof.
-  intros p Hp Hge H.
-  replace 27 with (3*(3*3)) in H by reflexivity.
-  destruct (prime_mult p Hp 3 (3*3) H) as [H1 | H1].
-  - refine (F28_prime_not_div_small p 3 Hp _ _ H1); lia.
-  - destruct (prime_mult p Hp 3 3 H1) as [H2 | H2];
-      refine (F28_prime_not_div_small p 3 Hp _ _ H2); lia.
-Qed.
-
-Theorem F28_reduction_hypotheses_hold :
+Theorem F28_c4_integral_nondivisibility :
   forall p a b c : Z,
-    prime p -> 5 <= p ->
-    a^2 + b^2 = c^2 ->
-    Z.gcd a b = 1 ->
-    (~ ((p | a) /\ (p | b))) /\
-    ((p | 4*a^3) -> (p | a)) /\
-    ((p | 27*b^2*c) -> (p | b) \/ (p | c)) /\
-    ((p | a) -> (p | c) -> (p | b)).
-Proof.
-  intros p a b c Hp Hge Hpy Hg.
-  repeat split.
-  - exact (F28_primitive_coprimality p a b Hge Hg).
-  - intro H.
-    exact (F28_ge5_div_4a3 p a Hp Hge H).
-  - intro H.
-    destruct (prime_mult p Hp (27*b^2) c H) as [H1 | H1].
-    + destruct (prime_mult p Hp 27 (b^2) H1) as [H2 | H2].
-      * exfalso.
-        exact (F28_ge5_not_div_27 p Hp Hge H2).
-      * left.
-        exact (F28_prime_square_cancel p b Hp H2).
-    + right.
-      exact H1.
-  - intros Ha Hc.
-    exact (F28_pythagorean_prime_divisibility p a b c Hp Hpy Ha Hc).
-Qed.
-
-Theorem F28_nondivisibility_prime :
-  forall p a b c : Z,
-    prime p -> 5 <= p ->
+    prime p ->
+    5 <= p ->
     a^2 + b^2 = c^2 ->
     Z.gcd a b = 1 ->
     (p | F a b c) ->
-    ~ (p | a) /\ ~ (p | b) /\ ~ (p | c).
+    ~ (p | -192*a*c^3).
 Proof.
-  intros p a b c Hp Hge Hpy Hg HF.
-  destruct (F28_reduction_hypotheses_hold p a b c Hp Hge Hpy Hg)
-    as [H1 [H2 [H3 H4]]].
-  exact (F28_nondivisibility_reduction p a b c HF H1 H2 H3 H4).
+  intros p a b c Hp Hlarge Hpyth Hgcd HF Hdiv.
+  destruct (F28_main_arithmetic p a b c Hp Hlarge Hpyth Hgcd HF)
+    as [Hna [Hnb Hnc]].
+  destruct (F28_prime_product_split p (-192*a) (c^3) Hp Hdiv)
+    as [H1 | H2].
+  - exact (F28_c4_nondivisibility p a b c Hp Hlarge Hpyth Hgcd HF H1).
+  - apply Hnc.
+    replace (c^3) with (c*(c*c)) in H2 by ring.
+    destruct (F28_prime_product_split p c (c*c) Hp H2) as [H3 | H3].
+    + exact H3.
+    + destruct (F28_prime_product_split p c c Hp H3) as [H4 | H4];
+        exact H4.
 Qed.
 
-Print Assumptions F28_reduction_hypotheses_hold.
-Print Assumptions F28_nondivisibility_prime.
+Print Assumptions F28_c4_integral_nondivisibility.

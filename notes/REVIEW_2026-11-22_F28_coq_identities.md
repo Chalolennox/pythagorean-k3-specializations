@@ -42,14 +42,15 @@ Status: derived with a language model; no human has checked it; compiled only in
 | the four facts for primes p >= 5 and a primitive triple | F28_reduction_hypotheses_hold (added) | exact |
 | the unconditional statement | F28_nondivisibility_prime (added), F28_prime_not_dividing_abc (second file) | exact, with the hypotheses of the paper |
 
-## Fourth to sixth files (code/coq/F28_arithmetic.v): fidelity audit
+## Fourth to seventh files (code/coq/F28_arithmetic.v): fidelity audit
 Status: derived with a language model; no human has checked it; compiled only in CI.
-- The owner sent three consecutive versions of one consolidated file; each regroups the earlier ones (identities, divisibility helpers, conditional reduction) into labelled parts and adds lemmas. I diffed them against each other: the sixth contains the fourth and fifth, so only the sixth is recorded.
-- New lemmas, all correct: `F28_primitive_coprimality` (5 <= p, gcd a b = 1 gives not (p | a and p | b); holds for every integer p >= 5), `F28_pythagorean_square_divisibility` (a^2 + b^2 = c^2, p | a, p | c give p | b^2; any integer p), `F28_prime_square_cancel` (p prime, p | x^2 gives p | x; the proof by prime_mult with both factors equal is sound) and `F28_pythagorean_prime_divisibility` (p prime, p | a, p | c give p | b: the last assumption of the reduction).
-- So the owner's file now discharges two of the reduction's four assumptions (coprimality and the Pythagorean one). The two cancellation assumptions (4a^3 and 27b^2c) are still not proved there: they need p prime and p >= 5 (p does not divide 27 = 3^3). Added in review: `F28_ge5_div_4a3`, `F28_ge5_not_div_27`, `F28_reduction_hypotheses_hold` (all four assumptions for a prime p >= 5 and a primitive triple) and `F28_nondivisibility_prime` (the unconditional statement). Same statement as F28_prime_not_dividing_abc (second file) and F28_nondivisibility_prime of F28_reduction.v; F28_arithmetic.v supersedes both as the single file to read, and they stay for history.
+- The owner sent four consecutive versions of one consolidated file; each contains the previous one and adds lemmas (I diffed them). Only the seventh is recorded.
+- It now proves, with no assumptions beyond the Coq library, `F28_main_arithmetic`: for a prime p >= 5, a^2 + b^2 = c^2, gcd(a,b) = 1 and p | F(a,b,c), p divides none of a, b, c; and `F28_c4_nondivisibility`: p does not divide -192 a. I read every proof (prime_mult splits, `F28_no_small_divisor` by cases on the cofactor with nia, the 4a^3 and 27b^2c cancellations, the bullets of F28_main_arithmetic against the four assumptions of the reduction): all sound. This supersedes my earlier discharge of the four assumptions, so that part is dropped; the helper lemmas of the earlier files (F28_divisibility.v, F28_reduction.v) stay for history.
+- Fidelity point: `c4_num a = -192 a` is the c4 of the model without the powers of c. The integral model of the paper is Y^2 = X^3 + 4 a c^3 X - 8 b c^5, whose c4 is -192 a c^3 (F28_c4_integral_model in F28_identities.v). Added in review: `F28_c4_integral_nondivisibility` (p does not divide -192 a c^3), which follows from F28_main_arithmetic because p does not divide c.
+- What is still not machine-checked: that these arithmetic facts imply multiplicative reduction (this needs minimality of the model and the Tate/Kodaira step, in the paper's section 3), the parametrization by t, and everything about local root numbers.
 
 | paper claim | Coq theorem | match |
-| the first assumption: p >= 5, primitive triple | F28_primitive_coprimality | exact (holds for every integer p >= 5) |
-| p | a and p | c give p | b (p prime) | F28_pythagorean_prime_divisibility | exact |
-| 4a^3 and 27b^2c cancellation for p >= 5 | F28_ge5_div_4a3, F28_ge5_not_div_27 (added) | exact |
-| the unconditional statement for primes p >= 5 | F28_nondivisibility_prime (added) | exact |
+| p >= 5, p | F: p does not divide abc | F28_main_arithmetic | exact |
+| p >= 5, p | F: p does not divide c4 of the model without c | F28_c4_nondivisibility | exact, for the model without powers of c |
+| the same for the integral model | F28_c4_integral_nondivisibility (added) | exact |
+| multiplicative reduction at p | none | not formalized |
