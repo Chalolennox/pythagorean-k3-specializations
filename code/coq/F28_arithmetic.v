@@ -765,3 +765,32 @@ Proof.
 Qed.
 
 Print Assumptions F28_certificate_nonvanishing.
+
+(* ======================================== *)
+(* ADDED IN REVIEW (22 November 2026): the integral-model conditions for a primitive triple *)
+(* ======================================== *)
+
+(* Together with F28_reduction_invariants.v (same statements with p not dividing a, c as hypotheses): for a prime p >= 5 dividing F,
+   p divides the discriminant of Y^2 = X^3 + 4 a c^3 X - 8 b c^5 and does not divide its c4. *)
+Theorem F28_integral_model_conditions :
+  forall p a b c : Z,
+    prime p ->
+    5 <= p ->
+    a^2 + b^2 = c^2 ->
+    Z.gcd a b = 1 ->
+    (p | F a b c) ->
+    (p | -16*(4*(4*a*c^3)^3 + 27*(-8*b*c^5)^2)) /\
+    ~ (p | -48*(4*a*c^3)).
+Proof.
+  intros p a b c Hp Hlarge Hpyth Hgcd HF.
+  split.
+  - replace (-16*(4*(4*a*c^3)^3 + 27*(-8*b*c^5)^2))
+      with (F a b c*(-1024*c^9))
+      by (unfold F; ring).
+    apply F28_divide_product.
+    exact HF.
+  - replace (-48*(4*a*c^3)) with (-192*a*c^3) by ring.
+    exact (F28_c4_integral_nondivisibility p a b c Hp Hlarge Hpyth Hgcd HF).
+Qed.
+
+Print Assumptions F28_integral_model_conditions.
