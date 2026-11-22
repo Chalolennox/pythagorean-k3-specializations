@@ -16,7 +16,8 @@ Statements checked (numbers refer to the note):
   5  the necessary congruence p = 1 mod 24 for |S| = 12 (tested on the hypotheses "all six roots qualify")
      and the example p = 5251537 with |S_{p,1}| = 12 (full group law, original definition)
   6  x(nP) is a square mod p for nP not in {O,T};  x(Q+T) = 2/x(Q)
-  7  p = 5 mod 8:  m_p is even;  (-1)^n = chi(t+i) for Q = nP and (-1)^n = chi(t+i) chi(-(1+i)) for
+  7  p = 1 mod 8:  chi(t+i) is constant on the orbit (Prop. 6 (e)): 1 on nP, chi(-(1+i)) on nP+T
+     p = 5 mod 8:  m_p is even;  (-1)^n = chi(t+i) for Q = nP and (-1)^n = chi(t+i) chi(-(1+i)) for
      Q = nP + T  (all n, not only qualifying ones);  for p = 1 mod 4 and n even, chi(t+i) = 1
   8  p = 5 mod 8: if both t and -t occur as t(Q) on one branch, the two indices have equal parity
      (branch 0) or opposite parity (branch 1)
@@ -126,8 +127,8 @@ check("1  group {(sigma, eps): prod eps = 1} of order 24: fixed roots 6/2/0 occu
 # ---------------------------------------------------------------- main loop over primes
 PR = [p for p in primes(LIMIT) if p >= 5]
 D = {}
-viol = {k: [] for k in ("roots", "sym", "even", "bound", "sq", "T", "par0", "par1", "pm", "even_impl", "m_even")}
-tested = {"par": 0, "pm": 0, "bound": 0}
+viol = {k: [] for k in ("roots", "sym", "even", "bound", "sq", "T", "par0", "par1", "pm", "even_impl", "m_even", "e8")}
+tested = {"par": 0, "pm": 0, "bound": 0, "e8": 0}
 bnd = {(3, 2): 2, (3, 6): 6, (1, 2): 4, (1, 6): 12}
 maxS = {}
 mixed_cong = {"b0": 0, "b1": 0}
@@ -168,6 +169,9 @@ for p in PR:
                 t = (1 - x) % p
                 c = chi(t + i, p) * (c1 if j else 1)
                 if n % 2 == 0 and c != 1: viol["even_impl"].append((p, j, n))
+                if p % 8 == 1:
+                    tested["e8"] += 1
+                    if c != 1: viol["e8"].append((p, j, n))
                 if p % 8 == 5:
                     tested["par"] += 1
                     if (-1) ** n != c: viol["par%d" % j].append((p, n))
@@ -194,6 +198,7 @@ check("7  p = 5 mod 8: m_p even", not viol["m_even"], str(viol["m_even"][:3]))
 check("7  p = 5 mod 8: (-1)^n = chi(t+i) [branch 0], chi(t+i)chi(-(1+i)) [branch 1] for all %d points" % tested["par"],
       not viol["par0"] and not viol["par1"], str((viol["par0"] + viol["par1"])[:3]))
 check("7  p = 1 mod 4: n even  =>  chi(t+i) [chi(-(1+i)) on branch 1] = 1", not viol["even_impl"], str(viol["even_impl"][:3]))
+check("7  p = 1 mod 8: chi(t+i) = 1 on every point nP and chi(t+i) = chi(-(1+i)) on every nP + T (%d points): <P> is inside 2C(F_p)" % tested["e8"], not viol["e8"] and tested["e8"] > 0, str(viol["e8"][:3]))
 check("8  p = 5 mod 8: +-t on one branch have equal (branch 0) / opposite (branch 1) parity; %d pairs" % tested["pm"], not viol["pm"], str(viol["pm"][:3]))
 
 # the converse of 7 fails for p = 1 mod 8 (P is in 2E there): exhibit it
