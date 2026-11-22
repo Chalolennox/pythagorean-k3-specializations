@@ -88,6 +88,8 @@ code/coq/F28_root_transport.v  F.28 section 3: the owner's twenty-third file: tr
 code/coq/F28_candidate_root.v  F.28 section 3: the owner's twenty-fourth file: p | Delta and p | 2Au - 1 give p | f(r), p | f'(r) for r = -3Bu; compiled in CI
 code/coq/F28_root_denominator.v  F.28 section 3: the owner's twenty-fifth file: prime p >= 5, p not dividing A gives p not dividing 2A; compiled in CI
 code/coq/F28_bezout_inverse.v  F.28 section 3: the owner's twenty-sixth file: p k + 2Au = 1 gives p | 2Au - 1; compiled in CI
+code/coq/F28_inverse_existence.v  F.28 section 3: the owner's twenty-seventh file: prime p not dividing s gives u with p | s u - 1 (Z.gcd_bezout); imports adapted to Coq 8.20; compiled in CI
+code/coq/F28_discriminant_singular_root.v  F.28 section 3: the owner's twenty-eighth, integrated file: prime p >= 5, p | -4A^3 - 27B^2, p not dividing A gives an integer double root r; imports adapted to Coq 8.20; compiled in CI
 code/verify_group_G.py  F.57 (b'): the group G of order 24576 built from the three relations among the thirteen radicals, its action on the 48 roots of Rp and the 24 roots of Rm, the character chi2 (the subgroup fixing sqrt 2), the fixed-point-free counts 22035, 19709, 11013, 9854 and the density 20867/24576 (notes/REVIEW_2026-11-17_group_G_sqrt2.md; numpy, about 5 seconds)
 code/verify_support_two.py  support-two review: exact discriminants and norms, phi_hat(P') = P, |ker delta| = N_p/2 and the even index [C(F_p):<P>], scan of S_p and R_p below 10^4, the class A / class B split (notes/REVIEW_2026-11-19_support_two.md; standard library, about 6 seconds)
 code/support_two_densities.py  the densities 633/4096, 39/512, 321/4096 from the model of G (numpy)
