@@ -31,3 +31,14 @@ Fidelity table (both files)
 | p >= 5, p | F => p does not divide abc | F28_prime_not_dividing_abc | exact, with the hypotheses of the paper |
 | a, b, c from a rational t; reduction types; local root numbers; Rizzo's tables; Appendix B | none | not formalized |
 
+## Third file (code/coq/F28_reduction.v): fidelity audit
+Status: derived with a language model; no human has checked it; compiled only in CI.
+- F28_nondivisibility_reduction is correct as a conditional statement: from p | F and four assumptions (no common divisor of a and b; (p | 4a^3) implies (p | a); (p | 27b^2c) implies (p | b) or (p | c); (p | a) and (p | c) imply (p | b)) it derives that p divides none of a, b, c; the proof only combines the three implications of the second file with these assumptions. I read the case analysis line by line and it is valid.
+- It is a reduction, not the nondivisibility itself: the four assumptions are where primality, p >= 5, a^2 + b^2 = c^2 and gcd(a,b) = 1 enter, and the file does not prove them. So it must not be cited as machine-checking "p does not divide abc". (The title "NONDIVISIBILITY REDUCTION" is honest; the name of the theorem could be misread.)
+- Added in review: F28_reduction_hypotheses_hold proves the four assumptions for every prime p >= 5 with a^2 + b^2 = c^2 and Z.gcd a b = 1 (so the reduction is not vacuous), and F28_nondivisibility_prime combines both: the unconditional statement, the same as F28_prime_not_dividing_abc of the second file, now obtained through the owner's reduction. The helper lemmas are repeated from the second file because each file is a separate compilation unit; a shared project layout (a _CoqProject with imports) can replace the repetition if more files arrive.
+
+| paper claim | Coq theorem | match |
+| p >= 5, p | F => p does not divide abc, as a reduction to four listed facts | F28_nondivisibility_reduction | exact, conditional on the four facts |
+| the four facts for primes p >= 5 and a primitive triple | F28_reduction_hypotheses_hold (added) | exact |
+| the unconditional statement | F28_nondivisibility_prime (added), F28_prime_not_dividing_abc (second file) | exact, with the hypotheses of the paper |
+
