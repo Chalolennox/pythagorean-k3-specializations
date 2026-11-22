@@ -42,6 +42,7 @@ jobs:
       - run: python3 code/verify_support_two.py
       - run: python3 code/support_two_densities.py
       - run: python3 code/support_two_affine_probability.py
+      - run: python3 code/verify_support_structure.py --quick
       - run: python3 code/verify_neutrality_circle.py
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick
