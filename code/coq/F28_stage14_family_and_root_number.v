@@ -3732,13 +3732,13 @@ Proof.
       destruct (IH k Hk0 Hbk) as [a [m0 [Hkm Hm0]]].
       exists (S a), m0.
       split.
-      * simpl.
+      * change (F28_ppow p (S a)) with (p * F28_ppow p a).
         rewrite Hk, Hkm.
         ring.
       * exact Hm0.
     + exists O, m.
       split.
-      * simpl.
+      * change (F28_ppow p O) with 1.
         ring.
       * exact Hndiv.
 Qed.
