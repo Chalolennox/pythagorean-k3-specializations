@@ -713,3 +713,55 @@ Proof.
 Qed.
 
 Print Assumptions F28_c4_integral_nondivisibility.
+
+(* ======================================== *)
+(* ADDED IN REVIEW (22 November 2026): the certified quantity does not vanish mod p *)
+(* ======================================== *)
+
+Lemma F28_prime_not_divide_neg6912 :
+  forall p : Z,
+    prime p ->
+    5 <= p ->
+    ~ (p | -6912).
+Proof.
+  intros p Hp Hlarge H.
+  replace (-6912) with ((-192)*(4*(3*3))) in H by ring.
+  destruct (F28_prime_product_split p (-192) (4*(3*3)) Hp H)
+    as [H1 | H1].
+  - exact (F28_prime_not_divide_neg192 p Hp Hlarge H1).
+  - destruct (F28_prime_product_split p 4 (3*3) Hp H1)
+      as [H2 | H2].
+    + exact (F28_prime_not_divide_4 p Hp Hlarge H2).
+    + destruct (F28_prime_product_split p 3 3 Hp H2)
+        as [H3 | H3];
+        exact (F28_prime_not_divide_3 p Hlarge H3).
+Qed.
+
+(* x = a b c (-c6_num b) is the quantity of F28_square_class_identity (and of F28_certificate.v). *)
+Theorem F28_certificate_nonvanishing :
+  forall p a b c : Z,
+    prime p ->
+    5 <= p ->
+    a^2 + b^2 = c^2 ->
+    Z.gcd a b = 1 ->
+    (p | F a b c) ->
+    ~ (p | a*b*c*(-c6_num b)).
+Proof.
+  intros p a b c Hp Hlarge Hpyth Hgcd HF Hdiv.
+  destruct (F28_main_arithmetic p a b c Hp Hlarge Hpyth Hgcd HF)
+    as [Hna [Hnb Hnc]].
+  replace (a*b*c*(-c6_num b)) with ((a*b*c)*((-6912)*b)) in Hdiv
+    by (unfold c6_num; ring).
+  destruct (F28_prime_product_split p (a*b*c) ((-6912)*b) Hp Hdiv)
+    as [H1 | H1].
+  - destruct (F28_prime_product_split p (a*b) c Hp H1) as [H2 | H2].
+    + destruct (F28_prime_product_split p a b Hp H2) as [H3 | H3].
+      * exact (Hna H3).
+      * exact (Hnb H3).
+    + exact (Hnc H2).
+  - destruct (F28_prime_product_split p (-6912) b Hp H1) as [H2 | H2].
+    + exact (F28_prime_not_divide_neg6912 p Hp Hlarge H2).
+    + exact (Hnb H2).
+Qed.
+
+Print Assumptions F28_certificate_nonvanishing.
