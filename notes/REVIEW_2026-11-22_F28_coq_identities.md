@@ -42,3 +42,14 @@ Status: derived with a language model; no human has checked it; compiled only in
 | the four facts for primes p >= 5 and a primitive triple | F28_reduction_hypotheses_hold (added) | exact |
 | the unconditional statement | F28_nondivisibility_prime (added), F28_prime_not_dividing_abc (second file) | exact, with the hypotheses of the paper |
 
+## Fourth and fifth files (code/coq/F28_arithmetic.v): fidelity audit
+Status: derived with a language model; no human has checked it; compiled only in CI.
+- The fourth file regroups the earlier ones (identities, divisibility helpers, conditional reduction) into labelled parts and adds `F28_primitive_coprimality` (5 <= p, gcd a b = 1 gives not (p | a and p | b)); the fifth file adds `F28_pythagorean_square_divisibility` (a^2 + b^2 = c^2, p | a, p | c gives p | b^2). I diffed both against the third file: nothing else changed. The fifth file supersedes the fourth, so only the fifth is recorded.
+- Both new lemmas are correct and hold for every integer p (the first needs only 5 <= p, which it uses to exclude p = 1; the second is the subtraction c^2 - a^2). Neither needs primality, and they do not yet give "p | b^2 implies p | b", which is the step that needs p prime.
+- So the consolidated file still proves the reduction only conditionally on three of its four assumptions. Added in review: `F28_reduction_hypotheses_hold` (all four assumptions for a prime p >= 5 and a primitive triple, using the owner's two new lemmas for the first and last) and `F28_nondivisibility_prime` (the unconditional statement). The statement is the same as F28_prime_not_dividing_abc (second file) and F28_nondivisibility_prime of F28_reduction.v; F28_arithmetic.v supersedes both as the single file to read. F28_reduction.v stays for history.
+
+| paper claim | Coq theorem | match |
+| the first assumption: p >= 5, primitive triple | F28_primitive_coprimality | exact (holds for every integer p >= 5) |
+| p | a and p | c give p | b^2 | F28_pythagorean_square_divisibility | exact, any integer p |
+| the unconditional statement for primes p >= 5 | F28_nondivisibility_prime (added) | exact |
+
