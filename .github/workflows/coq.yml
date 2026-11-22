@@ -7,8 +7,16 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y coq
       - run: coqc --version
-      - name: compile and check that no axioms are used
+      - name: no Admitted / Axiom / Parameter / Hypothesis in the sources
         run: |
-          coqc -q code/coq/F28_identities.v | tee coq_out.txt
-          test "$(grep -c 'Closed under the global context' coq_out.txt)" = "7"
-          ! grep -q 'Axioms:' coq_out.txt
+          if grep -nE '^[[:space:]]*(Admitted|Axiom|Parameter|Hypothesis|Conjecture)' code/coq/*.v; then
+            echo "forbidden keyword found"; exit 1
+          fi
+      - name: compile every file and check that no axioms are used
+        run: |
+          for f in code/coq/*.v; do
+            echo "== $f"
+            if ! coqc -q "$f" > coq_out.txt 2>&1; then cat coq_out.txt; echo "compilation failed: $f"; exit 1; fi
+            cat coq_out.txt
+            if grep -q 'Axioms:' coq_out.txt; then echo "axioms used in $f"; exit 1; fi
+          done
