@@ -7,7 +7,7 @@ Output: one line per prime/branch that passes the necessary filters of
         notes/REVIEW_2026-11-22_support_structure_proved.md (Prop. 4), with the number of the six
         x-values 1-t that actually lie in the orbit <P> (branch 0) or <P>+T (branch 1), and a final
         'FULL 12' list.
-Filters (all proved necessary there): p = 1 mod 24 (branch 0) or p = 1, 5 mod 24 (branch 1);
+Filters (all proved necessary there): p = 1 mod 24 (the script also lets p = 5 mod 24 through, which Proposition 4 now excludes);
         C(s)=s^3-30s^2-24s-1 splits completely mod p with all three roots squares (so H has 6 roots);
         g(t) is a square, Q=(1-t, .) lies on the curve, and x(nP) is a square, for each of the 6 roots t.
 Only the last test (membership of the six x-values in the orbit) needs the orbit itself.

@@ -13,7 +13,7 @@ Statements checked (numbers refer to the note):
   2  #{t in F_p : H(t) = 0} is 0, 2 or 6 for every prime 5 <= p <= LIMIT (brute force) and <= 60000 (gcd)
   3  N_{p,j} and S_{p,j} are symmetric under n -> -n and have even cardinality
   4  |S_{p,j}| <= 2 (p=3 mod 4, 2 roots), 6 (3 mod 4, 6 roots), 4 (1 mod 4, 2 roots), 12 (1 mod 4, 6 roots)
-  5  the necessary congruences for |S| = 12 (tested on the hypotheses "all six roots lie on the coset")
+  5  the necessary congruence p = 1 mod 24 for |S| = 12 (tested on the hypotheses "all six roots qualify")
      and the example p = 5251537 with |S_{p,1}| = 12 (full group law, original definition)
   6  x(nP) is a square mod p for nP not in {O,T};  x(Q+T) = 2/x(Q)
   7  p = 5 mod 8:  m_p is even;  (-1)^n = chi(t+i) for Q = nP and (-1)^n = chi(t+i) chi(-(1+i)) for
@@ -248,29 +248,32 @@ check("2  root counts for the %d primes 5 <= p <= 60000 are only 0, 2, 6 (polyno
 print("     frequencies 0/2/6: %.3f / %.3f / %.3f   (order-24 model: 14/24 = 0.583, 9/24 = 0.375, 1/24 = 0.042)"
       % tuple(hist.get(k, 0) / tot for k in (0, 2, 6)))
 
-# ---------------------------------------------------------------- 5. congruences for |S| = 12
+# ---------------------------------------------------------------- 5. congruence for |S| = 12
 def cong_hyp(p):
-    """roots of H mod p and whether the branch-0 / branch-1 hypotheses hold for all six of them."""
+    """roots of H mod p; hypothesis of Proposition 4 on each branch: all six g(t) are squares and
+    1 - t, 1 + t are squares (branch 0) / have the character of 2 (branch 1)."""
     ts = [t for t in range(p) if Hm(t, p) == 0]
     c2 = chi(2, p)
-    h0 = all(chi(1 - t, p) == 1 and chi(1 + t * t, p) == 1 for t in ts)
-    h1 = all(chi(1 - t, p) == c2 and chi(1 + t * t, p) == c2 for t in ts)
-    return ts, h0, h1
+    hg = all(chi(2 * t * (1 - t * t), p) == 1 for t in ts)
+    h0 = hg and all(chi(1 - t, p) == 1 and chi(1 + t * t, p) == 1 for t in ts)
+    h1 = hg and all(chi(1 - t, p) == c2 and chi(1 + t * t, p) == c2 for t in ts)
+    return ts, hg, h0, h1
 
-vieta_bad = []; n6 = 0; bad0 = []; bad1 = []
+vieta_bad = []; n6 = 0; bad = []; met = [0, 0]
 for p in PR:
     if D[p][2] != 6: continue
     n6 += 1
-    ts, h0, h1 = cong_hyp(p)
+    ts, hg, h0, h1 = cong_hyp(p)
     ss = sorted({t * t % p for t in ts})
     pm_ = (1 - ss[0]) * (1 - ss[1]) * (1 - ss[2]) % p; pp_ = (1 + ss[0]) * (1 + ss[1]) * (1 + ss[2]) % p
     if pm_ != (-54) % p or pp_ != 8 % p: vieta_bad.append(p)
-    if p % 4 == 1 and h0 and p % 24 != 1: bad0.append(p)
-    if p % 4 == 1 and h1 and p % 24 not in (1, 5): bad1.append(p)
+    if p % 4 == 1:
+        met[0] += h0; met[1] += h1
+        if (h0 or h1) and p % 24 != 1: bad.append(p)
 check("5  prod(1 - s_i) = -54 and prod(1 + s_i) = 8 mod p at the three roots s_i = t^2 (%d primes with 6 roots)" % n6, not vieta_bad, str(vieta_bad[:3]))
-check("5  no prime below %d violates the congruence implications (branch 0: p = 1 mod 24; branch 1: p = 1, 5 mod 24)" % LIMIT, not bad0 and not bad1, str(bad0 + bad1))
-ts, h0, h1 = cong_hyp(5251537)
-check("5  p = 5251537 (= 1 mod 24) satisfies the branch-1 hypothesis chi(1-t) = chi(1+t^2) = chi(2) for all six roots", len(ts) == 6 and h1 and 5251537 % 24 == 1, "h0=%s h1=%s" % (h0, h1))
+check("5  no prime below %d meets the hypothesis of Proposition 4 without p = 1 mod 24 (%d/%d primes met it on branch 0/1)" % (LIMIT, met[0], met[1]), not bad, str(bad))
+ts, hg, h0, h1 = cong_hyp(5251537)
+check("5  p = 5251537 (= 1 mod 24) meets the hypothesis on branch 1 (and 0): all six g(t) squares, chi(1-t) = chi(1+t^2) = chi(2)", len(ts) == 6 and h1 and 5251537 % 24 == 1, "h0=%s h1=%s" % (h0, h1))
 
 # ---------------------------------------------------------------- 5/10. large examples, original definition
 def full_S(p):
