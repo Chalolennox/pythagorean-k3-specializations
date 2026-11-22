@@ -3055,8 +3055,8 @@ Lemma F28_family_primitive_at_p :
     prime p ->
     5 <= p ->
     F28_family d U V a b c ->
-    ~ (p | U /\ p | V) ->
-    ~ (p | a /\ p | b).
+    ~ ((p | U) /\ (p | V)) ->
+    ~ ((p | a) /\ (p | b)).
 Proof.
   intros p d U V a b c Hp Hlarge [Ha [Hb Hc]] Hcop [Hpa Hpb].
 
@@ -3112,7 +3112,7 @@ Lemma F28_pythagorean_large_prime :
     prime p ->
     5 <= p ->
     a^2 + b^2 = c^2 ->
-    ~ (p | a /\ p | b) ->
+    ~ ((p | a) /\ (p | b)) ->
     (p | F28_F a b c) ->
     ~ (p | a) /\ ~ (p | b) /\ ~ (p | c).
 Proof.
@@ -3307,7 +3307,7 @@ Qed.
 
 Theorem F28_F_paper_nonzero :
   forall U V : Z,
-    ~ (2 | U /\ 2 | V) ->
+    ~ ((2 | U) /\ (2 | V)) ->
     F28_F_paper U V <> 0.
 Proof.
   intros U V Hcop.
@@ -3349,7 +3349,7 @@ Qed.
 Theorem F28_family_F_nonzero :
   forall d U V a b c : Z,
     F28_family d U V a b c ->
-    ~ (2 | U /\ 2 | V) ->
+    ~ ((2 | U) /\ (2 | V)) ->
     F28_F a b c <> 0.
 Proof.
   intros d U V a b c Hfam Hcop H0.
@@ -3368,8 +3368,8 @@ Theorem F28_family_hypotheses :
     5 <= p ->
     (d = 1 \/ d = 2) ->
     F28_family d U V a b c ->
-    ~ (2 | U /\ 2 | V) ->
-    ~ (p | U /\ p | V) ->
+    ~ ((2 | U) /\ (2 | V)) ->
+    ~ ((p | U) /\ (p | V)) ->
     (p | F28_F_paper U V) ->
     (p | F28_F a b c) /\
     F28_F a b c <> 0 /\
@@ -4034,8 +4034,8 @@ Theorem F28_stage14_complete :
     5 <= p ->
     (d = 1 \/ d = 2) ->
     F28_family d U V a b c ->
-    ~ (2 | U /\ 2 | V) ->
-    ~ (p | U /\ p | V) ->
+    ~ ((2 | U) /\ (2 | V)) ->
+    ~ ((p | U) /\ (p | V)) ->
     (p | F28_F_paper U V) ->
     (* the family: p | F, F nonzero, p divides none of a, b, c *)
     (p | F28_F a b c) /\
