@@ -42,14 +42,14 @@ Status: derived with a language model; no human has checked it; compiled only in
 | the four facts for primes p >= 5 and a primitive triple | F28_reduction_hypotheses_hold (added) | exact |
 | the unconditional statement | F28_nondivisibility_prime (added), F28_prime_not_dividing_abc (second file) | exact, with the hypotheses of the paper |
 
-## Fourth and fifth files (code/coq/F28_arithmetic.v): fidelity audit
+## Fourth to sixth files (code/coq/F28_arithmetic.v): fidelity audit
 Status: derived with a language model; no human has checked it; compiled only in CI.
-- The fourth file regroups the earlier ones (identities, divisibility helpers, conditional reduction) into labelled parts and adds `F28_primitive_coprimality` (5 <= p, gcd a b = 1 gives not (p | a and p | b)); the fifth file adds `F28_pythagorean_square_divisibility` (a^2 + b^2 = c^2, p | a, p | c gives p | b^2). I diffed both against the third file: nothing else changed. The fifth file supersedes the fourth, so only the fifth is recorded.
-- Both new lemmas are correct and hold for every integer p (the first needs only 5 <= p, which it uses to exclude p = 1; the second is the subtraction c^2 - a^2). Neither needs primality, and they do not yet give "p | b^2 implies p | b", which is the step that needs p prime.
-- So the consolidated file still proves the reduction only conditionally on three of its four assumptions. Added in review: `F28_reduction_hypotheses_hold` (all four assumptions for a prime p >= 5 and a primitive triple, using the owner's two new lemmas for the first and last) and `F28_nondivisibility_prime` (the unconditional statement). The statement is the same as F28_prime_not_dividing_abc (second file) and F28_nondivisibility_prime of F28_reduction.v; F28_arithmetic.v supersedes both as the single file to read. F28_reduction.v stays for history.
+- The owner sent three consecutive versions of one consolidated file; each regroups the earlier ones (identities, divisibility helpers, conditional reduction) into labelled parts and adds lemmas. I diffed them against each other: the sixth contains the fourth and fifth, so only the sixth is recorded.
+- New lemmas, all correct: `F28_primitive_coprimality` (5 <= p, gcd a b = 1 gives not (p | a and p | b); holds for every integer p >= 5), `F28_pythagorean_square_divisibility` (a^2 + b^2 = c^2, p | a, p | c give p | b^2; any integer p), `F28_prime_square_cancel` (p prime, p | x^2 gives p | x; the proof by prime_mult with both factors equal is sound) and `F28_pythagorean_prime_divisibility` (p prime, p | a, p | c give p | b: the last assumption of the reduction).
+- So the owner's file now discharges two of the reduction's four assumptions (coprimality and the Pythagorean one). The two cancellation assumptions (4a^3 and 27b^2c) are still not proved there: they need p prime and p >= 5 (p does not divide 27 = 3^3). Added in review: `F28_ge5_div_4a3`, `F28_ge5_not_div_27`, `F28_reduction_hypotheses_hold` (all four assumptions for a prime p >= 5 and a primitive triple) and `F28_nondivisibility_prime` (the unconditional statement). Same statement as F28_prime_not_dividing_abc (second file) and F28_nondivisibility_prime of F28_reduction.v; F28_arithmetic.v supersedes both as the single file to read, and they stay for history.
 
 | paper claim | Coq theorem | match |
 | the first assumption: p >= 5, primitive triple | F28_primitive_coprimality | exact (holds for every integer p >= 5) |
-| p | a and p | c give p | b^2 | F28_pythagorean_square_divisibility | exact, any integer p |
+| p | a and p | c give p | b (p prime) | F28_pythagorean_prime_divisibility | exact |
+| 4a^3 and 27b^2c cancellation for p >= 5 | F28_ge5_div_4a3, F28_ge5_not_div_27 (added) | exact |
 | the unconditional statement for primes p >= 5 | F28_nondivisibility_prime (added) | exact |
-

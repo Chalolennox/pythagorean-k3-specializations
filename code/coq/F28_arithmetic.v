@@ -1,12 +1,14 @@
 (* code/coq/F28_arithmetic.v
 
-   The owner's consolidated F.28 file (fifth version, 22 November 2026): Parts I-VII unchanged except for this header; the part
+   The owner's consolidated F.28 file (sixth version, 22 November 2026): Parts I-IX unchanged except for this header; the part
    after the line "ADDED IN REVIEW" is added.  It regroups the earlier files (identities, divisibility helpers, the conditional
-   reduction F28_nondivisibility_reduction) and adds two lemmas:
-     F28_primitive_coprimality           : 5 <= p, gcd a b = 1  =>  ~ (p | a /\ p | b)        (the first assumption of the reduction)
-     F28_pythagorean_square_divisibility : a^2 + b^2 = c^2, p | a, p | c  =>  p | b^2          (for ANY integer p; not yet p | b)
-   WHAT IS STILL OPEN HERE: the three other assumptions of the reduction need p PRIME (4a^3 and 27b^2c cancellation, p | b^2 => p | b)
-   and p >= 5 (p does not divide 27).  The added part supplies them and the unconditional corollary.
+   reduction F28_nondivisibility_reduction) and adds:
+     F28_primitive_coprimality           : 5 <= p, gcd a b = 1  =>  ~ (p | a /\ p | b)         (first assumption of the reduction)
+     F28_pythagorean_square_divisibility : a^2 + b^2 = c^2, p | a, p | c  =>  p | b^2           (any integer p)
+     F28_prime_square_cancel             : p prime, p | x^2  =>  p | x
+     F28_pythagorean_prime_divisibility  : p prime, a^2 + b^2 = c^2, p | a, p | c  =>  p | b     (last assumption of the reduction)
+   WHAT IS STILL OPEN HERE: the two cancellation assumptions of the reduction (4a^3 and 27b^2c) need p prime and p >= 5 (p does not
+   divide 27).  The added part supplies them and the unconditional corollary.
    NOT FORMALIZED: the parametrization of (a,b,c) by a rational t, reduction types, local root numbers.  Compiled in CI. *)
 
 From Coq Require Import ZArith.
@@ -225,8 +227,7 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART VI: PYTHAGOREAN DIVISIBILITY        *)
-(* NEW THEOREM                              *)
+(* PART VI: PYTHAGOREAN SQUARE DIVISIBILITY *)
 (* ======================================== *)
 
 Theorem F28_pythagorean_square_divisibility :
@@ -261,36 +262,77 @@ Proof.
 Qed.
 
 (* ======================================== *)
-(* PART VII: VERIFICATION                   *)
+(* PART VII: PRIME-SQUARE CANCELLATION      *)
+(* NEW                                      *)
+(* ======================================== *)
+
+Theorem F28_prime_square_cancel :
+  forall p x : Z,
+    prime p ->
+    (p | x^2) ->
+    (p | x).
+Proof.
+  intros p x Hp Hsq.
+
+  replace (x^2) with (x*x) in Hsq
+    by ring.
+
+  assert (Hsplit : (p | x) \/ (p | x)).
+  {
+    eapply prime_mult; eauto.
+  }
+
+  destruct Hsplit as [Hx | Hx];
+    exact Hx.
+Qed.
+
+(* ======================================== *)
+(* PART VIII: PYTHAGOREAN PRIME DIVISIBILITY*)
+(* NEW                                      *)
+(* ======================================== *)
+
+Theorem F28_pythagorean_prime_divisibility :
+  forall p a b c : Z,
+    prime p ->
+    a^2 + b^2 = c^2 ->
+    (p | a) ->
+    (p | c) ->
+    (p | b).
+Proof.
+  intros p a b c Hp Hpyth Ha Hc.
+
+  apply (F28_prime_square_cancel p b).
+  - exact Hp.
+  - apply (F28_pythagorean_square_divisibility
+             p a b c).
+    + exact Hpyth.
+    + exact Ha.
+    + exact Hc.
+Qed.
+
+(* ======================================== *)
+(* PART IX: VERIFICATION                    *)
 (* ======================================== *)
 
 Check F28_character_identity.
 Check F28_discriminant_identity.
-
-Check F28_if_p_divides_c.
-Check F28_if_p_divides_b.
-Check F28_if_p_divides_a.
-
 Check F28_nondivisibility_reduction.
 Check F28_primitive_coprimality.
-
 Check F28_pythagorean_square_divisibility.
 
-Print Assumptions
-  F28_nondivisibility_reduction.
+Check F28_prime_square_cancel.
+Check F28_pythagorean_prime_divisibility.
 
+Print Assumptions F28_prime_square_cancel.
 Print Assumptions
-  F28_primitive_coprimality.
-
-Print Assumptions
-  F28_pythagorean_square_divisibility.
+  F28_pythagorean_prime_divisibility.
 
 (* ======================================== *)
 (* END                                      *)
 (* ======================================== *)
 
 (* ======================================== *)
-(* ADDED IN REVIEW (22 November 2026): primality, p >= 5, and the unconditional statement *)
+(* ADDED IN REVIEW (22 November 2026): p >= 5 cancellation and the unconditional statement *)
 (* ======================================== *)
 
 Lemma F28_prime_not_div_small :
@@ -299,14 +341,6 @@ Proof.
   intros p n Hp Hn Hlt H.
   pose proof (Z.divide_pos_le p n Hn H) as H1.
   lia.
-Qed.
-
-Lemma F28_prime_div_sq :
-  forall p a : Z, prime p -> (p | a^2) -> (p | a).
-Proof.
-  intros p a Hp H.
-  replace (a^2) with (a*a) in H by ring.
-  destruct (prime_mult p Hp a a H) as [H1 | H1]; exact H1.
 Qed.
 
 Lemma F28_prime_div_cube :
@@ -361,12 +395,11 @@ Proof.
       * exfalso.
         exact (F28_ge5_not_div_27 p Hp Hge H2).
       * left.
-        exact (F28_prime_div_sq p b Hp H2).
+        exact (F28_prime_square_cancel p b Hp H2).
     + right.
       exact H1.
   - intros Ha Hc.
-    exact (F28_prime_div_sq p b Hp
-             (F28_pythagorean_square_divisibility p a b c Hpy Ha Hc)).
+    exact (F28_pythagorean_prime_divisibility p a b c Hp Hpy Ha Hc).
 Qed.
 
 Theorem F28_nondivisibility_prime :
