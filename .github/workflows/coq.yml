@@ -1,0 +1,14 @@
+name: coq
+on: [push, pull_request]
+jobs:
+  coq:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y coq
+      - run: coqc --version
+      - name: compile and check that no axioms are used
+        run: |
+          coqc -q code/coq/F28_identities.v | tee coq_out.txt
+          test "$(grep -c 'Closed under the global context' coq_out.txt)" = "7"
+          ! grep -q 'Axioms:' coq_out.txt
