@@ -118,3 +118,19 @@ The previously missing last interval, 20001–100000, on the nP+T branch was com
 For comparison, the final interval on nP had flip fraction 0.07165, cancellation ratio 0.37473831123517097, covariance -0.004640175, independent baseline -0.06298035, covariance contribution +0.00928035, delta -0.05370, final mean 0.38580, independent-prime product 0.3781597014893460, difference +0.0076402985106540.
 
 The last-block covariance is negative for both branches and reduces the magnitude of the downward mean correction relative to independence between the old sign and the block flip indicator. The covariance changes sign across earlier blocks, so no monotonic or asymptotic covariance claim follows. These are finite-N truncated-sign results only; the global prime tail remains uncontrolled.
+
+
+## Sample-size comparison at fixed prime cutoffs (23 November 2026)
+
+**Status: Observed.** The user ran `code/magma/problem_h_covariance_sample_sizes.m` with N=10000, 50000, 100000, 250000, prime cutoffs 1000, 5000, 20000, 100000. Four small-prime BSGS/direct-orbit regressions passed; the addition formula passed at each cutoff. Magma V2.30-1 wall time 8.8s.
+
+For the final prime block (20001–100000), empirical covariance of the old sign with the block-flip indicator was:
+
+| N | nP covariance | nP+T covariance | nP final mean | nP+T final mean |
+|---:|---:|---:|---:|---:|
+| 10000 | -0.001301680000 | +0.000324080000 | 0.380800 | 0.450200 |
+| 50000 | -0.004062129600 | -0.003262403200 | 0.383880 | 0.465920 |
+| 100000 | -0.004640175000 | -0.001600590400 | 0.385800 | 0.463800 |
+| 250000 | -0.004173728256 | -0.000371197120 | 0.385320 | 0.459928 |
+
+At N=250000 the independent-prime products are 0.3781597014893460 (nP) and 0.4600165260572131 (nP+T), with empirical deviations +0.0071602985106540 and -0.0000885260572131. On the nP branch, the last-block covariance is roughly -0.004 for N>=50000; on nP+T it changes substantially with N and approaches zero by N=250000. These finite samples do not establish limiting covariance or global parity distribution. Earlier-block covariances can also change sign (e.g. nP at 5001–20000: +0.0002144 at N=10000 versus -0.00142421728 at N=250000).
