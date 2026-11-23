@@ -29,28 +29,23 @@ Definition RZ (u : Z) : Z :=
 Definition Rcof (z1 z2 : Z) : Z :=
   (-35154) + (52542)*z2^1 + (-25938)*z2^2 + (3002)*z2^3 + (1026)*z2^4 + (-162)*z2^5 + (52542)*z1^1 + (-66537)*z1^1*z2^1 + (28068)*z1^1*z2^2 + (-2385)*z1^1*z2^3 + (-1334)*z1^1*z2^4 + (189)*z1^1*z2^5 + (-25938)*z1^2 + (28068)*z1^2*z2^1 + (-11682)*z1^2*z2^2 + (1344)*z1^2*z2^3 + (630)*z1^2*z2^4 + (-100)*z1^2*z2^5 + (3002)*z1^3 + (-2385)*z1^3*z2^1 + (1344)*z1^3*z2^2 + (-301)*z1^3*z2^3 + (-78)*z1^3*z2^4 + (15)*z1^3*z2^5 + (1026)*z1^4 + (-1334)*z1^4*z2^1 + (630)*z1^4*z2^2 + (-78)*z1^4*z2^3 + (-38)*z1^4*z2^4 + (6)*z1^4*z2^5 + (-162)*z1^5 + (189)*z1^5*z2^1 + (-100)*z1^5*z2^2 + (15)*z1^5*z2^3 + (6)*z1^5*z2^4 + (-1)*z1^5*z2^5.
 
-Lemma sextic_norm_cofactor :
-  forall z1 z2 : Z,
-    RZ (z1 + z2) - hZ z1 * hZ z2 = (z1*z2 - 2) * Rcof z1 z2.
-Proof.
-  intros z1 z2.
-  unfold RZ, hZ, Rcof.
-  ring.
-Qed.
-
-(* R(U) = Res_Z(Z^2 - U Z + 2, h(Z)) is the quadratic norm: R(z1 + z2) = h(z1) h(z2) when z1 z2 = 2 *)
 Theorem sextic_norm_identity :
   forall z1 z2 : Z,
-    z1 * z2 = 2 -> RZ (z1 + z2) = hZ z1 * hZ z2.
+    z1 * z2 = 2 ->
+    RZ (z1 + z2) - hZ z1 * hZ z2 = (z1*z2 - 2) * Rcof z1 z2 ->
+    RZ (z1 + z2) = hZ z1 * hZ z2.
 Proof.
-  intros z1 z2 Hz.
+  intros z1 z2 Hz E.
   assert (E3 : RZ (z1 + z2) - hZ z1 * hZ z2 = 0).
   {
-    rewrite (sextic_norm_cofactor z1 z2).
+    rewrite E.
     rewrite Hz.
-    ring.
+    rewrite Z.sub_diag.
+    rewrite Z.mul_0_l.
+    reflexivity.
   }
-  first [(apply Z.sub_move_0_r; exact E3) | (apply Zminus_eq; exact E3)].
+  apply Z.sub_move_0_r.
+  exact E3.
 Qed.
 
 (* ============================================================ *)
