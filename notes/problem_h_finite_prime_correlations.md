@@ -68,8 +68,43 @@ For these *particular ten-prime sets*, pair corrections explain approximately 98
 
 The near-independent finite-prime behavior has an explicit arithmetic source of deviation: split-event residue classes are constrained by common divisors of the local orbit periods. Exact pairwise correlations dominate the measured correction in these two selected ten-prime sets; the combined contributions from orders 4 through 10 are small.
 
-**This does not establish global sign equidistribution or Problem H.** There is no proved control of the contribution of primes beyond the finite cutoff, nor a uniform correlation estimate as the cutoff grows. The finite-prime computational branch is closed at this point, while Problem H remains open.
+**This does not establish global sign equidistribution or Problem H.** There is no proved control of the contribution of primes beyond the finite cutoff, nor a uniform correlation estimate as the cutoff grows. The exact finite-prime correlation calculation is complete for the selected ten-prime sets; an additional signed-increment experiment is ongoing. Problem H remains open.
 
 ## Reproducibility and provenance
 
 Computed by the user in Magma V2.30-1 on 23 November 2026 from ChatGPT-proposed scripts. The exact ten-prime CRT computation completed in approximately 0.2 seconds; the million-index two-branch computation completed in approximately 23.5 seconds. No independent implementation or human verification is claimed. The accompanying Magma script reproduces the exact ten-prime means; the empirical million-index figures are transcribed from the user's execution log.
+
+## Addition formula and signed-flip experiment (23 November 2026)
+
+**Status: Observed**, with an exact finite-sample identity. For a block of new primes ((B,C]), let (F_{B,C}(n)=1) when that block produces an odd number of split events. Then
+[
+\sigma_C(n)=\sigma_B(n)(1-2F_{B,C}(n)),\qquad
+M_C(N)-M_B(N)=-2\,\mathbb E_N[\sigma_B F_{B,C}].
+]
+Writing (A) for the number of indices with old sign (+1) and (F=1), and (D) for old sign (-1) and (F=1), gives the exact identity
+[
+M_C(N)-M_B(N)=2(D-A)/N.
+]
+An equivalent covariance decomposition is
+[
+M_C-M_B=-2\big(M_B\,\mathbb E_N[F]+\operatorname{Cov}_N(\sigma_B,F)\big).
+]
+The cancellation ratio (R=|D-A|/(A+D)) measures the net sign change per flipped index, not the covariance by itself.
+
+For **N=100000**, the completed Magma V2.30-1 run reported:
+
+| Branch | Prime interval | Positive-to-negative A | Negative-to-positive D | Flip fraction | Cancellation ratio | Mean after block |
+|---|---|---:|---:|---:|---:|---:|
+| (nP) | 5–1000 | 20209 | 0 | 0.20209 | 1.000000 | 0.59582 |
+| (nP) | 1001–5000 | 5785 | 1439 | 0.07224 | 0.601606 | 0.50890 |
+| (nP) | 5001–20000 | 5288 | 1818 | 0.07106 | 0.488320 | 0.43950 |
+| (nP) | 20001–100000 | 4925 | 2240 | 0.07165 | 0.374738 | 0.38580 |
+| (nP+T) | 5–1000 | 13352 | 0 | 0.13352 | 1.000000 | 0.73296 |
+| (nP+T) | 1001–5000 | 8009 | 1429 | 0.09438 | 0.697182 | 0.60136 |
+| (nP+T) | 5001–20000 | 4467 | 1101 | 0.05568 | 0.604526 | 0.53404 |
+
+The original computation timed out after 299.6 seconds while processing the final (nP+T) interval. **No value is reported for that missing interval.**
+
+On the (nP) branch, flip frequencies remain around 7.1% in the last three intervals while the cancellation ratio decreases from 0.602 to 0.375. This is a finite-sample pattern, not evidence of a limiting cancellation theorem: part of the reduction is expected from the evolving bias of the old sign. The covariance decomposition separates that baseline effect from arithmetic dependence.
+
+The follow-up standalone program `code/magma/problem_h_optimized_addition.m` replaces full-orbit scans by sextic-root filtering and baby-step/giant-step searches, shares the elliptic-curve setup between branches, prints results at each cutoff, and performs small-prime direct-orbit regression checks. **The optimized program has not yet been run independently**; the above table comes from the earlier completed portions of the user's run.
