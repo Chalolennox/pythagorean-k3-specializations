@@ -251,7 +251,6 @@ for upper in BOUNDS do
         newMean := QQ!newSum/MAX_N;
         delta := newMean-oldMean;
         flipProb := QQ!flipCount/MAX_N;
-        covariance := QQ!(D-A)/MAX_N-oldMean*flipProb;
         // E[sigma_B * flip] = (A-D)/N
         // covariance = E[sigma_B * flip]-E[sigma_B]*E[flip].
         covariance := QQ!(A-D)/MAX_N-oldMean*flipProb;
