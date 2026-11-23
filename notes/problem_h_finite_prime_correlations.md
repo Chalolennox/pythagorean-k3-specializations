@@ -108,3 +108,13 @@ The original computation timed out after 299.6 seconds while processing the fina
 On the (nP) branch, flip frequencies remain around 7.1% in the last three intervals while the cancellation ratio decreases from 0.602 to 0.375. This is a finite-sample pattern, not evidence of a limiting cancellation theorem: part of the reduction is expected from the evolving bias of the old sign. The covariance decomposition separates that baseline effect from arithmetic dependence.
 
 The follow-up standalone program `code/magma/problem_h_optimized_addition.m` replaces full-orbit scans by sextic-root filtering and baby-step/giant-step searches, shares the elliptic-curve setup between branches, prints results at each cutoff, and performs small-prime direct-orbit regression checks. **The optimized program has not yet been run independently**; the above table comes from the earlier completed portions of the user's run.
+
+## Optimized addition-formula run: completed (23 November 2026)
+
+**Status: Observed.** The user executed `code/magma/problem_h_optimized_addition.m` in Magma V2.30-1, N=100000, bounds 1000, 5000, 20000, 100000. Four direct-orbit versus BSGS regression tests passed: p=83 (period 39; event counts 4,2), p=149 (84; 2,0), p=197 (92; 2,0), p=307 (163; 4,0). All eight branch/cutoff exact addition-formula assertions passed. Wall-clock time reported: 8.7 seconds (Magma internal time 6s, memory 32.09 MB). The earlier unoptimized run timed out after 299.6 seconds.
+
+The previously missing last interval, 20001–100000, on the nP+T branch was completed: 480 active split primes, A=5194 positive-to-negative flips, D=1682 negative-to-positive flips, flip fraction 0.06876, cancellation ratio 0.5107620709714951, covariance -0.0016005904, independent baseline contribution -0.0734411808, covariance contribution +0.0032011808, exact delta -0.07024, final mean 0.46380, independent-prime product 0.4600165260572131, difference +0.0037834739427869, and 7406 split-event occurrences.
+
+For comparison, the final interval on nP had flip fraction 0.07165, cancellation ratio 0.37473831123517097, covariance -0.004640175, independent baseline -0.06298035, covariance contribution +0.00928035, delta -0.05370, final mean 0.38580, independent-prime product 0.3781597014893460, difference +0.0076402985106540.
+
+The last-block covariance is negative for both branches and reduces the magnitude of the downward mean correction relative to independence between the old sign and the block flip indicator. The covariance changes sign across earlier blocks, so no monotonic or asymptotic covariance claim follows. These are finite-N truncated-sign results only; the global prime tail remains uncontrolled.
