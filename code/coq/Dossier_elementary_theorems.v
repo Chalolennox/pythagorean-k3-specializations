@@ -36,13 +36,15 @@ Proof.
     rewrite Hc1 in H1.
     rewrite Hc2 in H2.
     exists (c2*k2 - c1*k1).
-    first [lia | nia | (ring_simplify in H1; ring_simplify in H2; ring_simplify; lia)].
+    assert (E : a - b = (n - b) - (n - a)) by ring.
+    rewrite E, H1, H2.
+    ring.
   - intros [k Hk].
     assert (Hb : exists u v : Z, u*m + v*l = Z.gcd m l).
     {
       destruct (Z.gcd_bezout m l (Z.gcd m l) eq_refl) as [u [v H]].
       exists u, v.
-      first [exact H | (rewrite <- H; ring) | lia | nia].
+      first [exact H | (rewrite <- H; ring) | lia].
     }
     destruct Hb as [u [v Hb]].
     rewrite <- Hb in Hk.
@@ -99,10 +101,10 @@ Proof.
   split.
   - intros [m Hm].
     exists m.
-    first [lia | nia | (ring_simplify in Hm; ring_simplify; lia)].
+    first [lia | (ring_simplify in Hm; ring_simplify; lia)].
   - intros [q Hq].
     exists q.
-    first [lia | nia | (ring_simplify in Hq; ring_simplify; lia)].
+    first [lia | (ring_simplify in Hq; ring_simplify; lia)].
 Qed.
 
 Lemma two_adic_exists_aux :
@@ -121,7 +123,10 @@ Proof.
       destruct (IH (n / 2) Hm Hm2) as [j [q Hjq]].
       exists (S j), q.
       change (pow2 (S j)) with (2 * pow2 j).
-      first [lia | nia].
+      assert (Hn2 : n = 2 * (n / 2)) by lia.
+      rewrite Hjq in Hn2.
+      rewrite Hn2.
+      ring.
     + exists O, (n / 2).
       change (pow2 0) with 1.
       lia.
@@ -140,7 +145,7 @@ Proof.
       change (pow2 0) with 1 in H.
       change (pow2 (S j')) with (2 * pow2 j') in H.
       assert (E : 2*q + 1 = 2 * (pow2 j' * (2*q' + 1))).
-      { first [lia | nia | (ring_simplify in H; ring_simplify; lia)]. }
+      { first [lia | (replace (2*q + 1) with (1 * (2*q + 1)) by ring; rewrite H; ring)]. }
       lia.
   - intros j' q q' H.
     destruct j' as [|j'].
@@ -148,12 +153,12 @@ Proof.
       change (pow2 0) with 1 in H.
       change (pow2 (S j)) with (2 * pow2 j) in H.
       assert (E : 2*q' + 1 = 2 * (pow2 j * (2*q + 1))).
-      { first [lia | nia | (ring_simplify in H; ring_simplify; lia)]. }
+      { first [lia | (replace (2*q' + 1) with (1 * (2*q' + 1)) by ring; rewrite <- H; ring)]. }
       lia.
     + change (pow2 (S j)) with (2 * pow2 j) in H.
       change (pow2 (S j')) with (2 * pow2 j') in H.
       assert (H' : pow2 j * (2*q + 1) = pow2 j' * (2*q' + 1)).
-      { first [lia | nia | (ring_simplify in H; ring_simplify; lia)]. }
+      { first [lia | (apply (proj1 (Z.mul_cancel_l _ _ 2 ltac:(discriminate))); rewrite <- !Z.mul_assoc in H; exact H)]. }
       f_equal.
       exact (IH j' q q' H').
 Qed.
