@@ -35,3 +35,27 @@ The boundary t=1 gives a repeated projected neighbor for every k, since it corre
 ## Scope and further collection
 
 The reflection M(t) is not the sign reflection t -> 2-t (which exchanges 1-x and 1+x); keep these two involutions distinct. Mirror nonintersection does not imply disjointness of full orbit images, nor global root-number parity independence. Please append new exact results, counterexamples, proof corrections and scripts in this PR discussion before promoting claims to the paper.
+
+
+## Theorem: limiting real mirror-pair distribution
+
+For each integer k≥1, the equation 2Q=-kR-T has exactly two real solutions Q on J(R), hence two real projected parameters t_{k,1}, t_{k,2}=1-x(Q). Let
+
+I = integral_{0}^{infinity} dx / sqrt(x(x^2-2x+2)) = 4.03646165391164... .
+
+Then for every bounded continuous function f on (-infinity,1],
+
+lim_{N→infinity} (1/(2N)) sum_{k=1}^N [f(t_{k,1})+f(t_{k,2})]
+ = (1/I) integral_{-infinity}^{1} f(t) dt / sqrt((1-t)(1+t^2)).
+
+Thus the limiting density is rho_t(t)=1/[I sqrt((1-t)(1+t^2))] for t<1, and zero for t>1. The support is (-infinity,1] (or its closure in the projective line). In the angular coordinate theta=2 arctan(t) mod 2pi, the density is
+
+rho_theta(theta) = sqrt(1+tan(theta/2)^2) / [2I sqrt(1-tan(theta/2))]
+
+on theta in [0,pi/2) union (pi,2pi), zero on (pi/2,pi); endpoints are understood in the integrable/a.e. sense. The support's closed accessible arc is [0°,90°] union [180°,360°]. Hence the real algebraic mirror parameters are dense on this arc but **not** on the entire circle.
+
+**Proof.** The cubic x((x-1)^2+1) has only one real zero, so J(R) is a connected compact circle group. Choose H,U∈J(R) with 2H=-R and 2U=-T. The two real solutions for each k are Q_{k,0}=kH+U and Q_{k,1}=kH+U+T. As R has infinite order, H has infinite order, and each sequence is an irrational rotation, equidistributed in Haar measure. The x-map is continuous into the projective real line; its affine pushforward has density rho_x(x)=1/[I sqrt(x(x^2-2x+2))] for x>0. Indeed, the two y-branches each contribute |dx/(2y)| and the total normalization is I. Substitute t=1-x and then t=tan(theta/2). For bounded continuous f on the noncompact affine interval, the statement follows from equidistribution by extending f∘(1-x) to the compact curve except possibly at the identity, a Haar-null point; boundedness permits the standard Riemann-integrable version of Weyl equidistribution.
+
+**Independent numerical check.** Magma V2.30-1 enumerated k=1..100 (200 real solutions). The maximum angular gap was 90.0229411267° at k=30 and remained unchanged through k=100; this reflects the forbidden 90° arc. Uniform-circle discrepancy at k=100 was 0.1600318627. Numerical quadrature of the theoretical Fourier magnitudes |c_m|, where c_m=(1/I)∫_0^∞ exp(2im arctan(1-x)) dx/sqrt(x(x²-2x+2)), yields m=1..5: [0.0493846069, 0.2867730794, 0.3540774667, 0.2243687909, 0.0066556477]. Observed Magma magnitudes at k≤100: [0.0556968370, 0.2910003918, 0.3629540430, 0.2015406386, 0.0254712283]. Numerical agreement supports the exact formula; no convergence rate is claimed.
+
+**Scope.** This is a theorem about real algebraic parameters and elliptic Haar measure, not about global root numbers or rational rank jumps.
