@@ -2,9 +2,10 @@
 
    THIS FILE: (1) crt_compat: (exists n, m | n - a and l | n - b) <-> gcd(m,l) | a - b; (2) two_adic_cover: every n > 0 lies in exactly one A_k = {n = 2^(k-1) mod 2^k}, written with j = k-1.
    Written by Claude (a language model) in review, 23 November 2026.  NO HUMAN HAS CHECKED IT; the only compile check is CI (Coq 8.20.1).  Standalone (ZArith, Lia, Ring only).
-   Not one of the owner's files.  Part of the elementary dossier theorems (split into three files so that CI shows which part is slow or failing):
+   Not one of the owner's files.  Part of the elementary dossier theorems (split into several files so that CI shows which part is slow or failing):
      Dossier_crt_two_adic.v   (1) generalized CRT compatibility, (2) the 2-adic covering of the positive integers;
-     Dossier_sextic_F26.v     (3) the quotient sextic R of x -> 2/x (cleared identity, norm form with explicit cofactor);
+     Dossier_sextic_cleared.v (3a) the quotient sextic R of x -> 2/x: the cleared identity h hT = X^6 R(X + 2/X);
+     Dossier_sextic_norm.v    (3b) the norm form R(z1+z2) = h(z1) h(z2) for z1 z2 = 2, with an explicit cofactor;
      Dossier_Fs_g_hom.v       (4) the F_s congruences of Lemma R (F.52), (5) the homogeneous g(tau(t)) identity.
    The statements about x(Q+T) = 2/x and the rational form of g(tau(t)) are in Dossier_elementary_rational.v (QArith).
    WHAT IT DOES NOT PROVE: anything about elliptic curves or root numbers; polynomial identity, divisibility and counting only.  Each identity was also checked in exact arithmetic with

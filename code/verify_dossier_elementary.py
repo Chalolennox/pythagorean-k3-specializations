@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cross-check of code/coq/Dossier_crt_two_adic.v, Dossier_sextic_F26.v and Dossier_Fs_g_hom.v by exact integer arithmetic (stdlib only; about 1 s).
+"""Cross-check of code/coq/Dossier_crt_two_adic.v, Dossier_sextic_cleared.v, Dossier_sextic_norm.v and Dossier_Fs_g_hom.v by exact integer arithmetic (stdlib only; about 1 s).
 
 Written by Claude (a language model), 23 November 2026; no human has checked it.  It does NOT replace the Coq compilation (CI job `coq`); it
 reads the Definitions and the statement of sextic_cleared_identity out of the .v files themselves, evaluates them in Python integers, and checks every
@@ -13,7 +13,7 @@ import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = "\n".join(open(os.path.join(HERE, "coq", f)).read() for f in ("Dossier_crt_two_adic.v", "Dossier_sextic_F26.v", "Dossier_Fs_g_hom.v"))
+SRC = "\n".join(open(os.path.join(HERE, "coq", f)).read() for f in ("Dossier_crt_two_adic.v", "Dossier_sextic_cleared.v", "Dossier_sextic_norm.v", "Dossier_Fs_g_hom.v"))
 ok_all = True
 
 
