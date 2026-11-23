@@ -38,7 +38,6 @@ Proof.
   ring.
 Qed.
 
-(* R(U) = Res_Z(Z^2 - U Z + 2, h(Z)) is the quadratic norm: R(z1 + z2) = h(z1) h(z2) when z1 z2 = 2 *)
 Theorem sextic_norm_identity :
   forall z1 z2 : Z,
     z1 * z2 = 2 -> RZ (z1 + z2) = hZ z1 * hZ z2.
@@ -48,9 +47,12 @@ Proof.
   {
     rewrite (sextic_norm_cofactor z1 z2).
     rewrite Hz.
-    ring.
+    rewrite Z.sub_diag.
+    rewrite Z.mul_0_l.
+    reflexivity.
   }
-  first [(apply Z.sub_move_0_r; exact E3) | (apply Zminus_eq; exact E3)].
+  apply Z.sub_move_0_r.
+  exact E3.
 Qed.
 
 (* ============================================================ *)
