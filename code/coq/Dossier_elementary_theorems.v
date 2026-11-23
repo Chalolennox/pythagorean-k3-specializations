@@ -113,6 +113,8 @@ Proof.
   induction N as [|N IH].
   - intros n Hn HnN. lia.
   - intros n Hn HnN.
+    pose proof (Z.div_mod n 2 ltac:(discriminate)) as Hdm.
+    pose proof (Z.mod_pos_bound n 2 ltac:(lia)) as Hb.
     destruct (Z.eq_dec (n mod 2) 0) as [He|Ho].
     + assert (Hm : 0 < n / 2) by lia.
       assert (Hm2 : n / 2 <= Z.of_nat N) by lia.
