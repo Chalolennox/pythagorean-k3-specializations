@@ -69,8 +69,8 @@ Fixpoint pow2 (j : nat) : Z :=
 Lemma pow2_pos : forall j : nat, 0 < pow2 j.
 Proof.
   induction j as [|j IH].
-  - simpl. lia.
-  - simpl. lia.
+  - change (pow2 0) with 1. lia.
+  - change (pow2 (S j)) with (2 * pow2 j). lia.
 Qed.
 
 Lemma pow2_is_power : forall j : nat, pow2 j = 2 ^ Z.of_nat j.
@@ -121,7 +121,7 @@ Proof.
       change (pow2 (S j)) with (2 * pow2 j).
       first [lia | nia].
     + exists O, (n / 2).
-      simpl.
+      change (pow2 0) with 1.
       lia.
 Qed.
 
