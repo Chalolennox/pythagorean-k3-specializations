@@ -44,11 +44,13 @@ Theorem sextic_norm_identity :
     z1 * z2 = 2 -> RZ (z1 + z2) = hZ z1 * hZ z2.
 Proof.
   intros z1 z2 Hz.
-  pose proof (sextic_norm_cofactor z1 z2) as E.
-  rewrite Hz in E.
-  assert (E2 : (2 - 2) * Rcof z1 z2 = 0) by ring.
-  rewrite E2 in E.
-  lia.
+  assert (E3 : RZ (z1 + z2) - hZ z1 * hZ z2 = 0).
+  {
+    rewrite (sextic_norm_cofactor z1 z2).
+    rewrite Hz.
+    ring.
+  }
+  first [(apply Z.sub_move_0_r; exact E3) | (apply Zminus_eq; exact E3)].
 Qed.
 
 (* ============================================================ *)
