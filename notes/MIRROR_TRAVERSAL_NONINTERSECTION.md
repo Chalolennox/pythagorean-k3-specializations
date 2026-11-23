@@ -18,17 +18,19 @@ For any nonzero integer k there is no t in P^1(Q) for which G_k(t,M(t))=0.
 
 Proof. Choose Q over t (over an algebraic closure). The condition is x(Q+kR)=x(Q+T), so either kR=T or 2Q=-kR-T. The first is impossible since R has infinite order. If t is rational, x(Q) is rational; we must show the second equation has no solution even with rational x(Q).
 
-If k=2m, then 2(Q+mR)=T. Any S satisfying 2S=T has x(S)^2=2, by x(S+T)=x(S) and x(S+T)=2/x(S). Hence x(S) is not rational. Since translation by a rational point preserves rationality of the x-coordinate of a point only when the full point is rational, this last implication requires care: Q need not be rational merely because t(Q) is rational. A safer argument uses the halving polynomial and its rational x-roots, together with rationality of x(Q) under rational translation as checked via the symmetric correspondence, or a Galois argument. **The claim about arbitrary rational t therefore requires a separate descent justification; do not treat the group-law proof alone as complete.**
+If t(Q) is rational, x(Q) is rational, so for every σ in Gal(Qbar/Q), σ(Q)=Q or -Q. In the second case, 2Q=-kR-T=:C is a non-torsion rational point (as R has infinite order). Applying σ gives 2σ(Q)=C. If σ(Q)=-Q, then C=-C, a contradiction. Therefore every conjugate fixes Q: Q is rational. (This elementary Galois argument also applies to points with rational x and non-torsion rational doubles.)
 
-If k=2m+1, the equation reduces after translation by a rational point to 2S=-P. The duplication numerator for x(2S)=1 is (x^2-4x+2)(x^2+2); it has no rational x-root. Again one must justify passage from rational x(Q) to rational x(S). This is the precise outstanding proof obligation for the full parameter statement.
+If k=2m, 2(Q+mR)=T. But a rational point S with 2S=T would satisfy x(S+T)=x(S), hence x(S)^2=2, impossible over Q.
 
-For *rational Q in J(Q)*, the argument is complete: k even forces T in 2J(Q); k odd forces P in 2J(Q), both impossible by the displayed x-coordinate obstructions.
+If k=2m+1, -kR-T=-kP-2(m+1)T=-kP, so after adding mP to Q one obtains 2(Q+mP)=-P. The duplication equation x(2S)=1 has numerator (x^2-4x+2)(x^2+2), with no rational roots. Thus P is not twice a rational point.
+
+Both parities are excluded, including projective boundary parameters. This proves the proposition for rational *parameters*, not merely rational elliptic points.
 
 ## Verified computations
 
 Magma V2.30-1 checked the exact torsion-translation identity and the mirror-polynomial rational roots for k=1,...,12. No rational affine mirror-pair roots were found. For odd k=1,3,5,7,9,11 the quartic factors as two quadratics over Q; for even k=2,4,6,8,10,12 it was irreducible. These are finite observations, not an all-k factorization theorem.
 
-The boundary t=1 gives a repeated projected neighbor for every k, since it corresponds to T=-T. Fixed-point equations G_k(t,t)=0 have rational roots at even gaps in the tested range; the corresponding group-law argument is likewise immediate for rational elliptic points, with the rational-parameter converse requiring care.
+The boundary t=1 gives a repeated projected neighbor for every k, since it corresponds to T=-T. Fixed-point equations G_k(t,t)=0 have rational roots at even gaps in the tested range; the corresponding group-law argument extends to rational parameters by the same Galois observation when the relevant doubled point is non-torsion.
 
 ## Scope and further collection
 
