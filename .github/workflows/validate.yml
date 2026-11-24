@@ -45,6 +45,7 @@ jobs:
       - run: python3 code/verify_support_structure.py --quick
       - run: python3 code/verify_kummer_compositum.py --quick
       - run: python3 code/verify_dossier_elementary.py
+      - run: python3 code/verify_eligible_triples.py --quick
       - run: python3 code/verify_neutrality_circle.py
       - run: python3 code/verify_mirror_collapse.py --quick
       - run: python3 code/verify_rotation_coding.py --quick
