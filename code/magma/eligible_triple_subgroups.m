@@ -1,4 +1,5 @@
-// Reconstructed subgroup certificate; unexecuted revision.
+// Reconstructed subgroup certificate; user confirmed execution 24 Nov 2026.
+// Reported CPU 1.510 s; output: notes/data/eligible_triple_subgroups_20261124.txt.
 function h(x)
  return x^6-6*x^5-15*x^4+100*x^3-189*x^2+162*x-54;
 end function;
