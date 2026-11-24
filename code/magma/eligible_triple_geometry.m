@@ -1,5 +1,6 @@
 // Reconstructed clean certificate from the conversation of 24 Nov 2026.
-// Not the verbatim original executed source; this revision is unexecuted.
+// User confirmed execution on 24 Nov 2026; reported CPU 0.070 s.
+// Output: notes/data/eligible_triple_geometry_20261124.txt.
 Z:=Integers();
 function h(x)
  return x^6-6*x^5-15*x^4+100*x^3-189*x^2+162*x-54;
