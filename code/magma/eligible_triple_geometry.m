@@ -1,5 +1,7 @@
 // Reconstructed clean certificate from the conversation of 24 Nov 2026.
 // User confirmed execution on 24 Nov 2026; reported CPU 0.070 s.
+// Attestation concerns the earlier delivered script; exact executed source not established.
+// This reconstructed blob requires a pinned-source rerun; output is not a log of this blob.
 // Output: notes/data/eligible_triple_geometry_20261124.txt.
 Z:=Integers();
 function h(x)
