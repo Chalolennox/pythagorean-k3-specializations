@@ -19,9 +19,9 @@ At a simple discriminant root, the local multiplicative root-number factor is \(
 
 The degree-24 splitting field of \(H\) described in Appendix F.2–F.3 has Frobenius classes with 0, 2 and 6 fixed roots in proportions \(14/24\), \(9/24\) and \(1/24\). Roots come in three opposite pairs \(r,-r\), with \(q(-r)=-q(r)\).
 
-By the square-class computation of F.5, the quadratic character \((-1/p)\) is independent of the splitting field. For \((-1/p)=-1\), each fixed opposite pair contributes one split and one non-split root. For \((-1/p)=+1\), the two roots of each fixed pair have the same character.
+By the direct four-class certificate below, the quadratic character \((-1/p)\) is independent of the splitting field. For \((-1/p)=-1\), each fixed opposite pair contributes one split and one non-split root. For \((-1/p)=+1\), the two roots of each fixed pair have the same character.
 
-On the two-root class, that pair character is equidistributed. On the six-root class, the three pair characters are jointly uniform in \(\{\pm1\}^3\), using the three \(q(a_i)\) characters in F.5 and their single relation with the other characters. The direct certificate below proves the required conditional joint uniformity, independently of the rank-10 calculation.
+On the two-root class, that pair character is equidistributed. On the six-root class, the three pair characters are jointly uniform in \(\{\pm1\}^3\), conditional on \((-1/p)=+1\). The direct certificate below proves the required conditional joint uniformity, independently of the rank-10 calculation.
 
 Thus the joint natural densities are:
 
@@ -57,8 +57,6 @@ In the sample of 9590 primes \(5\le p\le100000\), total split roots were 4805 an
 
 The \(175/1024\) density in F.3 concerns a different *admissibility* condition; it is not the \(41/128\) density here. The subgroup-accessibility obstruction in F.4 remains: a root of \(H\) modulo \(p\) need not be attained by \(1-x(nP+T)\). Equal average split/non-split root counts do **not** establish cancellation or parity equidistribution of global root numbers along the rational orbit.
 
-**Review request:** Check the joint uniformity of the three \(q(a_i)\) characters on the six-root Frobenius class against the full relation in Appendix F.5 before incorporating the density table as a proved corollary in the main paper.
-
 ## Direct four-class independence certificate (24 November 2026)
 
 **Proof given**, using the degree-24 splitting-field description of Appendix E/F.2, but not the rank-10 computation of F.5. Written with ChatGPT assistance; no independent human proof review. The finite residue witnesses below were computed with exact Python modular arithmetic.
@@ -76,6 +74,8 @@ For a nonzero residue \(v\), write \(b_p(v)=0\) for a square and 1 for a nonsqua
 
 Each triple has product 1 modulo p and its six signed entries are distinct roots of H. Both primes are away from the discriminant. The four rows have rank 4 over F2: the sum of the second, third and fourth rows is (1,0,0,0), which together with the first three rows spans the four coordinate vectors. Any square-class relation would reduce to a square at all four prime ideals (all radicands are units there), hence its exponent vector would be orthogonal to all four rows. It must be zero. Thus the four classes are independent over N.
 
-The Kummer kernel of \(M=N(i,\sqrt{q(a_1)},\sqrt{q(a_2)},\sqrt{q(a_3)})\) over N is consequently the full group of 16 sign choices. M is Galois over Q because q(-a)=-q(a) and i belongs to M. Over the identity Frobenius of N the four signs are uniform, hence the three pair signs are jointly uniform conditional on the sign of -1 being +1. For a two-fixed-root element, choose one lift to Gal(M/Q). Multiplying it by the Kummer kernel independently toggles the sign on i and on the square root of q at the fixed root, giving uniformity of that pair sign conditional on the sign of -1. Chebotarev counts conjugacy-invariant events, so these fiber counts give the stated density table. No F.5 rank-10 assertion is needed for this deduction.
+The Kummer kernel of \(M=N(i,\sqrt{q(a_1)},\sqrt{q(a_2)},\sqrt{q(a_3)})\) over N is consequently the full group of 16 sign choices. Explicitly, the restriction map from Gal(M/Q) onto Gal(N/Q) has kernel Gal(M/N), of order exactly 16; each fiber is a coset of this kernel. M is Galois over Q because q(-a)=-q(a) and i belongs to M. Over the identity Frobenius of N the four signs are uniform, hence the three pair signs are jointly uniform conditional on the sign of -1 being +1. For a two-fixed-root element, choose one lift to Gal(M/Q). Multiplying it by the Kummer kernel independently toggles the sign on i and on the square root of q at the fixed root, giving uniformity of that pair sign conditional on the sign of -1. Chebotarev counts conjugacy-invariant events, so these fiber counts give the stated density table. No F.5 rank-10 assertion is needed for this deduction.
 
 The original 9590-prime counts are **Observed (reported)**; the original Magma script is not archived here. This proof concerns available roots, not orbit accessibility or Problem H.
+
+**Review update:** Claude independently checked the four residue witnesses and rank in `code/verify/pr87_four_witnesses.py`, with output in `notes/data/pr87_four_witnesses_output.txt` (commit `1c92e35`, review comment `7144691288`). This is AI verification, not human review. The prior request to establish joint uniformity via F.5 is superseded by the direct certificate.
