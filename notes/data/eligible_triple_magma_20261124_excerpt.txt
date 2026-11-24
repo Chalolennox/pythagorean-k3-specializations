@@ -1,0 +1,218 @@
+Verbatim excerpts from user-pasted Magma console, 24 Nov 2026 20:42:37 and 20:43:21 UTC.
+This is a partial transcript, not the full raw log. Original run used BSGS, not the reconstructed prime-power script.
+
+>> SetProof(true);
+   ^
+User error: Identifier 'SetProof' has not been declared or assigned
+>>  ;
+    ^
+User error: bad syntax
+Computing Groebner basis ...
+
+>> GB := GroebnerBasis(I);
+                       ^
+User error: Identifier 'I' has not been declared or assigned
+
+>> print "Groebner basis:", GB;
+                            ^
+User error: Identifier 'GB' has not been declared or assigned
+
+>> assert #GB eq 1;
+           ^
+User error: Identifier 'GB' has not been declared or assigned
+
+>> assert GB[1] eq A!1;
+          ^
+User error: Identifier 'GB' has not been declared or assigned
+Distinct-coordinate triples: EXCLUDED
+Doubling gcd: 1
+Equal-coordinate triples: EXCLUDED
+Geometric discriminant points over GF(5^6): 12
+Geometric additive triples: 0
+Independent geometric enumeration: PASS
+STAGE 1: PASS
+
+Absolute addition resultant:
+373498621546397997365721859417806228830555086588159032744881026227290932692789679226784374707588810714987233619850735927166895099451678213365349012155355431249302127557278917326817327825405807297171658052621615190564061949845737300973640787243225927062080615407951895664382079649968029696
+Absolute doubling resultant:
+62797644024401756790605084920608973921437531450884055105536
+Discriminant of h: 13116508075584
+Resultant of h and Y: 3456
+
+Factoring addition resultant ...
+  2 ^ 108 : prime PASS
+  7 ^ 12 : prime PASS
+  31 ^ 6 : prime PASS
+  71 ^ 12 : prime PASS
+  83 ^ 6 : prime PASS
+  229 ^ 2 : prime PASS
+  5087 ^ 6 : prime PASS
+  12113 ^ 2 : prime PASS
+  363773 ^ 2 : prime PASS
+  609613 ^ 2 : prime PASS
+  9624457993 ^ 2 : prime PASS
+  1386618529213 ^ 2 : prime PASS
+  49635479695149757 ^ 6 : prime PASS
+Factorization reconstruction: PASS
+
+Factoring doubling resultant ...
+  2 ^ 36 : prime PASS
+  19 ^ 1 : prime PASS
+  229 ^ 1 : prime PASS
+  797 ^ 1 : prime PASS
+  7351 ^ 1 : prime PASS
+  12113 ^ 1 : prime PASS
+  363773 ^ 1 : prime PASS
+  609613 ^ 1 : prime PASS
+  9624457993 ^ 1 : prime PASS
+  1386618529213 ^ 1 : prime PASS
+Factorization reconstruction: PASS
+
+Factoring discriminant ...
+  2 ^ 6 : prime PASS
+  3 ^ 18 : prime PASS
+  23 ^ 2 : prime PASS
+Factorization reconstruction: PASS
+
+Factoring resultant h,Y ...
+  2 ^ 7 : prime PASS
+  3 ^ 3 : prime PASS
+Factorization reconstruction: PASS
+
+Computed candidate primes:
+[ 7, 19, 23, 31, 71, 83, 229, 797, 5087, 7351, 12113, 363773, 609613, 9624457993, 1386618529213, 49635479695149757 ]
+Number of candidates: 16
+Candidate list regression: PASS
+STAGE 2: PASS
+
+Primes with unfiltered triples:
+[ 83, 229, 12113, 363773, 609613, 9624457993, 1386618529213 ]
+Primes with eligible triples:
+[ 229, 609613, 1386618529213 ]
+Eligible-prime regression: PASS
+STAGE 3: PASS
+
+Prime: 229
+#E(F_p): 216
+Certified order(P): 36
+Factorization of order(P): [ <2, 2>, <3, 2> ]
+Building baby table: 6 entries
+Testing membership of T ...
+T belongs to <P>: false
+
+Eligible point: (53 : 34 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (53 : 195 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (178 : 19 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (178 : 210 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch: INACCESSIBLE
+
+Accessible points in <P>: 0
+Accessible points in <P,T>: 0
+Ordered triples in <P>: 0
+Ordered triples in <P,T>: 0
+Prime-specific regression: PASS
+
+Prime: 609613
+#E(F_p): 609032
+Certified order(P): 304516
+Factorization of order(P): [ <2, 2>, <76129, 1> ]
+Building baby table: 552 entries
+Testing membership of T ...
+T belongs to <P>: false
+
+Eligible point: (100993 : 129078 : 1)
+  Original branch log: 218616
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (100993 : 480535 : 1)
+  Original branch log: 85900
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (508622 : 6351 : 1)
+  Original branch log: 261566
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (508622 : 603262 : 1)
+  Original branch log: 42950
+  Mirror branch: INACCESSIBLE
+
+Accessible points in <P>: 4
+Accessible points in <P,T>: 4
+Ordered triples in <P>: 6
+Ordered triples in <P,T>: 6
+
+Prime: 1386618529213
+#E(F_p): 1386617467648
+Certified order(P): 693308733824
+Factorization of order(P): [ <2, 7>, <7, 1>, <71, 1>, <229, 1>, <47591, 1> ]
+Building baby table: 832652 entries
+  Baby steps completed: 100000 / 832652
+  Baby steps completed: 200000 / 832652
+  Baby steps completed: 300000 / 832652
+  Baby steps completed: 400000 / 832652
+  Baby steps completed: 500000 / 832652
+  Baby steps completed: 600000 / 832652
+  Baby steps completed: 700000 / 832652
+  Baby steps completed: 800000 / 832652
+Testing membership of T ...
+T belongs to <P>: false
+
+Eligible point: (142580403282 : 526823158976 : 1)
+  Original branch log: 666136870466
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (142580403282 : 859795370237 : 1)
+  Original branch log: 27171863358
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (1244038125933 : 527140836946 : 1)
+  Original branch log: 822156916
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (1244038125933 : 859477692267 : 1)
+  Original branch log: 692486576908
+  Mirror branch: INACCESSIBLE
+
+Eligible point: (1316438545547 : 152107308206 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch log: 411078458
+
+Eligible point: (1316438545547 : 1234511221007 : 1)
+  Original branch: INACCESSIBLE
+  Mirror branch log: 692897655366
+
+Accessible points in <P>: 4
+Accessible points in <P,T>: 6
+Ordered triples in <P>: 0
+Ordered triples in <P,T>: 6
+
+FINAL CERTIFICATION
+============================================================
+All finite-field eligible-triple primes:
+[ 229, 609613, 1386618529213 ]
+Exceptional primes in <P>:
+[ 609613 ]
+Exceptional primes in <P,T>:
+[ 609613, 1386618529213 ]
+
+Characteristic-zero nonintersection: PASS
+Complete resultant factorization: PASS
+Finite-field triple classification: PASS
+Certified subgroup accessibility: PASS
+
+ALL CERTIFICATION STAGES PASSED
+Total CPU time: 93.380 seconds
+============================================================
+
+An error occurred. See the output for details.
+# 95.0s · Magma V2.30-1 | 93.539s | 130.66MB | seed 1778709747
