@@ -20,8 +20,12 @@ Write z=a_18, which need not be known. The five rows, augmented by a leading 1, 
     A_3  1 1 0 0 z
     B_3  1 0 0 1 z
 
-Exact Gaussian elimination over F_2 gives the identity matrix for both z=0 and z=1. Thus the affine span of the combined original and mirror blocks is all of F_2^4, on the recorded arithmetic data. Every nonzero affine coefficient vector is excluded. This strengthens the earlier calculation using x=1/3: no twist witness is needed, and its factorization is not relied upon.
+Exact Gaussian elimination over F_2 gives the identity matrix for both z=0 and z=1. Thus the affine span of the combined original and mirror blocks is all of F_2^4, on the recorded arithmetic data. Conditional on the recorded arithmetic data, every nonzero affine coefficient vector is excluded. This strengthens the earlier calculation using x=1/3: no twist witness is needed, and its factorization is not relied upon.
 
 ## Scope and stopping criterion
 
-Close the search for a universal affine parity identity on the union of these two branches. This does not exclude branch-specific identities, nonlinear restrictions, eventual identities, or establish recurrence of any configuration. It does not prove Problem H or exclude the all-odd block. The original branch alone remains a separate affine-span question. The arithmetic input from F.38 uses probable primes, as explicitly stated in the paper.
+Conditional on the recorded arithmetic inputs, close the search for a universal affine parity identity on the union of these two branches. This does not exclude branch-specific identities, nonlinear restrictions, eventual identities, or establish recurrence of any configuration. It does not prove Problem H or exclude the all-odd block. The original branch alone remains a separate affine-span question. The arithmetic input from F.38 uses probable primes, as explicitly stated in the paper.
+
+## Review correction: exact dependence on the arithmetic input
+
+Proof given (ChatGPT, AI-authored; human review pending). In the displayed augmented matrix replace the last entry of A_2 by w=a_12. Add B_1 to each of the other rows, then add the resulting A_1 row to the resulting B_3 row. The four rows with leading zero, after dropping that coordinate, are (0,0,1,0), (1,0,0,w), (1,1,0,z), (0,1,0,z). Adding the last two gives (1,0,0,0); adding this to the second gives (0,0,0,w). Thus the augmented rank is 5 if w=1 and 4 if w=0, independently of z. Exact elimination independently executed by ChatGPT on all four (w,z) combinations: ranks 4,4,5,5 in lexicographic order. This confirms Claude comment 7167339349. The full-span conclusion is conditional on the recorded a_n,b_n and in particular on the probable-prime factorization in F.38; if w=0 these five rows alone do not establish full span. The original 24 November raw rectangle log has not been recovered in this review; its listed bits remain inputs, not independently verified here.
