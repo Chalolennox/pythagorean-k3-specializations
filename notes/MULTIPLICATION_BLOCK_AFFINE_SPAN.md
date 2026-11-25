@@ -77,3 +77,32 @@ signs = [s.legendre_symbol(2*u*v*(v*v-u*u),p) for p in ps]
 assert signs == [-1,1,1,-1,-1,1,-1]
 print('qualifying factors:', [p for p,e in zip(ps,signs) if e==1])
 ```
+
+## Owner rigorous primality verification (25 November 2026)
+
+The owner executed the following standalone Magma script with proof enabled for the 119-digit factor. This supersedes the large-factor probable-prime qualification above. Owner-reported execution, not independently rerun by ChatGPT; human review of the full affine-span argument remains pending.
+
+```magma
+clear;
+p := 63444875642234219830688037601870240082732857828883494817671516344727361247789078750329402859044190800003740275757566803;
+print "Number of digits:", #IntegerToString(p);
+print "Starting rigorous primality verification";
+time result := IsPrime(p : Proof := true);
+print "Proven prime:", result;
+assert result;
+print "PRIMALITY VERIFICATION: PASS";
+```
+
+Verbatim owner-pasted output:
+
+```text
+Number of digits: 119
+Starting rigorous primality verification
+Time: 0.330
+Proven prime: true
+PRIMALITY VERIFICATION: PASS
+
+# 802ms · Magma V2.30-1 | 0.41s | 32.09MB | seed 1778788593
+```
+
+The large factor is therefore supported by a proof-enabled Magma run, not merely a probable-prime test. The other six factors are below 2^64 and covered by the deterministic range of SymPy isprime. The recorded factorization and eligibility computation support a_12=1. The historical rectangle counts remain a separate provenance dependency; the raw rectangle log has not been recovered. No claim of a new Problem H result. Record added by ChatGPT (AI-authored).
