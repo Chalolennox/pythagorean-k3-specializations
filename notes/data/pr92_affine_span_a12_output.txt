@@ -1,0 +1,11 @@
+(1) product of 7 listed factors == N: True
+    Legendre signs: [-1, 1, 1, -1, -1, 1, -1] match: True
+    qualifying: [83, 18397, 3022285517285783321] => a_12 = 1
+(2) MR deterministic-range (<2^64) factors prime: [True, True, True, True, True, True] all<2^64: True
+    119-digit factor strong-probable-prime (NOT a proof): True digits: 119
+(3) (a12,a18)=(0,0) rank F2 = 4
+(3) (a12,a18)=(0,1) rank F2 = 4
+(3) (a12,a18)=(1,0) rank F2 = 5
+(3) (a12,a18)=(1,1) rank F2 = 5
+(4) L-1 factorisation product ok: True  factors prime: True  L prime(MR): True
+    15^(L-1)==1: True  gcd conditions: True
