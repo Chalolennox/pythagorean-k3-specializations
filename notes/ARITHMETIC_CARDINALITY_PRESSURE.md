@@ -22,7 +22,9 @@ H is even and G is odd. Hence for every rational parameter t with primitive coor
 s(t)+s(-t) = #{p>=5:p|D(u,v), p=3 mod 4} (mod 2),
 where s(t)=|Q(t)|. Primes 1 mod 4 contribute twice or zero, and primes 3 mod 4 contribute exactly once. If D>0 is squarefree and D=3 mod 4 with gcd(D,6)=1, the right side is odd. This does not assert that even valuations are impossible in general. For integer t, the corresponding squarefree-value step is not established here; the rational two-variable construction below removes that obstruction.
 
-## Theorem: arbitrarily many odd eligible primes with arbitrary finite avoidance
+## Proof given: arbitrarily many odd eligible primes with arbitrary finite avoidance
+
+Status: deduction conditional on the applicability of the cited published squarefree sieve; human review pending.
 
 For every finite forbidden prime set S and every integer r>=1, infinitely many rational parameters t satisfy Q(t) disjoint from S, |Q(t)|>=r and |Q(t)| odd.
 
@@ -31,9 +33,9 @@ Proof. Choose r good split primes p_i as above. For each choose a lift beta_i mo
 - (u,v)=(0,1) mod q for q>=5 in S;
 - (u,v)=(0,1) mod 6.
 
-Let M be the product of these pairwise coprime moduli. The residue class has no fixed square divisor of D: at p_i valuation is exactly one; at other primes dividing M the value is a unit; at any prime ell not dividing M we can additionally prescribe (u,v)=(0,1) mod ell^2, giving D=-1 mod ell^2.
+Let M be the product of these pairwise coprime moduli. The residue class has no fixed square divisor of D: at p_i valuation is exactly one; at other primes dividing M the value is a unit; for each individual prime ell not dividing M, CRT gives a lift of the fixed class modulo M satisfying (u,v)=(0,1) mod ell^2, hence D=-1 mod ell^2. This is a prime-by-prime local solvability argument, not an infinite simultaneous congruence prescription. It also covers primes dividing the discriminant of H that do not divide M; those dividing M are already covered by the preceding cases. Thus no prime square divides every value in the fixed class.
 
-Apply Greaves's squarefree binary-form theorem in the congruence and region version of Lemke Oliver and Thorne, Lemma 6.2 (references below). Every irreducible factor of D has degree <=6 and D is separable. Choose a smooth positive-area domain Omega contained in 0<v<u/6, u<1. On this domain D>0: for t>6, H=t^4(t^2-30)-24t^2-1>0 since t^2>36. The lemma gives a positive leading constant times X^2 squarefree values counted by pairs in X Omega in the fixed CRT class, with error O(X^2/(log X)^(1/3)). In particular infinitely many such pairs exist. Squarefreeness forces gcd(u,v)=1 by homogeneity, and v>0 gives unique reduced parameters. The imposed 2-adic parity gives d=1; D=3 mod 4, and the modulo 3 condition gives D=-1 mod 3. So D is positive squarefree and coprime to 6.
+Apply Greaves's squarefree binary-form theorem in the congruence and region version of Lemke Oliver and Thorne, Lemma 6.2 (references below). Every irreducible factor of D has degree <=6 and D is separable. Choose a smooth positive-area domain Omega contained in 0<v<u/6, u<1. On this domain D>0: for t>6, H=t^4(t^2-30)-24t^2-1>0 since t^2>36. Under the stated congruence-and-region version of the sieve, the lemma gives a positive leading constant times X^2 squarefree values counted by pairs in X Omega in the fixed CRT class, with error O(X^2/(log X)^(1/3)). In particular infinitely many such pairs exist. Squarefreeness forces gcd(u,v)=1 by homogeneity, and v>0 gives unique reduced parameters. The imposed 2-adic parity gives d=1; D=3 mod 4, and the modulo 3 condition gives D=-1 mod 3. So D is positive squarefree and coprime to 6.
 
 Both t=u/v and -t have the r prescribed eligible primes (all p_i=1 mod 4) and avoid S. By Proposition 2 exactly one has odd eligible cardinality. Selecting that sign yields infinitely many distinct rational parameters, since each absolute parameter has at most two signs. QED.
 
@@ -50,3 +52,5 @@ Crucially this does NOT give a grid of the form t(n*2^i*3^j P), nor settle Probl
 - Canonical paper, F.51–F.57 for normalization and qualifying primes; PR #92 companion notes for multiplication constraints.
 
 No novelty claim for max-min optimization or multicoloring. The specific arithmetic theorem is a deduction from published squarefree sieve and Chebotarev results, not a new sieve theorem.
+
+Review clarification (ChatGPT, AI-authored; human review pending): the local fixed-square-divisor argument above addresses Claude comment 7161595194. The published lemma itself was not independently retrieved in this review; its precise hypotheses and error term remain an external-reference verification item. No new density or orbit claim is made.
