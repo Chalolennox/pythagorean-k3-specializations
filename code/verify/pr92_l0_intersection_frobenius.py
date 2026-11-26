@@ -167,7 +167,7 @@ def main():
         if out:
             out.write("%d\t%d\t%d\t%d\t%d\t%d\n" % recs[-1])
             out.flush()
-    print("primes p = 1 mod 8 completely split in K, p <= %d: %d (group order not determined for %d)" % (B, len(recs), skipped))
+    print("primes p = 1 mod 8 completely split in K, p <= %d: %d (group order not determined for %d)" % (max(r[0] for r in recs) if PRIMES_FROM else B, len(recs), skipped))
     print("columns: p, w (pair-vector weight), alpha, beta (J(F_p)[2^inf] = Z/2^alpha x Z/2^beta), v2(#J), a_p mod 32")
     from collections import Counter
     print("weight distribution (expected for independent uniform bits 1:3:3:1):", dict(sorted(Counter(r[1] for r in recs).items())))
@@ -185,7 +185,7 @@ def main():
     ev = [r for r in recs if r[2] >= 2]
     print("   among the %d primes with alpha >= 2 (full 4-torsion): weight distribution %s; among alpha >= 3 (%d primes): %s" % (len(ev), dict(sorted(Counter(r[1] for r in ev).items())), sum(1 for r in recs if r[2] >= 3), dict(sorted(Counter(r[1] for r in recs if r[2] >= 3).items()))))
     print("\nchi-square of statistic vs feature (df in brackets); dependence would show as chi2 well above df (about df + 3 sqrt(2 df) is the 0.3% level):")
-    flag = False
+    flag = {}
     for sn, sf in stats.items():
         for fn, ff in feats.items():
             vals = sorted({sf(r[1]) for r in recs})
@@ -194,9 +194,10 @@ def main():
             x, df = chi2(tab)
             thr = df + 3 * math.sqrt(2 * df) if df else 0
             bad = df > 0 and x > thr
-            flag = flag or bad
+            flag[sn] = flag.get(sn, False) or bad
             print("   %-18s vs %-24s chi2 = %7.2f (df %3d)%s" % (sn, fn, x, df, "   <-- above threshold" if bad else ""))
-    print("\nsummary:", "some statistic shows dependence on Frobenius data (possible overlap)" if flag else "no statistic shows dependence on the 2-adic Frobenius data tested")
+    print("\nsummary: s (the invariant line b1 b2 b3) %s the 2-adic Frobenius data; t (the other two directions) %s." % (
+        "is determined by" if flag.get("s = w mod 2") else "does not depend on", "shows dependence on them (possible further overlap)" if flag.get("t = min(w, 3-w)") else "shows no dependence on them (no sign of further overlap)"))
     print("DONE")
 
 
