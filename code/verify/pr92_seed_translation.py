@@ -47,12 +47,12 @@ def main():
         A,B=images[2],images[3]
         e=d//gcd(504,d)
         r,a,b=lattice(e)
-        assert len(A)==len(B)==r*b
         t=pow(2,U,d)*pow(3,V,d)%d
         assert all(((5*x%d in R)==(t*x%d in R)) for x in A)
         if not A&R:
             assert not B&R
             continue
+        assert len(A)==len(B)==r*b
         active+=1
         assert len(A&R)==len(B&R)==1
         hits=[]
