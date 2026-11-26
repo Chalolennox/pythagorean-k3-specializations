@@ -1,0 +1,5 @@
+primes used: 25994 (5 <= p <= 300000, p != 23)
+<chi_V, 1>     = -0.0065   (0 expected: no trivial constituent)
+<chi_V, chi_V> = 1.0067   (1 = irreducible; a reducible V_D would give at least 2)
+(#rational roots of h, chi_V) -> number of primes: [((0, 0), 15119), ((2, -2), 2490), ((2, 0), 4921), ((2, 2), 2418), ((6, -6), 20), ((6, -4), 104), ((6, -2), 238), ((6, 0), 325), ((6, 2), 242), ((6, 4), 99), ((6, 6), 18)]
+ok   chi_V has mean ~ 0 and mean square ~ 1
