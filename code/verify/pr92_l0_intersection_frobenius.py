@@ -13,7 +13,8 @@ in particular of p mod 2^n, of the trace a_p mod 2^n and of the Smith invariants
 This script scans all primes p = 1 mod 8 up to B that are completely split in K (all 12 points of the discriminant divisor rational, hence completely split in L0), records w, alpha, beta, a_p, and
 reports contingency chi-squares of s, t, w against (alpha, beta), (p mod 32), (a_p mod 32) and against 2-adic valuation v2(#J).  Dependence would indicate an overlap; independence is only evidence of none.
 
-Usage: python3 -I code/verify/pr92_l0_intersection_frobenius.py [--B 30000000] [--out FILE]   (about 30 s per 3e6 of range at the start, slower later; --B 80000000 takes about 15 minutes)
+Usage: python3 -I code/verify/pr92_l0_intersection_frobenius.py [--B 30000000] [--out FILE] [--primes-from FILE]   (about 30 s per 3e6 of range at the start, slower later; --B 80000000 takes about 25 minutes; --primes-from reuses the first column of a previous output, e.g. notes/data/pr92_l0_split_primes.tsv, and then runs in seconds)
+Correction note (26 Nov 2026): the first version took the 2-exponent from the orders of P and the U_j, which can lie in 2 J(F_p) and hide the exponent; the (alpha, beta) of that version were biased.  Fixed: beta comes from random points.
 """
 import math
 import os
@@ -25,6 +26,9 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 sys.path.insert(0, HERE)
 B = 30000000
 OUT = None
+PRIMES_FROM = None
+if "--primes-from" in sys.argv:
+    PRIMES_FROM = sys.argv[sys.argv.index("--primes-from") + 1]
 if "--B" in sys.argv:
     B = int(sys.argv[sys.argv.index("--B") + 1])
 if "--out" in sys.argv:
@@ -83,6 +87,27 @@ def group_order(p, rts, rng):
     return None, e
 
 
+def two_exponent(p, N, nu, rng, tries=30):
+    """v2 of the exponent of J(F_p), from RANDOM points only (the special points P, U_j may lie in 2 J(F_p) and would hide the exponent): the maximum of v2(order) over random points; a random point
+    attains the maximum with probability >= 1/2, so 30 points fail with probability <= 2^-30."""
+    add, neg, mul = sm.group(p)
+    m = N >> nu
+    best = 0
+    for _ in range(tries):
+        while True:
+            x = rng.randrange(p)
+            Y = v.Yc(x) % p
+            if Y and leg(Y, p) == 1:
+                break
+        R = mul(m, (x, v.sqrt_mod(Y, p)))
+        k = 0
+        while R is not None:
+            R = add(R, R)
+            k += 1
+        best = max(best, k)
+    return best
+
+
 def v2(n):
     k = 0
     while n % 2 == 0:
@@ -109,13 +134,15 @@ def chi2(table):
 
 def main():
     rng = random.Random(20261126)
-    S = sieve(B)
+    S = sieve(B) if PRIMES_FROM is None else None
     recs = []
     skipped = 0
     out = open(OUT, "w") if OUT else None
-    for p in range(17, B + 1, 8):
-        if not S[p]:
-            continue
+    if PRIMES_FROM is not None:
+        plist = [int(l.split()[0]) for l in open(PRIMES_FROM)]
+    else:
+        plist = (p for p in range(17, B + 1, 8) if S[p])
+    for p in plist:
         rts = v.roots_mod_p(p)
         if len(rts) != 6 or any(leg(v.Yc(x), p) != 1 for x in rts):
             continue
@@ -133,7 +160,7 @@ def main():
             skipped += 1
             continue
         nu = v2(N)
-        be = v2(e)
+        be = two_exponent(p, N, nu, rng)
         al = nu - be
         a = p + 1 - N
         recs.append((p, w, al, be, nu, a % 32))
@@ -153,6 +180,10 @@ def main():
         "v2(#J)": lambda r: min(r[4], 8),
         "(p mod 32, a_p mod 32)": lambda r: (r[0] % 32, r[5]),
     }
+    agree = sum(1 for r in recs if (r[1] % 2 == 0) == (r[2] >= 2))
+    print("owner's exact certificate (KUMMER_TWO_ADIC_INTERSECTION.md: [b1 b2 b3] = [1+i], L0(J[4]) = L0(sqrt(1+i))) predicts s = 0 iff J(F_p) contains (Z/4)^2 iff alpha >= 2: holds for %d of %d primes" % (agree, len(recs)))
+    ev = [r for r in recs if r[2] >= 2]
+    print("   among the %d primes with alpha >= 2 (full 4-torsion): weight distribution %s; among alpha >= 3 (%d primes): %s" % (len(ev), dict(sorted(Counter(r[1] for r in ev).items())), sum(1 for r in recs if r[2] >= 3), dict(sorted(Counter(r[1] for r in recs if r[2] >= 3).items()))))
     print("\nchi-square of statistic vs feature (df in brackets); dependence would show as chi2 well above df (about df + 3 sqrt(2 df) is the 0.3% level):")
     flag = False
     for sn, sf in stats.items():
