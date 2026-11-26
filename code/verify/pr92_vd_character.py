@@ -38,4 +38,64 @@ print("<chi_V, chi_V> = %.4f   (1 = irreducible; a reducible V_D would give at l
 print("(#rational roots of h, chi_V) -> number of primes:", sorted(cnt.items()))
 ok = abs(s1 / n) < 0.05 and abs(s2 / n - 1) < 0.1
 print(("ok   " if ok else "FAIL ") + "chi_V has mean ~ 0 and mean square ~ 1")
-sys.exit(0 if ok else 1)
+
+# Comparison with the owner-attested exact Galois computation (PR #83 comment 7201408002, Magma V2.30-1): |G| = 1536, trace histogram of chi_V
+# at -6,-4,-2,0,2,4,6 equal to 1,6,159,1204,159,6,1.  By Chebotarev the observed trace frequencies should match these proportions.
+OWNER = {-6: 1, -4: 6, -2: 159, 0: 1204, 2: 159, 4: 6, 6: 1}
+obs = Counter()
+for (nr, S), c in cnt.items():
+    obs[S] += c
+chi2 = 0.0
+print("\ntrace   observed frequency   owner group frequency")
+for t in sorted(OWNER):
+    e = OWNER[t] / 1536
+    chi2 += (obs[t] - n * e) ** 2 / (n * e)
+    print("%5d   %.5f              %.5f" % (t, obs[t] / n, e))
+print("chi-square statistic (6 degrees of freedom): %.2f" % chi2)
+six = sum(c for (nr, S), c in cnt.items() if nr == 6) / n
+print("fraction of primes with 6 rational roots: %.4f (1/24 = %.4f for the owner's group acting on 6 pairs through a quotient of order 24)" % (six, 1 / 24))
+ok2 = chi2 < 16.8 and set(nr for (nr, S) in cnt) <= {0, 2, 6}  # 99 percent point of chi-square with 6 d.o.f. is 16.81
+print(("ok   " if ok2 else "FAIL ") + "observed trace distribution consistent with the owner's group (chi-square below the 99% point); root counts only 0, 2, 6")
+
+# R(z) = prod (z^2 - Y(x_i)) over the roots of h, computed exactly as the characteristic polynomial of multiplication by Y on Q[x]/(h)
+from fractions import Fraction as Fr
+hh = [Fr(c) for c in v.FC]
+
+
+def mulmod(a, b):
+    r = [Fr(0)] * 11
+    for i, x in enumerate(a):
+        for j, y in enumerate(b):
+            r[i + j] += x * y
+    for k in range(10, 5, -1):
+        c = r[k]
+        if c:
+            for i in range(7):
+                r[k - 6 + i] -= c * hh[i]
+    return r[:6]
+
+
+Ycoef = [Fr(0), Fr(2), Fr(-2), Fr(1), Fr(0), Fr(0)]
+cols = []
+for j in range(6):
+    e = [Fr(0)] * 6
+    e[j] = Fr(1)
+    cols.append(mulmod(Ycoef, e))
+Mx = [[cols[j][i] for j in range(6)] for i in range(6)]
+I6 = [[Fr(int(i == j)) for j in range(6)] for i in range(6)]
+
+
+def mm(A, Bm):
+    return [[sum(A[i][k] * Bm[k][j] for k in range(6)) for j in range(6)] for i in range(6)]
+
+
+cp, Mk = [Fr(1)], I6
+for k in range(1, 7):
+    if k > 1:
+        Mk = [[mm(Mx, Mk)[i][j] + cp[-1] * I6[i][j] for j in range(6)] for i in range(6)]
+    AM = mm(Mx, Mk)
+    cp.append(-sum(AM[i][i] for i in range(6)) / k)
+OWNER_R = [1, -66, -29922, 73214, -62559, 22032, -3456]  # R(z) = z^12 - 66 z^10 - 29922 z^8 + 73214 z^6 - 62559 z^4 + 22032 z^2 - 3456, in w = z^2
+ok3 = [int(c) for c in cp] == OWNER_R
+print(("ok   " if ok3 else "FAIL ") + "char poly of Y mod h equals the owner's R(w), w = z^2: %s" % [int(c) for c in cp])
+sys.exit(0 if (ok and ok2 and ok3) else 1)

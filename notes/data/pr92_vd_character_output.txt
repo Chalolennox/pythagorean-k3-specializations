@@ -3,3 +3,16 @@ primes used: 25994 (5 <= p <= 300000, p != 23)
 <chi_V, chi_V> = 1.0067   (1 = irreducible; a reducible V_D would give at least 2)
 (#rational roots of h, chi_V) -> number of primes: [((0, 0), 15119), ((2, -2), 2490), ((2, 0), 4921), ((2, 2), 2418), ((6, -6), 20), ((6, -4), 104), ((6, -2), 238), ((6, 0), 325), ((6, 2), 242), ((6, 4), 99), ((6, 6), 18)]
 ok   chi_V has mean ~ 0 and mean square ~ 1
+
+trace   observed frequency   owner group frequency
+   -6   0.00077              0.00065
+   -4   0.00400              0.00391
+   -2   0.10495              0.10352
+    0   0.78345              0.78385
+    2   0.10233              0.10352
+    4   0.00381              0.00391
+    6   0.00069              0.00065
+chi-square statistic (6 degrees of freedom): 1.62
+fraction of primes with 6 rational roots: 0.0402 (1/24 = 0.0417 for the owner's group acting on 6 pairs through a quotient of order 24)
+ok   observed trace distribution consistent with the owner's group (chi-square below the 99% point); root counts only 0, 2, 6
+ok   char poly of Y mod h equals the owner's R(w), w = z^2: [1, -66, -29922, 73214, -62559, 22032, -3456]
