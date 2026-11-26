@@ -49,3 +49,17 @@ AI-authored, no human review.  Script `code/verify/pr92_sieve_dimension.py` (std
 * **Numerical test of Step 4.** Over B in [31622, 2·10^6]: kappa_A (slope of sum a_p/d_p against log log B) = 0.494, kappa_D (same for sum |D_p^+|/p) = 0.501, ratio C = 0.986; the difference sum a_p/d_p - sum |D_p^+|/p stays between -0.3835 and -0.3972 (it does not drift), so C = 1 to within the noise (a few percent).  An Artin-type constant different from 1 by more than a few percent is excluded numerically; an exactly-1 statement is not proved.
 
 **Consequence (heuristic).** With kappa = 1/2 the critical-exponent reading of the first part of this note is no longer a numerical coincidence: the mean number of eligible primes covering a fixed n grows like (1/2) log log of the size of the attached integer, so P(Q(n) empty) is of order (log D(n))^(-1/2), about 1/n if log D(n) grows like n^2, and the expected number of empty n <= X is of order log X: the borderline.  What would change this: (i) a different kappa (it is 2^(1-r) in general, where r in {0,1,2} is the rank of <Y, g> in L*/L*^2; here r = 2, Step 2); (ii) a constant C not equal to 1; (iii) correlations among the large primes (parity-type obstructions) which the heuristic ignores.  Note for review: the relation "H would follow from infinitely many empty Q(n)" is the statement of the PR notes; this addendum does not prove or use it.
+
+## Addendum 2: parity balance of the finite coverage count (26 Nov 2026)
+AI-authored, no human review.  Observed numerics only.  Script `code/verify/pr92_parity_balance.py`, output `notes/data/pr92_parity_balance_output.txt`.  Prompted by the strategic clarification on #83 (comment 7200962556), which points out that Problem H needs only an even qualifying support infinitely often, not an empty one.
+
+For n in [1, 10^6] and primes p <= B, the fraction of n with X_B(n) even is compared with the independent-Bernoulli prediction (1 + prod (1 - 2 c_p))/2:
+
+| B | even (observed) | model | empty (observed) | model prod(1-c_p) |
+|---:|---:|---:|---:|---:|
+| 10^3 | 0.7977 | 0.8007 | 0.7805 | 0.7821 |
+| 10^4 | 0.7402 | 0.7413 | 0.7001 | 0.7006 |
+| 10^5 | 0.6918 | 0.6891 | 0.6224 | 0.6203 |
+| 3·10^5 | 0.6758 | 0.6732 | 0.5958 | 0.5937 |
+
+The observed parity matches the model to about 0.3 percent at every cutoff, with no detectable parity bias beyond it.  The bias prod(1 - 2 c_p) is expected to decay like (log B)^(-C + o(1)), i.e. very slowly, so the fraction of even supports approaches 1/2 only at astronomically large B in this model; the table shows the first stage of that decay and nothing more.  Limits as before: fixed finite sieve, window 10^6, no large primes, and the parity that matters for Problem H is that of the complete support |Q(n)| (all primes), not of X_B.  Observed numerics, not a proof of parity balance for the orbit.
