@@ -11,7 +11,7 @@ then E[1[Q in <P>] / d_p] = w(p, Q) / N, so
 and the sieve constant is C = C_2 * prod_{l odd} C_l with C_l = 1 under the hypotheses above.  Replacing the odd part of the indicator by its conditional expectation removes the heavy-tailed
 fluctuation caused by small odd orders d_p.  For p <= --fullB the script also computes the full indicator a_p / d_p (a_p = #(D_p^+ ∩ <P>), d_p = ord P) to test the uniform-odd-part hypothesis:
 the paired differences a_p/d_p - sum_Q w/N_p must average to 0 within their standard error.
-Usage: python3 -I code/verify/pr92_c2_estimator.py [--B 5000000] [--fullB 400000] [--out FILE] [--procs 2]
+Usage: python3 -I code/verify/pr92_c2_estimator.py [--B 5000000] [--lo 7] [--fullB 400000] [--out FILE] [--procs 2]   (--lo: smallest prime; ranges can be run separately and the TSV files concatenated)
 Output: one TSV line per prime with a non-empty D_p^+: p N nu alpha beta vP nelig n_in2 sumw d hits   (d, hits = 0, -1 above fullB); alpha, beta from 8 random points (alpha = nu - beta).
 """
 import math
@@ -27,8 +27,11 @@ B = 5000000
 FULLB = 400000
 OUT = None
 PROCS = 2
+LO = 7
 for i, a in enumerate(sys.argv):
-    if a == "--B":
+    if a == "--lo":
+        LO = int(sys.argv[i + 1])
+    elif a == "--B":
         B = int(sys.argv[i + 1])
     elif a == "--fullB":
         FULLB = int(sys.argv[i + 1])
@@ -160,7 +163,7 @@ def work(p):
 
 
 def main():
-    primes = [p for p in v.primes_upto(B) if p >= 7 and p != 23]
+    primes = [p for p in v.primes_upto(B) if p >= max(7, LO) and p != 23]
     out = open(OUT, "w") if OUT else None
     cnt = 0
     with Pool(PROCS) as pool:
