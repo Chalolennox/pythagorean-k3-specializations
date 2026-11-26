@@ -1,0 +1,11 @@
+# Arithmetic translation monoid (fixed sixteen primes)
+
+Use the residue rows in code/verify/pr92_seed_translation.py and base seed N=504. For each active prime put e_p=d_p/gcd(N,d_p), and D=lcm of these effective moduli. The active supports are singletons. Direct orbit enumeration gives inactive primes 12907 and 77347, effective moduli 2155 and 38711 respectively, and D=126709678149187856271474822785063992070204621127241. The three moduli are pairwise coprime (exact gcd checks).
+
+The map phi: Z^2 -> (Z/D)^* sending (u,v) to 2^u 3^v has kernel Lambda, the intersection of active local period lattices. Thus Z^2/Lambda is isomorphic to H=<2,3> modulo D. For a multiplier m with residue in H, all active labels translate by the unique class tau_m=phi^{-1}(m). This follows directly from N m 2^i 3^j congruent to N 2^(i+u) 3^(j+v) modulo each active d_p.
+
+Define M0 by m positive, coprime to 6, m mod D in H, m a unit modulo 2155, and m mod 38711 in <2,3>. This is a multiplicative monoid. At 12907 neither qualifying residue divided by gcd(N,d_p) is a unit modulo 2155 (or the residue is not divisible by that gcd); hence unit multipliers cannot activate it. At 77347 the last condition preserves the original multiplication orbit, which is inactive. Thus every m in M0 preserves the full sixteen-prime label configuration up to translation, and tau_mn=tau_m+tau_n. CRT (including modulus 6) realizes every class of H by a positive integer m in M0. In particular the translation map is surjective. The active lattice index is odd, so no subgroup of order 32 exists.
+
+Direct orbit enumeration in this review confirms that 504, 5544 have no hits at 77347, whereas 60984=504*121 has hit 5713. All active supports remain singletons for these seeds. To establish the claimed failure of closure of the full admissible set one additionally needs the simultaneous translation certificate for multiplier 11, not merely singleton counts; this is provided by the CRT test in the connected-tori verification workflow, but was not independently rerun in this commit. No quotient coset numbering or counts from the earlier discussion are needed for the theorem.
+
+Scope: fixed sixteen-prime local labels, not complete parity. Surjectivity concerns translations of a single configuration, not inequivalent tori. No conclusion for Problem H.
