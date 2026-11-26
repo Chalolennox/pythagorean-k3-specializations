@@ -1,0 +1,19 @@
+primes used 15059 skipped (ambiguous N) 203
+overall ratio 1.040 (sumA 0.2072 sumD 0.1992)
+mod 4
+  p=1: n=6413 ratio 1.072 +- 0.068
+  p=3: n=8646 ratio 1.008 +- 0.052
+mod 8
+  p=1: n=3109 ratio 1.197 +- 0.137
+  p=3: n=4329 ratio 0.983 +- 0.045
+  p=5: n=3304 ratio 0.964 +- 0.054
+  p=7: n=4317 ratio 1.035 +- 0.107
+mod 16
+  p=1: n=1506 ratio 1.381 +- 0.244
+  p=3: n=2141 ratio 0.927 +- 0.065
+  p=5: n=1648 ratio 0.882 +- 0.066
+  p=7: n=2136 ratio 1.003 +- 0.073
+  p=9: n=1603 ratio 1.020 +- 0.146
+  p=11: n=2188 ratio 1.035 +- 0.068
+  p=13: n=1656 ratio 1.040 +- 0.090
+  p=15: n=2181 ratio 1.064 +- 0.175

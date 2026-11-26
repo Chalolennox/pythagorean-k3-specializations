@@ -106,6 +106,37 @@ def main():
     check("Part 2: fraction of eligible x-values that are squares is within 0.03 of 1/2", abs(sq / tot - 0.5) < 0.03)
     print("   accessible eligible points seen (n up to the walk length) with x a square: %d of %d" % (acc_sq, acc))
     check("Part 2: every accessible eligible point has x a square (delta(P) = 1)", acc == acc_sq and acc > 0)
+    # Part 3: full 2-descent when J[2] is rational (p = 1 mod 4): classes over L(i)
+    rows6, rows3 = [], []
+    for p in v.primes_upto(6000):
+        if p % 4 != 1:
+            continue
+        iv = next(z for z in range(2, p) if z * z % p == p - 1)
+        for x in v.roots_mod_p(p):
+            for I in (iv, p - iv):
+                gens6 = [2, x, 1 - x, 2 - x, x - 1 - I, x - 1 + I]
+                s6 = [leg(g, p) for g in gens6]
+                Y = x * (x - 1 - I) * (x - 1 + I)
+                g = 2 * (1 - x) * x * (2 - x)
+                s3 = [leg(x, p), leg(Y, p), leg(g, p)]
+                if 0 not in s6:
+                    rows6.append(sum(1 << k for k, t in enumerate(s6) if t == -1))
+                if 0 not in s3:
+                    rows3.append(sum(1 << k for k, t in enumerate(s3) if t == -1))
+    r6, r3 = rank_f2(rows6), rank_f2(rows3)
+    check("Part 3: over L(i), classes of {2, x, 1-x, 2-x, x-1-i, x-1+i} have rank %d on %d degree-one primes (independent iff 6); {x, Y, g} rank %d (3)" % (r6, len(rows6), r3), r6 == 6 and r3 == 3)
+    # Part 4: D has no torsion point.  D is one Galois orbit (Part 1 of pr92_sieve_dimension.py), conjugates of a torsion point have equal order, and torsion injects into the
+    # reduction at primes of good reduction unramified in Q(D) (Res(h,Y) = +-2^7 3^3 and disc h = 2^6 3^18 23^2 make 83 unramified); so differing orders at p = 83 show that no point of D is torsion.
+    p = 83
+    add, neg, mul = sm.group(p)
+    orders = set()
+    for pt in sm.points(p)[0]:
+        k, Q = 1, pt
+        while Q is not None:
+            Q = add(Q, pt)
+            k += 1
+        orders.add(k)
+    check("Part 4: orders of the rational points of D mod 83 are %s (not all equal), so no point of D is torsion" % sorted(orders), len(orders) > 1)
     print("DONE")
     return 0 if ok else 1
 
