@@ -8,7 +8,7 @@ For a prime p, an eligible rational point Q in D_p^+ and a prime l let nu_l = v_
 For a set S of primes, w_S = prod_{l in S} w_l.  If the l-primary components for l in S behave like independent uniform points relative to P (Kummer model), E[w_l] = 1 and E[w_S] = 1.
 The local factor is C_l := lim (sum_p sum_Q w_l/N_p) / (sum_p |D_p^+|/N_p) and the joint factor C_S likewise with w_S; C = C_S * prod_{l not in S} C_l.  The joint factor tests the product structure
 (cross-prime entanglement through Q(sqrt -6, sqrt 69) in Q(zeta_552)).
-Usage: python3 -I code/verify/pr92_c_local_factors.py [--B 10000000] [--out FILE] [--procs 2]
+Usage: python3 -I code/verify/pr92_c_local_factors.py [--B 10000000] [--lo 7] [--out FILE] [--procs 2]   (ranges can be run separately and the TSV files concatenated)
 Output: one TSV line per prime with non-empty D_p^+:  p N nelig  w_2 w_3 w_5 w_7 w_11 w_13 w_23 w_S   (each w = sum over the eligible Q at p)
 """
 import math
@@ -23,8 +23,11 @@ sys.path.insert(0, HERE)
 B = 10000000
 OUT = None
 PROCS = 2
+LO = 7
 for i, a in enumerate(sys.argv):
-    if a == "--B":
+    if a == "--lo":
+        LO = int(sys.argv[i + 1])
+    elif a == "--B":
         B = int(sys.argv[i + 1])
     elif a == "--out":
         OUT = sys.argv[i + 1]
@@ -132,7 +135,7 @@ def work(p):
 
 
 def main():
-    primes = [p for p in v.primes_upto(B) if p >= 7 and p != 23]
+    primes = [p for p in v.primes_upto(B) if p >= max(7, LO) and p != 23]
     out = open(OUT, "w") if OUT else sys.stdout
     cnt = 0
     with Pool(PROCS) as pool:

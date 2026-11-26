@@ -4,6 +4,7 @@
 Written by Claude (a language model), 26 November 2026; no human has checked it.  Numerical evidence only; no claim about Problem H.
 Usage: python3 -I code/verify/pr92_c2_analysis.py notes/data/pr92_c2_estimator.tsv [lo] [blocks]      (lo = smallest p included in the slope, default 30000)
 """
+import gzip
 import math
 import sys
 from collections import defaultdict
@@ -13,7 +14,7 @@ LO = int(sys.argv[2]) if len(sys.argv) > 2 else 30000
 NB = int(sys.argv[3]) if len(sys.argv) > 3 else 20
 rows = []
 und = 0
-for l in open(fn):
+for l in (gzip.open(fn, "rt") if fn.endswith(".gz") else open(fn)):
     t = l.split()
     p, N, nu, al, be, vP, ne, n2 = map(int, t[:8])
     sw = float(t[8])

@@ -1,0 +1,41 @@
+131581 primes with non-empty D_p^+ (undetermined group order: 0), largest p = 9999877
+
+C_2 estimate (sum w/N)/(sum |D+|/N) over p >= 30000: 0.9954  (block mean 1.0079 +- 0.0042 from 20 blocks)
+by range:
+      30000 <= p <   100000:   1261 primes, C_2 = 0.9886 (block se 0.0408)
+     100000 <= p <   300000:   3255 primes, C_2 = 0.9888 (block se 0.0289)
+     300000 <= p <  1000000:  10333 primes, C_2 = 0.9881 (block se 0.0138)
+    1000000 <= p <  3000000:  27189 primes, C_2 = 1.0076 (block se 0.0081)
+    3000000 <= p < 10000001:  88906 primes, C_2 = 1.0095 (block se 0.0073)
+
+uniform-odd-part check on 6723 primes (p <= 399983): sum a_p/d_p = 0.5254, sum RB = 0.5348, difference -0.0095 +- 0.0501 (paired standard error); ratios: full 0.654, RB 0.666 (including small p)
+   restricted to p >= 30000 (6086 primes): full 0.9833, RB 0.9929
+
+breakdown by p mod 8 (weights 1/N): share of sum|D+|/N, mean w per eligible point, C_2 contribution
+   p = 1 mod 8:  28398 primes, share of denominator 0.243, C_2 within class 0.9805, fraction of eligible points with Q_2 in <P_2>: 0.1775
+   p = 3 mod 8:  37183 primes, share of denominator 0.250, C_2 within class 0.9984, fraction of eligible points with Q_2 in <P_2>: 0.5000
+   p = 5 mod 8:  28307 primes, share of denominator 0.255, C_2 within class 0.9939, fraction of eligible points with Q_2 in <P_2>: 0.4995
+   p = 7 mod 8:  37056 primes, share of denominator 0.252, C_2 within class 1.0082, fraction of eligible points with Q_2 in <P_2>: 0.3394
+
+breakdown for p = 1 mod 8 by (alpha, beta, vP): count of eligible points, fraction with Q_2 in <P_2>, mean w
+   (alpha,beta,vP) = (1, 1, 0)    eligible points  41400, in <P_2>: 0.248, mean w 0.991
+   (alpha,beta,vP) = (2, 2, 1)    eligible points  20248, in <P_2>: 0.135, mean w 1.077
+   (alpha,beta,vP) = (2, 3, 0)    eligible points   1298, in <P_2>: 0.031, mean w 0.986
+   (alpha,beta,vP) = (2, 3, 1)    eligible points   1220, in <P_2>: 0.059, mean w 0.944
+   (alpha,beta,vP) = (2, 3, 2)    eligible points   5092, in <P_2>: 0.125, mean w 0.999
+   (alpha,beta,vP) = (2, 4, 0)    eligible points    310, in <P_2>: 0.013, mean w 0.826
+   (alpha,beta,vP) = (2, 4, 1)    eligible points    302, in <P_2>: 0.060, mean w 1.907
+   (alpha,beta,vP) = (2, 4, 2)    eligible points    632, in <P_2>: 0.063, mean w 1.013
+   (alpha,beta,vP) = (2, 4, 3)    eligible points   2470, in <P_2>: 0.121, mean w 0.972
+   (alpha,beta,vP) = (2, 5, 3)    eligible points    354, in <P_2>: 0.073, mean w 1.175
+   (alpha,beta,vP) = (2, 5, 4)    eligible points   1418, in <P_2>: 0.103, mean w 0.824
+   (alpha,beta,vP) = (2, 6, 4)    eligible points    200, in <P_2>: 0.060, mean w 1.280
+   (alpha,beta,vP) = (2, 6, 5)    eligible points    758, in <P_2>: 0.121, mean w 1.098
+   (alpha,beta,vP) = (2, 6, 6)    eligible points    742, in <P_2>: 0.137, mean w 1.143
+   (alpha,beta,vP) = (3, 3, 0)    eligible points    678, in <P_2>: 0.015, mean w 0.944
+   (alpha,beta,vP) = (3, 3, 1)    eligible points   2028, in <P_2>: 0.033, mean w 1.041
+   (alpha,beta,vP) = (3, 4, 1)    eligible points    344, in <P_2>: 0.029, mean w 1.860
+   (alpha,beta,vP) = (3, 4, 2)    eligible points    448, in <P_2>: 0.022, mean w 0.714
+   (alpha,beta,vP) = (3, 5, 3)    eligible points    256, in <P_2>: 0.008, mean w 0.250
+   (alpha,beta,vP) = (4, 4, 2)    eligible points    276, in <P_2>: 0.014, mean w 0.928
+DONE
