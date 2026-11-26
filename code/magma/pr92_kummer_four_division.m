@@ -1,0 +1,65 @@
+clear;
+print "EXACT 4-DIVISION FIELD CONTAINMENT";
+START := Cputime();
+Q := RationalField();
+R<X> := PolynomialRing(Q);
+h := (1-X)^6-30*(1-X)^4-24*(1-X)^2-1;
+K := SplittingField(h);
+print "Splitting field degree:",Degree(K);
+KX<Z> := PolynomialRing(K);
+if not IsSquare(K!(-1)) then K := ext<K | Z^2+1>; end if;
+KX<Z> := PolynomialRing(K);
+if not IsSquare(K!2) then K := ext<K | Z^2-2>; end if;
+F := K;
+print "Final absolute degree:",AbsoluteDegree(F);
+ok,ii := IsSquare(F!(-1)); assert ok;
+ok,r2 := IsSquare(F!2); assert ok;
+FX<Z> := PolynomialRing(F);
+rt := Roots(FX!h); assert #rt eq 6;
+xx := [r[1] : r in rt];
+YY := [a*(a^2-2*a+2) : a in xx];
+assert &*xx eq -54;
+assert &*YY eq -3456;
+pairs := []; used := {};
+for j in [1..6] do
+    if j in used then continue; end if;
+    k := Index(xx,2-xx[j]);
+    assert k ne 0 and k ne j;
+    Append(~pairs,<j,k>);
+    Include(~used,j); Include(~used,k);
+end for;
+assert #pairs eq 3;
+print "Root pairs:",pairs;
+reps := [p[1] : p in pairs];
+beta := &*[xx[j]-1-ii : j in reps];
+betaBar := &*[xx[j]-1+ii : j in reps];
+assert beta*betaBar eq 8;
+delta := beta/(1+ii); assert delta ne 0;
+V := VectorSpace(GF(2),6);
+vectors := Setseq(Seqset([v : v in V]));
+found := false; tested := 0;
+for weight in [0..6] do
+    print "Hamming weight:",weight,"CPU time:",Cputime(START);
+    for v in vectors do
+        if #[j : j in [1..6] | v[j] ne 0] ne weight then continue; end if;
+        candidate := delta;
+        for j in [1..6] do
+            if v[j] ne 0 then candidate *:= YY[j]; end if;
+        end for;
+        tested +:= 1;
+        printf "Test %o: %o\n",tested,v;
+        ok,root := IsSquare(candidate);
+        if ok then
+            assert root^2 eq candidate;
+            print "EXACT CERTIFICATE FOUND";
+            print "Square-class vector:",v;
+            print "Square root:",root;
+            print "Exact square verification: PASS";
+            found := true; break;
+        end if;
+    end for;
+    if found then break; end if;
+end for;
+print "Tests completed:",tested;
+print "Certificate found:",found;
+print "CPU time:",Cputime(START);
