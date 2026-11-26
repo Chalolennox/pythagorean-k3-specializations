@@ -1,0 +1,18 @@
+ok   Step 1: h mod 11 has factor degrees [3, 3] (expected [3, 3]) and h mod 29 has [2, 4] (expected [2, 4]); hence h is irreducible over Q
+ok   Step 2: non-square witnesses (p, root x mod p) for Y, g(1-x), Y*g(1-x): {'Y': (7, 4), 'g': (7, 4), 'Yg': (19, 18)}
+ok   Step 2/3: so L[y,w]/(y^2-Y, w^2-g) is a field of degree 4 over L; X~ has one Galois orbit of 24 points, X one orbit of 12, Spec L one orbit of 6
+
+Step 3 numerics (primes 7 <= p <= B, p != 23): means of #roots, |D_p|, |D_p^+| should tend to 1, 1, 0.5 (Chebotarev error about 1/sqrt(#primes))
+Step 4 numerics: S_A = sum a_p/d_p, S_D = sum |D_p^+|/p, and kappa_eff = d S / d loglog B between rows
+   B         #primes  mean|roots|  mean|D_p|  mean|D_p^+|   S_A      S_D      S_A-S_D   kappa_A  kappa_D
+   1000      165      0.9091       0.9333     0.5212        0.2384   0.6219   -0.3835   nan      nan     
+   3162      443      1.0113       1.0519     0.4876        0.2834   0.6918   -0.4084   0.292    0.454   
+   10000     1226     0.9592       0.9478     0.4535        0.3482   0.7515   -0.4033   0.485    0.447   
+   31622     3398     0.9694       0.9653     0.4868        0.4165   0.8112   -0.3948   0.579    0.507   
+   100000    9589     0.9888       0.9805     0.4939        0.4700   0.8644   -0.3944   0.509    0.505   
+   316227    27290    0.9983       0.9911     0.4967        0.5162   0.9125   -0.3963   0.485    0.505   
+   1000000   78495    0.9968       0.9939     0.4954        0.5592   0.9557   -0.3966   0.493    0.497   
+   2000000   148929   0.9972       0.9926     0.4952        0.5828   0.9800   -0.3972   0.482    0.495   
+ok   Step 3 numerics: means 0.997, 0.993, 0.495 within 0.05 of 1, 1, 0.5
+   over B in [31622, 2000000]: kappa_A = 0.494, kappa_D = 0.501, ratio C = 0.986
+DONE
