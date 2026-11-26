@@ -1,0 +1,99 @@
+============================================
+SIGNED GALOIS REPRESENTATION
+============================================
+h(x) = x^6 - 6*x^5 - 15*x^4 + 100*x^3 - 189*x^2 + 162*x - 54
+Y(x) = x^3 - 2*x^2 + 2*x
+Irreducibility of h: PASS
+Discriminant of h: [ <2, 6>, <3, 18>, <23, 2> ]
+
+STEP 1: RESULTANT
+R(z) = z^12 - 66*z^10 - 29922*z^8 + 73214*z^6 - 62559*z^4 + 22032*z^2 - 3456
+Degree = 12
+Squarefree = true
+Irreducible = true
+
+STEP 2: Y-COORDINATE SEPARATION
+Polynomial of Y-values = z^6 - 66*z^5 - 29922*z^4 + 73214*z^3 - 62559*z^2 + 22032*z - 3456
+Degree = 6
+Squarefree = true
+Y-coordinate separation: PASS
+
+STEP 3: GALOIS GROUP
+Starting exact Galois-group computation
+Galois computation time: 0.200
+Group order = 1536
+Permutation degree = 12
+Transitive = true
+Generators:
+{
+    (1, 8, 5, 3, 11, 9)(2, 12, 10)(4, 7, 6),
+    (1, 11, 10)(2, 12, 9, 4, 7, 5)(3, 8, 6),
+    (8, 11),
+    (5, 9),
+    (7, 12),
+    (2, 4),
+    (1, 9)(2, 10)(3, 5)(4, 6)(7, 12),
+    (1, 3),
+    (1, 6, 3, 10)(2, 9, 4, 5)(7, 12),
+    (6, 10)
+}
+
+STEP 4: OPPOSITE-ROOT PAIRING
+Number of invariant opposite pairings: 1
+Unique invariant pairing: PASS
+Six geometric pairs: [
+    { 1, 3 },
+    { 2, 4 },
+    { 5, 9 },
+    { 6, 10 },
+    { 7, 12 },
+    { 8, 11 }
+]
+Chosen representatives: [ 1, 2, 5, 6, 7, 8 ]
+
+STEP 5: EXACT CHARACTER COMPUTATION
+Character computation time: 0.000
+
+Character distribution:
+Trace = -6 Multiplicity = 1
+Trace = -4 Multiplicity = 6
+Trace = -2 Multiplicity = 159
+Trace = 0 Multiplicity = 1204
+Trace = 2 Multiplicity = 159
+Trace = 4 Multiplicity = 6
+Trace = 6 Multiplicity = 1
+
+============================================
+EXACT RESULTS
+============================================
+Group order = 1536
+Representation dimension = 6
+Sum of characters = 0
+Sum of squared characters = 1536
+<chi,1> = 0
+<chi,chi> = 1
+No trivial constituent = true
+Absolutely irreducible = true
+
+============================================
+CONCLUSION
+============================================
+SIGNED REPRESENTATION: PASS
+V_D is absolutely irreducible.
+V_D has no trivial constituent.
+
+Using the established non-torsion results:
+P,U_1,...,U_6 are independent modulo torsion.
+Rank J(K) >= 7.
+
+MORDELL-WEIL INDEPENDENCE: PASS
+Subject to the non-torsion proof.
+
+This does not establish C = 1.
+Problem H remains open.
+
+============================================
+COMPUTATION FINISHED
+============================================
+
+# 1.2s · Magma V2.30-1 | 0.33s | 32.09MB | seed 2499246698
