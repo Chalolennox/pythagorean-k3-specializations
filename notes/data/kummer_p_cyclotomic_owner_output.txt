@@ -1,0 +1,91 @@
+============================================
+OPTIMIZED CYCLOTOMIC CONTAINMENT
+============================================
+--------------------------------------------
+Lifting torsion level: 2
+First generator: PASS
+Second generator: PASS
+Full torsion level: 4
+Absolute degree: 8
+--------------------------------------------
+Lifting torsion level: 4
+First generator: PASS
+Second generator: PASS
+Full torsion level: 8
+Absolute degree: 64
+--------------------------------------------
+Lifting torsion level: 8
+First generator: PASS
+Second generator: PASS
+Full torsion level: 16
+Absolute degree: 512
+T_16 CONSTRUCTION: PASS
+--------------------------------------------
+CONSTRUCTING ZETA_32
+Primitive 32nd root: VERIFIED
+--------------------------------------------
+CONSTRUCTING QUARTER POINT
+Quarter point: VERIFIED
+--------------------------------------------
+CONSTRUCTING QUADRATIC GENERATORS
+Number of radical generators: 4
+Initial candidates: 16
+--------------------------------------------
+FINITE-FIELD FILTERING
+--------------------------------------------
+Prime: 2113
+Full torsion reduction: VERIFIED
+Generator character bits: [ 1, 0, 0, 0 ]
+Target character bit: 1
+Candidates before: 16
+Candidates after: 8
+--------------------------------------------
+Prime: 6689
+Full torsion reduction: VERIFIED
+Generator character bits: [ 0, 0, 0, 1 ]
+Target character bit: 0
+Candidates before: 8
+Candidates after: 4
+--------------------------------------------
+Prime: 10177
+Full torsion reduction: VERIFIED
+Generator character bits: [ 1, 0, 0, 0 ]
+Target character bit: 1
+Candidates before: 4
+Candidates after: 4
+--------------------------------------------
+Prime: 14753
+Full torsion reduction: VERIFIED
+Generator character bits: [ 1, 1, 1, 1 ]
+Target character bit: 1
+Candidates before: 4
+Candidates after: 2
+--------------------------------------------
+Filtering primes used: 4
+Surviving candidates: [
+    [ 1, 0, 0, 0 ],
+    [ 1, 1, 1, 0 ]
+]
+--------------------------------------------
+EXACT NUMBER-FIELD VERIFICATION
+--------------------------------------------
+Testing candidate: [ 1, 0, 0, 0 ]
+Exact square test: true
+============================================
+EXACT SQUARE-CLASS CERTIFICATE: PASS
+Exponent vector: [ 1, 0, 0, 0 ]
+x(S)/zeta_32 is square in T_32
+sqrt(x(S)) belongs to T_64
+POSITIVE CONTAINMENT: PROVED
+============================================
+============================================
+FINAL SUMMARY
+============================================
+Largest torsion field constructed: T_16
+Absolute field degree: 512
+Filtering primes: 4
+Surviving candidates: 2
+Positive containment proved: true
+============================================
+
+# 23.7s · Magma V2.30-1 | 23.329s | 32.09MB | seed 1778953886
