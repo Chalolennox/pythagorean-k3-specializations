@@ -1,0 +1,7 @@
+(1) |G| = 1536; image on the 6 x-coordinates 24; kernel (sign flips) 64; invariant pairings 1; image on the 3 pairs 6
+(3) K-split primes p = 1 mod 8 with chi(1+i) = +1 among the first 3000 scan primes: 1518; violations of {sum c_i = 0, sum n_i = [p = 9 mod 16]}: 0; rank of the S_3-orbit span: 5
+(4) triple (U1-U2, U3-U4, U5-U6 all in 4J(F_p)); independent prediction 1/64, one extra F_2-coupling 1/32:
+    m_p 2: 18520 primes, triple 431 (0.02327); expected indep 289.4, coupled 578.8
+    m_p 3: 3836 primes, triple 111 (0.02894); expected indep 59.9, coupled 119.9
+    m_p 4+: 1106 primes, triple 35 (0.03165); expected indep 17.3, coupled 34.6
+    m_p >= 3 pooled: 146 vs 77.2 (indep) / 154.4 (coupled); z = 7.9
