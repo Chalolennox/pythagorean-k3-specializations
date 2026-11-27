@@ -1,0 +1,5 @@
+p=79841  #J=79872  brute (m,d)=(5,2)  x-halving scan (m,d)=(5,2)  OK  [1s]
+p=198977  #J=199680  brute (m,d)=(5,3)  x-halving scan (m,d)=(5,3)  OK  [3s]
+p=210113  #J=209920  brute (m,d)=(5,2)  x-halving scan (m,d)=(5,2)  OK  [3s]
+p=557057  #J=557056  brute (m,d)=(7,2)  x-halving scan (m,d)=(7,2)  OK  [8s]
+p=1251329  #J=1253376  brute (m,d)=(6,3)  x-halving scan (m,d)=(6,3)  OK  [19s]
