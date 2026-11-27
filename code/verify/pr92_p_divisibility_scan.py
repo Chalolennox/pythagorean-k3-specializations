@@ -92,18 +92,19 @@ def small_primes(n):
             sv[a * a::a] = bytearray(len(sv[a * a::a]))
     return [a for a in range(n + 1) if sv[a]]
 
-def segment_primes(lo_t, hi_t, sp):
+def segment_primes(lo_t, hi_t, sp, M=8):
+    """primes of the form 1 + M t, lo_t <= t < hi_t (M a power of 2)"""
     seg = bytearray([1]) * (hi_t - lo_t)
     for q in sp:
         if q == 2:
             continue
-        t0 = (-pow(8, -1, q)) % q
+        t0 = (-pow(M, -1, q)) % q
         st = lo_t + ((t0 - lo_t) % q)
         # do not strike the prime itself
-        if 1 + 8 * st == q:
+        if 1 + M * st == q:
             st += q
         seg[st - lo_t::q] = bytearray(len(seg[st - lo_t::q]))
-    return [1 + 8 * (lo_t + k) for k in range(hi_t - lo_t) if seg[k]]
+    return [1 + M * (lo_t + k) for k in range(hi_t - lo_t) if seg[k]]
 
 def work(args):
     lo_t, hi_t, sp, keep_min = args
