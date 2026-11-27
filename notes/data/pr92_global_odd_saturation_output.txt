@@ -1,0 +1,42 @@
+Owner-provided execution excerpts, 2026-11-27. Compact replay is reconstructed, not independently run.
+V2:
+Field degree: 12
+Field signature: [2, 5]
+Field discriminant: -14970542793242443776
+Curve discriminant: -256
+Resultant: 65536
+Bezout coefficient A: 3/16*x^2 - 1/4*x + 1/4
+Bezout coefficient B: -3/64*x^3 - 1/32*x^2 + 5/32*x + 1/8
+Bezout constant: 1
+Bezout identity: PASS
+Canonical height: 8.9387379895336553292778845054958966356
+EXACT PREPARATION: PASS
+
+V4:
+Usable finite places: 66
+CERTIFICATE FOUND
+Multiplier: 60
+Denominator norm bound: 316299002425639143508066329
+Binary logarithm bound: 88
+Rational lower bound: 44/9
+Rational upper bound: 300445347/100140049
+Exact margin: 1702154033/901260441
+Contributing places:
+[3, 6, 1, 6]
+[3, 3, 1, 6]
+[3, 3, 1, 6]
+[7, 1, 1, 12]
+[7, 1, 1, 12]
+[23, 1, 1, 20]
+[23, 1, 1, 20]
+[71, 1, 1, 60]
+[71, 1, 1, 60]
+[71, 1, 1, 60]
+[71, 1, 1, 60]
+Prime bound: 200
+Multiplier bound: 10000
+Best multiplier: 60
+Best margin: 1.8886372413187943306168033619485136151
+DENOMINATOR CONTRADICTION: PASS
+GLOBAL ODD SATURATION: PASS
+DONE
