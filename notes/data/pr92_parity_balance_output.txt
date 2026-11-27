@@ -1,0 +1,4 @@
+B=1000     fraction even 0.7977  model (1+prod(1-2c))/2 = 0.8007   empty 0.7805  model prod(1-c) = 0.7821
+B=10000    fraction even 0.7402  model (1+prod(1-2c))/2 = 0.7413   empty 0.7001  model prod(1-c) = 0.7006
+B=100000   fraction even 0.6918  model (1+prod(1-2c))/2 = 0.6891   empty 0.6224  model prod(1-c) = 0.6203
+B=300000   fraction even 0.6758  model (1+prod(1-2c))/2 = 0.6732   empty 0.5958  model prod(1-c) = 0.5937

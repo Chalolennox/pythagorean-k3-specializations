@@ -1,0 +1,47 @@
+conditioning on m_p >= k + 1;  15643 K-split primes
+  k=1  single U_j (6 pooled)                22662/45618   obs 0.49678  pred 0.50000  z=-1.38
+  k=1  partner sum U_a+U_b                  22809/22809   obs 1.00000  pred 1.00000  z=+0.00
+  k=1  partner difference U_a-U_b           22809/22809   obs 1.00000  pred 1.00000  z=+0.00
+  k=1  non-partner sum                      45324/91236   obs 0.49678  pred 0.50000  z=-1.95
+  k=1  non-partner difference               45324/91236   obs 0.49678  pred 0.50000  z=-1.95
+  k=1  P +- U_j (12 pooled)                 45324/91236   obs 0.49678  pred 0.50000  z=-1.95
+  k=1  both of a partner pair (3 pairs)     11331/22809   obs 0.49678  pred 0.50000  z=-0.97
+  k=1  two different pairs (12 combos)      22368/91236   obs 0.24517  pred 0.25000  z=-3.37
+  k=1  one rep. from each pair (8 combos)   14912/60824   obs 0.24517  pred 0.25000  z=-2.75
+  k=1  all six U_j                           1864/7603    obs 0.24517  pred 0.25000  z=-0.97
+
+  k=2  single U_j (6 pooled)                  666/5454    obs 0.12211  pred 0.12500  z=-0.64
+  k=2  partner sum U_a+U_b                    645/2727    obs 0.23652  pred 0.25000  z=-1.63
+  k=2  partner difference U_a-U_b             636/2727    obs 0.23322  pred 0.25000  z=-2.02
+  k=2  non-partner sum                       1353/10908   obs 0.12404  pred 0.12500  z=-0.30
+  k=2  non-partner difference                1427/10908   obs 0.13082  pred 0.12500  z=+1.84
+  k=2  P +- U_j (12 pooled)                  1332/10908   obs 0.12211  pred 0.12500  z=-0.91
+  k=2  both of a partner pair (3 pairs)        80/2727    obs 0.02934  pred 0.03125  z=-0.57
+  k=2  two different pairs (12 combos)        167/10908   obs 0.01531  pred 0.01562  z=-0.27
+  k=2  one rep. from each pair (8 combos)      30/7272    obs 0.00413  pred 0.00391  z=+0.30
+  k=2  all six U_j                              0/909     obs 0.00000  pred 0.00006  z=-0.24
+
+  k=3  single U_j (6 pooled)                   13/648     obs 0.02006  pred 0.03125  z=-1.64
+  k=3  partner sum U_a+U_b                      4/324     obs 0.01235  pred 0.06250  z=-3.73
+  k=3  partner difference U_a-U_b              16/324     obs 0.04938  pred 0.06250  z=-0.98
+  k=3  non-partner sum                         31/1296    obs 0.02392  pred 0.03125  z=-1.52
+  k=3  non-partner difference                  38/1296    obs 0.02932  pred 0.03125  z=-0.40
+  k=3  P +- U_j (12 pooled)                    42/1296    obs 0.03241  pred 0.03125  z=+0.24
+  k=3  both of a partner pair (3 pairs)         1/324     obs 0.00309  pred 0.00195  z=+0.46
+  k=3  two different pairs (12 combos)          0/1296    obs 0.00000  pred 0.00098  z=-1.13
+  k=3  one rep. from each pair (8 combos)       0/864     obs 0.00000  pred 0.00006  z=-0.23
+  k=3  all six U_j                              0/108     obs 0.00000  pred 0.00000  z=-0.00
+
+  k=4  single U_j (6 pooled)                    1/126     obs 0.00794  pred 0.00781  z=+0.02
+  k=4  partner sum U_a+U_b                      1/63      obs 0.01587  pred 0.01562  z=+0.02
+  k=4  partner difference U_a-U_b               1/63      obs 0.01587  pred 0.01562  z=+0.02
+  k=4  non-partner sum                          0/252     obs 0.00000  pred 0.00781  z=-1.41
+  k=4  non-partner difference                   0/252     obs 0.00000  pred 0.00781  z=-1.41
+  k=4  P +- U_j (12 pooled)                     1/252     obs 0.00397  pred 0.00781  z=-0.69
+  k=4  both of a partner pair (3 pairs)         0/63      obs 0.00000  pred 0.00012  z=-0.09
+  k=4  two different pairs (12 combos)          0/252     obs 0.00000  pred 0.00006  z=-0.12
+  k=4  one rep. from each pair (8 combos)       0/168     obs 0.00000  pred 0.00000  z=-0.01
+  k=4  all six U_j                              0/21      obs 0.00000  pred 0.00000  z=-0.00
+
+one representative from each pair at k=2: H* predicts 2^-8 = 0.00391; independent U_j would give 2^-9 = 0.00195; a coupling mod 4 (x_3 forced by x_1, x_2) would give 2^-6 = 0.01562
+note: at shift 0 the k=1 rows use primes with m_p = 1, where the extra class (1+i) is not yet trivial (rank 3); use shift 1 for the k=1 triple rows.

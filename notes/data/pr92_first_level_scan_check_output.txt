@@ -1,0 +1,2 @@
+distinct K-split primes p=1 mod 8 in the two scan files: 47217
+violations: (a) chi(x_j)=-1: 0; (b) partner mismatch: 0; (c) coupling vs chi(1+i): 0; (d) P class nontrivial: 0

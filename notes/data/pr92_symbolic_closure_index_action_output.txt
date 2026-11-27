@@ -1,0 +1,1 @@
+PASS: index action relations, orbit size 32, shift formulas on -64..95; 32 valid arrays, 16 ones at each of the 16 positions

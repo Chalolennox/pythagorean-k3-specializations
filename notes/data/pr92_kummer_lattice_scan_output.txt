@@ -1,0 +1,1 @@
+range [1000,2000000000): 6136955 primes passed the quadratic filter, 15643 completely K-split (p=1 mod 8); 893s

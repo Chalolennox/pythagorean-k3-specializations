@@ -1,0 +1,4 @@
+m_p>=6: False  p=1 mod 64: False  character of d1 over the 16 quarter points: [-1]      6280 primes
+m_p>=6: False  p=1 mod 64: True   character of d1 over the 16 quarter points: [1]       5422 primes
+m_p>=6: True   p=1 mod 64: True   character of d1 over the 16 quarter points: [1]       773 primes
+primes with J[32] rational: 12475;  violations of [d1 square at all 16 points] <=> [p = 1 mod 64]: 0

@@ -1,0 +1,20 @@
+Part 1 (Sidon, primes 7 <= p <= 2000000): max |S ∩ (S+R)| over nonzero R
+   D_p   (all rational points of the divisor):  max = 4 (first at p = 64811)
+   D_p^+ (eligible rational points):             max = 4 (first at p = 519521);  primes with max > 2: [(519521, 4, [(0, 0)])]
+   S_p   (eligible and in <P>):                  max = 2 (first at p = 83)
+ok   orbit bound <= 2 and the only eligible violation is p = 519521 (if within range)
+
+Part 2 (sieve, n in [1, 1000000]): primes with nonempty A_p up to B: 9674
+   B        #primes  survivors/N   product(1-c_p)  E[X]     Var/E     kappa_eff = d E[X] / d loglog B (previous row to this)
+   100      1        0.89744       0.89744         0.1026   0.8974   nan
+   316      4        0.83495       0.83599         0.1727   0.9165   0.314
+   1000     8        0.78045       0.78207         0.2384   0.9269   0.360
+   3162     24       0.74594       0.74761         0.2834   0.9361   0.292
+   10000    74       0.70008       0.70064         0.3482   0.9557   0.485
+   31622    228      0.65665       0.65441         0.4164   0.9817   0.579
+   100000   642      0.62240       0.62026         0.4700   0.9837   0.509
+   316227   1782     0.59438       0.59226         0.5162   0.9863   0.485
+   1000000  5123     0.56947       0.56736         0.5592   0.9877   0.494
+   2000000  9674     0.55617       0.55413         0.5828   0.9884   0.482
+   fraction of pairs among the first 400 periods d_p with gcd > 1: 0.427
+DONE

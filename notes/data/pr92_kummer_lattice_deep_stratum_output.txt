@@ -1,0 +1,41 @@
+K-split primes with m_p >= 4: 1106 (first scan 108, deep scan 998); by m_p: [(4, 962), (5, 140), (6, 4)]
+  k=1 single U_j                       3276/6636    0.49367  H* 0.50000  z=-1.03
+  k=1 partner sum                      3318/3318    1.00000  H* 1.00000  z=+0.00
+  k=1 partner difference               3318/3318    1.00000  H* 1.00000  z=+0.00
+  k=1 non-partner sum                  6552/13272   0.49367  H* 0.50000  z=-1.46
+  k=1 non-partner difference           6552/13272   0.49367  H* 0.50000  z=-1.46
+  k=1 P +- U_j                         6552/13272   0.49367  H* 0.50000  z=-1.46
+  k=1 both of a partner pair           1638/3318    0.49367  H* 0.50000  z=-0.73
+  k=1 two different pairs (12)         3192/13272   0.24051  H* 0.25000  z=-2.53
+  k=1 one rep from each pair (8)       2128/8848    0.24051  H* 0.25000  z=-2.06
+
+  k=2 single U_j                        824/6636    0.12417  H* 0.12500  z=-0.20
+  k=2 partner sum                       805/3318    0.24262  H* 0.25000  z=-0.98
+  k=2 partner difference                808/3318    0.24352  H* 0.25000  z=-0.86
+  k=2 non-partner sum                  1660/13272   0.12508  H* 0.12500  z=+0.03
+  k=2 non-partner difference           1620/13272   0.12206  H* 0.12500  z=-1.02
+  k=2 P +- U_j                         1648/13272   0.12417  H* 0.12500  z=-0.29
+  k=2 both of a partner pair             97/3318    0.02923  H* 0.03125  z=-0.67
+  k=2 two different pairs (12)          209/13272   0.01575  H* 0.01562  z=+0.11
+  k=2 one rep from each pair (8)         33/8848    0.00373  H* 0.00391  z=-0.27
+
+  k=3 single U_j                        219/6636    0.03300  H* 0.03125  z=+0.82
+  k=3 partner sum                       174/3318    0.05244  H* 0.06250  z=-2.39
+  k=3 partner difference                224/3318    0.06751  H* 0.06250  z=+1.19
+  k=3 non-partner sum                   426/13272   0.03210  H* 0.03125  z=+0.56
+  k=3 non-partner difference            393/13272   0.02961  H* 0.03125  z=-1.09
+  k=3 P +- U_j                          402/13272   0.03029  H* 0.03125  z=-0.64
+  k=3 both of a partner pair              4/3318    0.00121  H* 0.00195  z=-0.98
+  k=3 two different pairs (12)           10/13272   0.00075  H* 0.00098  z=-0.82
+  k=3 one rep from each pair (8)          1/8848    0.00011  H* 0.00006  z=+0.63
+
+  k=4 single U_j                         49/6636    0.00738  H* 0.00781  z=-0.40
+  k=4 partner sum                        52/3318    0.01567  H* 0.01562  z=+0.02
+  k=4 partner difference                 59/3318    0.01778  H* 0.01562  z=+1.00
+  k=4 non-partner sum                   103/13272   0.00776  H* 0.00781  z=-0.07
+  k=4 non-partner difference             97/13272   0.00731  H* 0.00781  z=-0.66
+  k=4 P +- U_j                           98/13272   0.00738  H* 0.00781  z=-0.56
+  k=4 both of a partner pair              0/3318    0.00000  H* 0.00012  z=-0.64
+  k=4 two different pairs (12)            0/13272   0.00000  H* 0.00006  z=-0.90
+  k=4 one rep from each pair (8)          0/8848    0.00000  H* 0.00000  z=-0.09
+

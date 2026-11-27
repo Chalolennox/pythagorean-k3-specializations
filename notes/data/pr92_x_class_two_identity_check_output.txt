@@ -1,0 +1,5 @@
+OK  w*s(w)^2 = 27(w^2-1) in Q[w]/(w^3-30w^2-24w-1), s=w^2-29w-26  (coefficients [-27, 0, 27] )
+OK  h(0) = -54
+OK  m(-1) = -8, so prod_k (1+w_k) = 8 and prod over the six roots of (1+t^2) = 64
+OK  prod_j f(x_j) = prod x_j * prod(1+w_j) = -54*64 = -3456 = -6*24^2
+OK  checked 251 K-split primes 101<=p<=6000000 (by p mod 8: {5: 59, 3: 74, 7: 64, 1: 54}): square-root formula for 2x_j and chi(x_j)=chi(2) at all six x_j: 0 violations

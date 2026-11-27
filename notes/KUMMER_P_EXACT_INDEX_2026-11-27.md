@@ -1,0 +1,13 @@
+# Exact P-component 2-adic translation index
+Proof given, human review pending. Owner Magma certificate; compact replay not independently executed. Scope J/Q, not the compositum with K.
+
+J: y²=x³−2x²+2x, P=(1,1), T_m=Q(J[m]), T_infty=union T_(2^n). Let B be the quarter-point field and S a quarter point, N=B(J[2], halves of S). See KUMMER_TWO_ADIC_EIGHTH_INTERSECTION.md and KUMMER_P_HIGHER_LIFT_AND_LEVEL16_2026-11-27.md.
+
+1. P is divisible by 4 over T16 by KUMMER_TWO_ADIC_P_QUARTER.md. Owner verifies full T16 basis and degree 512.
+2. Level 32 congruence kernel is full: Addendum 15 and code/verify/pr92_frobenius_kernel_layer.py give primes 79841,198977,210113,271969, with columns in basis (T2,T3) coded (2,2),(3,2),(1,2),(3,1). Independent full-point arithmetic replay in chat reproduced these, with all intermediate doublings checked and rational 32-torsion bases. Encoded vectors 10,11,9,7 span F2^4. Squaring and closedness give G(32)=I+32M2(Z2). Any elementary abelian quotient of this group kills G(64), since squares topologically generate G(64).
+3. At those four primes, d1=x(S) character bits 1,0,0,1, respectively, at all quarter points. Unique fitting linear functional is trace (mask 9). First prime excludes d1 square in T32. This fit was only on four witnesses plus two zero-matrix controls, not all 12475 rows.
+4. Owner optimized Magma run, seed 1778953886, exact identity x(S)=w²*z32*x(A) with w in T16, A an order-16 torsion point, z32 primitive 32nd root in T16. Therefore sqrt(x(S))=w*z64*sqrt(x(A)) belongs to T64, since halving A supplies sqrt(x(A)) by standard halving criterion and Weil pairing supplies z64. Thus T32(sqrt(x(S)))=T32(z64), and d1 is not square in T32. See notes/data/kummer_p_cyclotomic_owner_output.txt and code/magma/kummer_p_cyclotomic_replay.m. The replay prioritizes the successful exponent vector and omits the discovery filter; owner output belongs to original filtered script.
+5. p=557057 splits T64, and d2=x(S)-1-i and d3=d1*d2 are nonsquares at all quarter points (code/verify/pr92_eighth_division_witness.py). By step 2, N intersect T_infty equals N intersect T64: the elementary abelian extension N T32/T32, intersected with T_infty, factors through T64. Hence N intersect T_infty=B(sqrt(d1)), and the first translation layer has order 2.
+6. Higher lifting proof in KUMMER_P_HIGHER_LIFT_AND_LEVEL16_2026-11-27.md gives 8Z2² contained in H. The unique mod-2 invariant line is T1=(0,0). Consequently H=4Z2 e1 + 8Z2 e2 in a basis reducing e1 to T1. Index 32.
+
+The P-component research subtask is closed, subject to human review. The seven-point lattice, K-compositum, and Problem H remain open. No PR merge or closure is implied.

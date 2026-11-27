@@ -1,0 +1,5 @@
+rational point m=1 D=1 l=1 U=1 V=1
+rational point m=1 D=2 l=5 U=8 V=2
+rational point m=7 D=3 l=41 U=1 V=81
+rational point m=31 D=20 l=689 U=128 V=1250
+checks (1),(2) passed for 2171 pairs; (3),(4) for 4 rational points

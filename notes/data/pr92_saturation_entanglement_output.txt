@@ -1,0 +1,25 @@
+ok   (1) p = 2621 is completely split with #J = 2680 = 2^3 * 5 * 67, so J(K) has no 3- or 23-primary torsion
+ok   (1) 17 completely split primes up to 229469 (owner list has 17; expected about 13.3)
+ok   (1) p = 113819, #J = 113730, [N/3](1, 1) = (101754, 42501) (stated (101754, 42501)), nonzero, p completely split: True
+ok   (1) p = 49253, #J = 49536, [N/3](3857, 14240) = (26339, 2137) (stated (26339, 2137)), nonzero, p completely split: True
+ok   (1) p = 229469, #J = 229080, [N/23](1, 1) = (202137, 196012) (stated (202137, 196012)), nonzero, p completely split: True
+ok   (1) p = 229469, #J = 229080, [N/23](5468, 173790) = (215498, 199718) (stated (215498, 199718)), nonzero, p completely split: True
+ok   (2) |G| = 1536 and G has 4 sign characters (so G^ab/2G^ab has order 4)
+     6052 primes tested; quadratic d with prime factors in {-1,2,3,23} for which some sign character of G is consistent:
+        d =  -138: none  -> sqrt(d) is not in K
+        d =   -69: none  -> sqrt(d) is not in K
+        d =   -46: characters [2]
+        d =   -23: none  -> sqrt(d) is not in K
+        d =    -6: characters [3]
+        d =    -3: none  -> sqrt(d) is not in K
+        d =    -2: none  -> sqrt(d) is not in K
+        d =    -1: none  -> sqrt(d) is not in K
+        d =     2: none  -> sqrt(d) is not in K
+        d =     3: none  -> sqrt(d) is not in K
+        d =     6: none  -> sqrt(d) is not in K
+        d =    23: none  -> sqrt(d) is not in K
+        d =    46: none  -> sqrt(d) is not in K
+        d =    69: characters [1]
+        d =   138: none  -> sqrt(d) is not in K
+ok   (2) exactly three such d pass, namely [-46, -6, 69] (the three quadratic subfields of a biquadratic field; each is a necessary-condition match with a distinct sign character)
+ok   (2) sqrt(-1), sqrt(2), sqrt(-2), sqrt(-3) and sqrt(-23) are NOT in K (so Q(i), Q(zeta_8)'s sqrt 2, Q(zeta_3), and the quadratic subfield Q(sqrt(-23)) of Q(zeta_23) do not lie in K)

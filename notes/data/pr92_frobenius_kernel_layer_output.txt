@@ -1,0 +1,24 @@
+level k=4: 3000 primes with J[2^4] rational (smallest 2113, largest 24770657); failed internal checks: 0
+dimension of the F_2-span of the matrices A mod 2 in M_2(F_2): 3 (span has 8 elements)
+distinct matrices seen: 8 of 16;  counts by (trace,vector):
+  trace 0: 3000 primes, 8 distinct of 8, counts [412, 392, 380, 371, 371, 368, 362, 344]
+  trace 1: 0 primes, 0 distinct of 8, counts []
+chi-square against uniform on the 8 matrices of each trace class: 7.7 on 7 d.o.f.
+independent examples (p, m_p, A(T2), A(T3)): [(2113, 4, 2, 0), (6689, 4, 3, 3), (10177, 4, 0, 1)]
+
+level k=5: 12475 primes with J[2^5] rational (smallest 79841, largest 999931393); failed internal checks: 0
+dimension of the F_2-span of the matrices A mod 2 in M_2(F_2): 4 (span has 16 elements)
+distinct matrices seen: 16 of 16;  counts by (trace,vector):
+  trace 0: 6195 primes, 8 distinct of 8, counts [855, 807, 779, 773, 767, 760, 729, 725]
+  trace 1: 6280 primes, 8 distinct of 8, counts [827, 809, 807, 780, 779, 771, 765, 742]
+chi-square against uniform on the 8 matrices of each trace class: 22.7 on 14 d.o.f.
+independent examples (p, m_p, A(T2), A(T3)): [(79841, 5, 2, 2), (198977, 5, 3, 2), (210113, 5, 1, 2), (271969, 5, 3, 1)]
+
+level k=6: 773 primes with J[2^6] rational (smallest 557057, largest 999737729); failed internal checks: 0
+dimension of the F_2-span of the matrices A mod 2 in M_2(F_2): 4 (span has 16 elements)
+distinct matrices seen: 16 of 16;  counts by (trace,vector):
+  trace 0: 367 primes, 8 distinct of 8, counts [52, 48, 47, 46, 46, 44, 43, 41]
+  trace 1: 406 primes, 8 distinct of 8, counts [62, 58, 54, 49, 49, 49, 43, 42]
+chi-square against uniform on the 8 matrices of each trace class: 8.3 on 14 d.o.f.
+independent examples (p, m_p, A(T2), A(T3)): [(1251329, 6, 3, 3), (2738753, 6, 1, 0), (4662337, 6, 3, 0), (5677057, 6, 0, 1)]
+

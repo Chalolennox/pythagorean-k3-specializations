@@ -1,0 +1,5 @@
+roots of h mod 2621 : [65, 271, 1072, 1551, 2352, 2558]
+points: 12 zero sums: 6 distinct nonzero sums: 72
+translation multiplicities (R != O): {1: 12, 2: 60} ; identity: 12
+sum check: 144 == 144
+ALL CHECKS PASSED

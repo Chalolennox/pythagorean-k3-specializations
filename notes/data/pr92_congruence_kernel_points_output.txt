@@ -1,0 +1,23 @@
+p = 8956097
+PASS prime and p = 65 mod 128
+PASS T1 on curve, 2*T1 = O
+PASS A, B on curve
+PASS 32A = T1
+PASS 64B = O
+PASS 32B not in {O, T1}
+PASS 64 divides quoted #J
+PASS U on curve
+PASS 2U = A
+PASS 64U = T1
+PASS quoted #J = 64*139904
+p = 2738753
+PASS prime and p = 65 mod 128
+PASS T1 on curve, 2*T1 = O
+PASS A, B on curve
+PASS 32A = T1
+PASS 64B = O
+PASS 32B not in {O, T1}
+PASS 64 divides quoted #J
+PASS D=(1532999,0): on curve, 2-torsion
+PASS D != T1
+ALL PASS

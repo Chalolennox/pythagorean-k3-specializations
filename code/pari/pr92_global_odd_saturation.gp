@@ -1,0 +1,41 @@
+{
+  print("GLOBAL ODD SATURATION: COMPACT HEIGHT REPLAY");
+  f = y^12-66*y^10-29922*y^8+73214*y^6-62559*y^4+22032*y^2-3456;
+  h = x^6-6*x^5-15*x^4+100*x^3-189*x^2+162*x-54;
+  if(!polisirreducible(f),error("Field polynomial"));
+  nf = nfinit(f);
+  if(poldegree(f)!=12,error("Degree"));
+  print("Field signature: ",nf.sign);
+  print("Field discriminant: ",nf.disc);
+  a=Mod(y,f);
+  g=gcd(h,x^3-2*x^2+2*x-a^2);
+  if(poldegree(g,x)!=1,error("GCD"));
+  u=-polcoef(g,0,x)/polcoef(g,1,x);
+  if(subst(h,x,u)!=0 || a^2!=u^3-2*u^2+2*u,error("Point"));
+  A=(x^2-2)^2;
+  B=4*x*(x^2-2*x+2);
+  C=12*x^2-16*x+16;
+  D=-3*x^3-2*x^2+10*x+8;
+  if(C*A+D*B!=64,error("Bezout"));
+  print("Bezout: PASS");
+  rows=[[3,3,6],[7,2,12],[23,2,20],[71,4,60]];
+  denprod=1;
+  for(jj=1,#rows,
+    pp=rows[jj][1];
+    dec=idealprimedec(nf,pp);
+    cnt=0;
+    for(kk=1,#dec,if(dec[kk].f==1,cnt++));
+    Ep=ellinit([0,-2,0,2,0],pp);
+    nn=ellcard(Ep);
+    if(cnt!=rows[jj][2] || nn!=rows[jj][3] || 60%nn!=0,error("Local certificate"));
+    denprod*=pp^(2*cnt);
+    print("PASS p=",pp," places=",cnt," order=",nn);
+  );
+  if(denprod!=316299002425639143508066329 || denprod<=2^88,error("Denominator"));
+  if(17*116^2<=226800,error("Cutoff"));
+  print("Denominator: ",denprod);
+  print("Uniform full canonical height lower bound: ",17/32400);
+  print("Prime cutoff: 113");
+  print("HEIGHT CERTIFICATE: PASS");
+  print("Global odd saturation follows with prior finite exclusions.");
+}

@@ -1,0 +1,74 @@
+============================================
+KUMMER SATURATION AT 3 AND 23
+============================================
+--------------------------------------------
+TORSION CERTIFICATE
+--------------------------------------------
+p = 2621
+Number of geometric pairs = 6
+#J(F_p) = 2680
+3-primary torsion excluded: PASS
+23-primary torsion excluded: PASS
+--------------------------------------------
+VERIFYING 3-SATURATION CERTIFICATES
+--------------------------------------------
+p = 113819
+#J(F_p) = 113730
+P witness = (101754 : 42501 : 1)
+P not divisible by 3: PASS
+U witness prime = 49253
+U = (3857 : 14240 : 1)
+[N/3]U = (26339 : 2137 : 1)
+U not divisible by 3: PASS
+3-SATURATION: PASS
+--------------------------------------------
+SEARCHING FOR 23-SATURATION CERTIFICATES
+--------------------------------------------
+Split prime: 2621 Cardinality: 2680
+Split prime: 49253 Cardinality: 49536
+Split prime: 93491 Cardinality: 94022
+Split prime: 95603 Cardinality: 95078
+Split prime: 98143 Cardinality: 97968
+Split prime: 113819 Cardinality: 113730
+Split prime: 120223 Cardinality: 120496
+Split prime: 125329 Cardinality: 125236
+Split prime: 130687 Cardinality: 131056
+Split prime: 136057 Cardinality: 135772
+Split prime: 157057 Cardinality: 157072
+Split prime: 162703 Cardinality: 162312
+Split prime: 166541 Cardinality: 166712
+Split prime: 188933 Cardinality: 189408
+Split prime: 193763 Cardinality: 193182
+Split prime: 201337 Cardinality: 201824
+Split prime: 229469 Cardinality: 229080
+23-divisibility candidate
+************************
+P CERTIFICATE FOUND
+p = 229469
+#J(F_p) = 229080
+P = (1 : 1 : 1)
+[N/23]P = (202137 : 196012 : 1)
+************************
+************************
+U CERTIFICATE FOUND
+p = 229469
+#J(F_p) = 229080
+U = (5468 : 173790 : 1)
+[N/23]U = (215498 : 199718 : 1)
+************************
+============================================
+FINAL SUMMARY
+============================================
+Prime bound: 2000000
+Completely split primes: 17
+23-divisibility candidates: 1
+3-primary torsion excluded: true
+23-primary torsion excluded: true
+3-saturation: PASS
+23-saturation P component: true
+23-saturation U component: true
+23-SATURATION: PASS
+CPU time: 0.470
+============================================
+
+# 1.2s · Magma V2.30-1 | 0.57s | 32.09MB | seed 1779009649

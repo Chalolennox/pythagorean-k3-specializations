@@ -1,0 +1,6 @@
+odd primes <=10000: 1228
+8431 2123831 2124612 count 2124612 checks [True, True, True, True, True, True, True, True, True, True, True]
+6841 2136527 2134392 count 2134392 checks [True, True, True, True, True, True, True, True, True, True, True]
+5167 2302987 2304482 count 2304482 checks [True, True, True, True, True, True, True, True, True, True, True]
+8627 2487581 2484576 count 2484576 checks [True, True, True, True, True, True, True, True, True, True, True]
+ALL PASS

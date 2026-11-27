@@ -1,0 +1,15 @@
+primes with m_p >= 5: 12475
+
+[m_p>=6: False, depth d_p (3 means >=3): 2]  (9044 primes)
+    3157 primes: char sets for i: [(-1, -1, 1)] ; for -i: [(-1, 1, -1)]
+    3123 primes: char sets for i: [(-1, 1, -1)] ; for -i: [(-1, -1, 1)]
+    2764 primes: char sets for i: [(1, -1, -1)] ; for -i: [(1, -1, -1)]
+
+[m_p>=6: False, depth d_p (3 means >=3): 3]  (2658 primes)
+    2658 primes: char sets for i: [(1, 1, 1)] ; for -i: [(1, 1, 1)]
+
+[m_p>=6: True, depth d_p (3 means >=3): 2]  (371 primes)
+     371 primes: char sets for i: [(1, -1, -1)] ; for -i: [(1, -1, -1)]
+
+[m_p>=6: True, depth d_p (3 means >=3): 3]  (402 primes)
+     402 primes: char sets for i: [(1, 1, 1)] ; for -i: [(1, 1, 1)]

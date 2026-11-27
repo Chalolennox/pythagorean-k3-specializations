@@ -1,0 +1,2 @@
+specializations tested 72 mismatches 0
+PASS

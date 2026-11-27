@@ -1,0 +1,16 @@
+ok   h(2-x) = h(x): H is even, so h(2-x) = H(x-1) = H(1-x) (spot-checked at 1000 integers)
+ok   (1) p = 125329 is prime and p = 1 mod 8
+ok   (1) roots of h mod p are 10263,37280,45627,79704,88051,115068: [10263, 37280, 45627, 79704, 88051, 115068]
+ok   (1) all Y_j = x(x^2-2x+2) and all x_j are nonzero squares mod p (K completely split, and x_j square)
+ok   (1) with i = 32773 the bits of B_j = x_j-1-i are [1, 0, 0, 0, 0, 1]
+ok   (1) with i = 92556 the bits of B_j = x_j-1-i are [1, 0, 0, 0, 0, 1]
+ok   (1) roots pair as x + x' = 2: (10263,115068), (37280,88051), (45627,79704)
+ok   (1) pair vector (bits on the three pairs) = [1, 0, 0], a unit vector
+   primes p = 1 mod 8 completely split in K, p <= 3000000: 28; with some x_j a nonsquare: 0
+ok   (3) every such prime has all six x_j squares (owner certificate necessary condition; chance of this by accident about 64^-28)
+   primes completely split in K with p != 1 mod 8: 101; with some x_j a nonsquare: 64
+ok   (3) at p != 1 mod 8 non-squares do occur, so adjoining i and sqrt 2 is needed
+ok   (2) at all those primes the roots pair under x -> 2-x and the B-bits agree on each pair (failures: 0)
+   (4) weight distribution of the pair vectors over the three pairs: {0: 4, 1: 9, 2: 9, 3: 6}
+ok   (4) a weight-1 vector occurs (so the rank-3 argument is not an accident of one prime)
+DONE

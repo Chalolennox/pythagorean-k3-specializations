@@ -1,0 +1,94 @@
+conditioning on m_p >= k + 2 (SHIFT)
+K-split primes p = 1 mod 8: 15643  (largest 1999846897)
+torsion level m_p: m=1: 8040, m=2: 6694, m=3: 801, m=4: 87, m=5: 20, m=6: 1
+first-level (k=1) F_2-rank of the descent-character vectors of (P, U_1..U_6) over the 15643 primes with m_p >= 1: 3
+first-level (k=1) F_2-rank of the descent-character vectors of (P, U_1..U_6) over the 7603 primes with m_p >= 2: 2
+first-level (k=1) F_2-rank of the descent-character vectors of (P, U_1..U_6) over the 909 primes with m_p >= 3: 2
+first-level (k=1) F_2-rank of the descent-character vectors of (P, U_1..U_6) over the 108 primes with m_p >= 4: 2
+P descent characters over all primes: [(0, 15643)]
+
+Fraction of primes with J[2^k] rational in which Q is in 2^k J(F_p)  [1/fraction = size of the Kummer image of Q mod 2^k]
+
+--- k = 1 ---
+  P            :   909/909   1.0000+-0.0000
+  U_j (all 6 pooled):  2730/5454  0.5006+-0.0068
+     U1:   453/909   0.4983+-0.0166
+     U2:   453/909   0.4983+-0.0166
+     U3:   450/909   0.4950+-0.0166
+     U4:   450/909   0.4950+-0.0166
+     U5:   462/909   0.5083+-0.0166
+     U6:   462/909   0.5083+-0.0166
+  U_a+U_b, partner pairs {x,2-x} :  2727/2727  1.0000+-0.0000
+  U_a+U_b, other pairs           :  5460/10908 0.5006+-0.0048
+  U_a-U_b, partner pairs {x,2-x} :  2727/2727  1.0000+-0.0000
+  U_a-U_b, other pairs           :  5460/10908 0.5006+-0.0048
+  P+U_j (pooled)        :  2730/5454  0.5006+-0.0068
+  P-U_j (pooled)        :  2730/5454  0.5006+-0.0068
+  all of U_1..U_6 in 2^k J :   228/909   0.2508+-0.0144
+  all of P,U_1..U_6 in 2^k J:   228/909   0.2508+-0.0144
+  U1 and U2 both:   453/909   0.4983+-0.0166   (product of marginals 0.2484)
+  U1 and U3 both:   228/909   0.2508+-0.0144   (product of marginals 0.2467)
+  U3 and U5 both:   228/909   0.2508+-0.0144   (product of marginals 0.2516)
+
+--- k = 2 ---
+  P            :   108/108   1.0000+-0.0000
+  U_j (all 6 pooled):    65/648   0.1003+-0.0118
+     U1:     5/108   0.0463+-0.0202
+     U2:     8/108   0.0741+-0.0252
+     U3:     8/108   0.0741+-0.0252
+     U4:    14/108   0.1296+-0.0323
+     U5:    19/108   0.1759+-0.0366
+     U6:    11/108   0.1019+-0.0291
+  U_a+U_b, partner pairs {x,2-x} :    65/324   0.2006+-0.0222
+  U_a+U_b, other pairs           :   147/1296  0.1134+-0.0088
+  U_a-U_b, partner pairs {x,2-x} :    59/324   0.1821+-0.0214
+  U_a-U_b, other pairs           :   159/1296  0.1227+-0.0091
+  P+U_j (pooled)        :    65/648   0.1003+-0.0118
+  P-U_j (pooled)        :    65/648   0.1003+-0.0118
+  all of U_1..U_6 in 2^k J :     0/108   0.0000+-0.0000
+  all of P,U_1..U_6 in 2^k J:     0/108   0.0000+-0.0000
+  U1 and U2 both:     0/108   0.0000+-0.0000   (product of marginals 0.0034)
+  U1 and U3 both:     0/108   0.0000+-0.0000   (product of marginals 0.0034)
+  U3 and U5 both:     2/108   0.0185+-0.0130   (product of marginals 0.0130)
+
+--- k = 3 ---
+  P            :     7/21    0.3333+-0.1029
+  U_j (all 6 pooled):     3/126   0.0238+-0.0136
+     U1:     1/21    0.0476+-0.0465
+     U2:     0/21    0.0000+-0.0000
+     U3:     0/21    0.0000+-0.0000
+     U4:     2/21    0.0952+-0.0641
+     U5:     0/21    0.0000+-0.0000
+     U6:     0/21    0.0000+-0.0000
+  U_a+U_b, partner pairs {x,2-x} :     1/63    0.0159+-0.0157
+  U_a+U_b, other pairs           :     4/252   0.0159+-0.0079
+  U_a-U_b, partner pairs {x,2-x} :     3/63    0.0476+-0.0268
+  U_a-U_b, other pairs           :     7/252   0.0278+-0.0104
+  P+U_j (pooled)        :     4/126   0.0317+-0.0156
+  P-U_j (pooled)        :     4/126   0.0317+-0.0156
+  all of U_1..U_6 in 2^k J :     0/21    0.0000+-0.0000
+  all of P,U_1..U_6 in 2^k J:     0/21    0.0000+-0.0000
+  U1 and U2 both:     0/21    0.0000+-0.0000   (product of marginals 0.0000)
+  U1 and U3 both:     0/21    0.0000+-0.0000   (product of marginals 0.0000)
+  U3 and U5 both:     0/21    0.0000+-0.0000   (product of marginals 0.0000)
+
+--- k = 4 ---
+  P            :     0/1     0.0000+-0.0000
+  U_j (all 6 pooled):     0/6     0.0000+-0.0000
+     U1:     0/1     0.0000+-0.0000
+     U2:     0/1     0.0000+-0.0000
+     U3:     0/1     0.0000+-0.0000
+     U4:     0/1     0.0000+-0.0000
+     U5:     0/1     0.0000+-0.0000
+     U6:     0/1     0.0000+-0.0000
+  U_a+U_b, partner pairs {x,2-x} :     0/3     0.0000+-0.0000
+  U_a+U_b, other pairs           :     0/12    0.0000+-0.0000
+  U_a-U_b, partner pairs {x,2-x} :     0/3     0.0000+-0.0000
+  U_a-U_b, other pairs           :     0/12    0.0000+-0.0000
+  P+U_j (pooled)        :     0/6     0.0000+-0.0000
+  P-U_j (pooled)        :     0/6     0.0000+-0.0000
+  all of U_1..U_6 in 2^k J :     0/1     0.0000+-0.0000
+  all of P,U_1..U_6 in 2^k J:     0/1     0.0000+-0.0000
+  U1 and U2 both:     0/1     0.0000+-0.0000   (product of marginals 0.0000)
+  U1 and U3 both:     0/1     0.0000+-0.0000   (product of marginals 0.0000)
+  U3 and U5 both:     0/1     0.0000+-0.0000   (product of marginals 0.0000)
